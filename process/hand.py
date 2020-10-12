@@ -17,12 +17,15 @@ def get_rectangles(frame):
     rows, cols, chans = frame.shape
     center_frame = (int(round(cols/2)), int(round(rows/2)))
     offset = (int(round(cols*0.01)), int(round(rows*0.01)))
-
-    rectangles = np.array([[[(0,0), (0,0)], [(0,0), (0,0)], [(0,0), (0,0)]],
-                          [[(0,0), (0,0)], [(0,0), (0,0)], [(0,0), (0,0)]],
-                          [[(0,0), (0,0)], [(0,0), (0,0)], [(0,0), (0,0)]],
-                          [[(0,0), (0,0)], [(0,0), (0,0)], [(0,0), (0,0)]]])
     
+    start_point = (0,0)
+    end_point = (0,0)
+    rectangle = [start_point, end_point]
+
+    rectangles = np.array([[rectangle, rectangle, rectangle],
+                           [rectangle, rectangle, rectangle],
+                           [rectangle, rectangle, rectangle],
+                           [rectangle, rectangle, rectangle]])
     r = -12
     for i in range(4):
         c = -8
