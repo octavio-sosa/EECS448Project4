@@ -12,7 +12,7 @@ def main():
         if pressed_key & 0xFF == ord('q'): #quit
             break
         elif pressed_key & 0xFF == ord('s'): #scan hand
-            # flip about y-axis
+            frame = hp.draw_rect(frame)
             frame = cv2.flip(frame, 1)
             cv2.imshow('Hand-scan', frame)
         else:
