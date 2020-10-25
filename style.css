@@ -1,0 +1,58 @@
+body, canvas{ margin: 0; padding: 0; border: 0 none; } /* remove all the borders so there isn't any weird whitespace in the body & canvas */
+
+body {
+    overflow: hidden; /* Hide scrollbars */
+  }
+  .container {
+      width: 300px;
+      padding: 40px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(0,0,0,.8);
+      text-align: center;
+      box-shadow: 0 15px 25px rgba(0,0,0,.9);
+      border-radius: 10px;
+  }
+  .container h1 {
+      color: white;
+      font-size: 50px;
+      font-weight: 600;
+  }
+  .container p{
+      color: white;
+      font-size: 20px;
+  }
+
+  .submit {
+      border: 0;
+      background: none;
+      margin: 20px auto;
+      margin-top: 0;
+      display: inline-block;
+      text-align: center;
+      border: 2px solid #3498db;
+      padding: 10px 40px;
+      outline: none;
+      color: white;
+      border-radius: 24px;
+      transition: 0.25s;
+      cursor: pointer;
+      text-decoration: none;
+      font-size: 20px;
+  }
+  .submit:hover {
+      font-size: 15px;
+      background-image: linear-gradient(to right,#2ecc71 0%,#FFF36E 100%);
+      border:0;
+  }
+  ul.menu {
+      text-align: center;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+  }
+  ul.menu li {
+      margin: 0.8em 0;
+  }
