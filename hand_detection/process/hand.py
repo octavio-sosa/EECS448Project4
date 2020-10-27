@@ -39,3 +39,50 @@ def get_rectangles(frame):
         r = r+8
 
     return rectangles
+
+def get_regionsOfInterest(frame, rectangles):
+    hsvFrame = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+    width, height = get_rectShape(rectangles)
+    rows = rectangles.shape[0]
+    cols = rectangles.shape[1]
+    channels = 3 
+
+    roi = np.zeros((rows*height, cols*width, channels), dtype=hsvFrame.dtype)
+
+    for r in range(rows):
+        rowPix = rectangles[r][0][0][1] #row_r, col_0, start_point, y_coord
+        for c in range(cols):
+            colPix = rectangles[0][c][0][0] #row_0, col_c, start_point, x_coord
+
+            hsvRect = hsvFrame[rowPix:rowPix+height, colPix:colPix+width]
+            roi[r*height:(r+1)*height, c*width:(c+1)*width] = hsvRect
+
+    return roi
+
+
+def get_rectShape(rectangles):
+
+    one_rectangle = rectangles[0][0]
+    startCoord = one_rectangle[0]
+    endCoord = one_rectangle[1]
+    width = endCoord[0] - startCoord[0]
+    height = endCoord[1] - startCoord[1]
+
+    return width, height
+
+def get_handHist(frame, rectangles):
+    roi = get_regionsOfInterest(frame, rectangles)
+
+    channels = [0, 1]
+    mask = None
+    histSize = [180, 256]
+    ranges = [0, 180, 0, 256]
+
+    handHist = cv2.calcHist([roi], channels, mask, histSize, ranges)
+
+    #TODO
+    """
+    handHist_norm = cv2.normalize(handHist,
+    
+    return handHist_norm
+    """
