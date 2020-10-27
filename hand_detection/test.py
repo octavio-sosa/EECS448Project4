@@ -6,7 +6,7 @@ def viewArrSizes():
     roi = np.zeros([90,10,3]) #90 matrices of size 10 rows x 3 cols
     print(roi)
 
-def viewRectData():
+def viewROI():
     capture = cv2.VideoCapture(0)
 
     while capture.isOpened():
@@ -36,11 +36,7 @@ def getPixelShape(rectangles):
 
     return (startCoord, endCoord)
 
-#def viewROI():
-
 def run():
-    viewRectData() #rectangle array shape:  (4, 3, 2, 2)
-                    # pixel shape length, width: 38, 22
-    #viewROI()
+    viewROI()
 
 run()
