@@ -1,10 +1,11 @@
 class Paddle // the thing the player controls
 {
-
-    /*
-    * @Pre: creates a paddle object
-    * @Post: initializes to middle of screen and sets height and width
-    */
+    /**
+     * Initializes the paddle object
+     * @constructor
+     * @Pre creates a paddle object
+     * @Post initializes to middle of screen and sets height and width
+     */
     constructor()
     {
         this.width = PADDLE_WIDTH; // width of paddle
@@ -13,10 +14,11 @@ class Paddle // the thing the player controls
         this.y = canvas.height - this.height; // initial y position
     }
 
-    /*
-    * @Pre: assumes paddle is initialized
-    * @Post: updates paddle's position based on movements input by the user from eithe mouse or keyboard
-    */
+    /**
+     * Updates the paddle position on screen
+     * @Pre assumes paddle is initialized
+     * @Post updates paddle's position based on movements input by the user from eithe mouse or keyboard
+     */
     update()
     {
         if (mouse.x != undefined) 
@@ -25,22 +27,35 @@ class Paddle // the thing the player controls
         }
     }
 
-    /*
-    * @Pre: assumes paddle is initialized
-    * @Post: draws paddle on bottom of screen
-    */
+    /**
+     * Draws the paddle on the screen
+     * @Pre assumes paddle is initialized
+     * @Post draws paddle on bottom of screen
+     */
     draw()
     {
         ctx.fillRect(this.x, this.y, this.width, this.height); //fill in a rectangle at (this.x, this.y) with dimensions this.width x this.height
     }
 
-    /*
-    * @Pre: assumes paddle is initialized
-    * @Post: resets paddle's location to center of screen
-    */
+    /**
+     * Resets the paddle to initial position on screen
+     * @Pre assumes paddle is initialized
+     * @Post resets paddle's location to center of screen
+     */
     resetPaddle(){
       this.x = canvas.width / 2;  // initial x position
       this.y = canvas.height - this.height; // initial y position
+    }
 
+
+    /*
+    * @Pre: The window has been resized, and an event listener has called this method
+    * @Post: The paddle's size and y-position will be updated to correspond with the new window size
+    */
+    resize()
+    {
+        this.width = PADDLE_WIDTH; // width of paddle
+        this.height = PADDLE_HEIGHT; // height of paddle
+        this.y = canvas.height - this.height; // initial y position
     }
 }

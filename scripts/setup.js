@@ -34,9 +34,10 @@ let mouse = // create variable which will be used to update things based on the 
 };
 
 
-/*
-* @Pre: a key has been pressed by the user
-* @Post: updates game depending on the key the user pressed
+/**
+ * Detects if keys are pressed by user
+ * @Pre a key has been pressed by the user
+ * @Post updates game depending on the key the user pressed
         left arrow: shift paddle left by updating mouse variable
         right arrow: shift paddle right
         escape: pause or unpause game
@@ -53,10 +54,11 @@ window.addEventListener('keydown', e => {
     if (e.code == 'Space') simulate_ball = true;
 })
 
-/*
-* @Pre: mouse has been moved
-* @Post: updates variable keeping track of mouse, which will update paddle's position
-*/ 
+/**
+ * Mouse event listener that detects if user moves mouse
+ * @Pre mouse has been moved
+ * @Post updates variable keeping track of mouse, which will update paddle's position
+ */ 
 window.addEventListener('mousemove', // window will call this function every time the mouse moves, updating its position
     function(e) 
     {
@@ -65,12 +67,3 @@ window.addEventListener('mousemove', // window will call this function every tim
     }
 );
 
-/*
-* @Pre: the window size has been changed
-* @Post: updates the canvas to correspond with the window size
-*/
-window.addEventListener('resize', () => // if the user shrinks/expands their browser, the canvas will update accordingly
-{
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-});
