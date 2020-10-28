@@ -3,6 +3,8 @@ canvas.width = window.innerWidth; // make the canvas' width equal to the width o
 canvas.height = window.innerHeight; // make the canvas' height equal to the height of the user's browser
 let ctx = canvas.getContext('2d'); // a variable that contains the canvas' 2d methods, used for drawing shapes and adding colors
 
+let about = document.getElementById('about'); // Gets the about button to redirect to about page
+
 //assign variables to html elements
 var setting = document.getElementById('setting screen');
 setting.style.display = 'none';

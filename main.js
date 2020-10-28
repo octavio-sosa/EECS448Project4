@@ -165,10 +165,10 @@ var bmain_w = function Bmain_w(){ //need to update when add level part
 }
 backmainBtn_w.onclick = bmain_w;
 
-/*
-* @Pre: the window size has been changed
-* @Post: updates the canvas to correspond with the window size
-*/
+/**
+ * @Pre the window size has been changed
+ * @Post updates the canvas to correspond with the window size
+ */
 window.addEventListener('resize', () => // if the user shrinks/expands their browser, the canvas will update accordingly
 {
     canvas.width = window.innerWidth;
@@ -185,3 +185,12 @@ window.addEventListener('resize', () => // if the user shrinks/expands their bro
     }
     
 });
+
+
+/**
+ * Redirects the about button to the main github page
+ */
+
+about.onclick = function() {
+  location.href = "https://github.com/ConnorSutton07/EECS448Project4";
+}
