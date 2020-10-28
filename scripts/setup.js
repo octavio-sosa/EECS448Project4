@@ -23,10 +23,13 @@ var backmainBtn_w = document.getElementById('backmain_w');
 var tryBtn = document.getElementById('tryagain');
 var backmainBtn_l = document.getElementById('backmain_l');
 
+let clrs = [["#FFFFFF", "#000000"], ["#BF0436", "#020F59"], ["#ff787f", "#f13005"], ["#254019", "#7CA653"]];
+let clr_idx = 2;
 
 let paused = false;
 let lost = false;
 let simulate_ball = false;
+
 let mouse = // create variable which will be used to update things based on the mouse's position
 {
     x: undefined,

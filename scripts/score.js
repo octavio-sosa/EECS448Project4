@@ -48,7 +48,7 @@ class Score {
  */
   draw() {
     ctx.font = this.fontSize + 'px serif'
-    ctx.fillStyle = object_color
+    ctx.fillStyle = clrs[clr_idx][1];
     ctx.textAlign = 'right'
     ctx.fillText(this.currentScore + '', this.position.x, this.position.y)
     //TODO draw temp life based on targetscore and current score

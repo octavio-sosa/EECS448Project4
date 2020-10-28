@@ -1,7 +1,4 @@
 
-let page_color = "#FFFFFF";
-let object_color = "#000000";
-
 const BRICK_ROWS = 5;
 const BRICK_COLS = 8;
 const TOTAL_BRICKS = BRICK_ROWS * BRICK_COLS;
@@ -47,13 +44,13 @@ var resume = function Resume()
  */
 var inv = function InvertColors()
 {
-    let temp = page_color;
-    page_color = object_color;
-    object_color = temp;
+  let temp = clrs[clr_idx][0];
+  clrs[clr_idx][0] = clrs[clr_idx][1];
+  clrs[clr_idx][1] = temp;
 
-    ctx.fillStyle = page_color;
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = object_color;
+  ctx.fillStyle = clrs[0];
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = clrs[1];
 }
 
 
@@ -71,11 +68,11 @@ var ani = function animate() // main game loop occurs here
         setting.style.display = 'none';
         win.style.display = 'none';
         lose.style.display = 'none';  
-
+        
         ctx.clearRect(0, 0 , window.innerWidth, window.innerHeight); // clears the previous frame
-        ctx.fillStyle = page_color;
+        ctx.fillStyle = clrs[clr_idx][0];
         ctx.fillRect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = object_color;
+        ctx.fillStyle = clrs[clr_idx][1];
 
         for (let i = 0; i < gameObjects.length; i++) // iterate through game objects
         {
