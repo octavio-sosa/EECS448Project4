@@ -14,11 +14,13 @@ let ball = new Ball(); // instantiate ball
 let brickset = new Brickset(BRICK_ROWS, BRICK_COLS, true); //instantiate brickset with number of rows and columns of bricks
 let targetScore = Math.floor(brickset.bricks.length/4)
 let playerStatus = new PlayerStatus(targetScore)
+let powers = new Powers(TOTAL_BRICKS);
 
 gameObjects.push(paddle); // add paddle to array
 gameObjects.push(ball); // add ball to array
 gameObjects.push(brickset);
 gameObjects.push(playerStatus);
+//gameObjects.push(powers);
 
 const OBJ_KEYS = {
 	PADDLE: 0,
@@ -67,8 +69,8 @@ var ani = function animate() // main game loop occurs here
         menu.style.display = 'none';
         setting.style.display = 'none';
         win.style.display = 'none';
-        lose.style.display = 'none';  
-        
+        lose.style.display = 'none';
+
         ctx.clearRect(0, 0 , window.innerWidth, window.innerHeight); // clears the previous frame
         ctx.fillStyle = clrs[clr_idx][0];
         ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -174,7 +176,7 @@ window.addEventListener('resize', () => // if the user shrinks/expands their bro
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
     PADDLE_WIDTH = canvas.width / 6;
-    PADDLE_HEIGHT = canvas.height / 30; 
+    PADDLE_HEIGHT = canvas.height / 30;
 
     if (gameObjects.length > 0) // if the objects have been created
     {
@@ -183,7 +185,7 @@ window.addEventListener('resize', () => // if the user shrinks/expands their bro
         gameObjects[i].resize();
       }
     }
-    
+
 });
 
 
