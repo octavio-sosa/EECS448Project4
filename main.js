@@ -197,12 +197,3 @@ window.addEventListener('resize', () => // if the user shrinks/expands their bro
     }
 
 });
-
-
-/**
- * Redirects the about button to the main github page
- */
-
-about.onclick = function() {
-  location.href = "https://github.com/ConnorSutton07/EECS448Project4";
-}

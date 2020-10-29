@@ -1,9 +1,7 @@
-let canvas = document.querySelector('canvas'); // create variable to reference the canvas html element 
+let canvas = document.querySelector('canvas'); // create variable to reference the canvas html element
 canvas.width = window.innerWidth; // make the canvas' width equal to the width of the user's browser
 canvas.height = window.innerHeight; // make the canvas' height equal to the height of the user's browser
 let ctx = canvas.getContext('2d'); // a variable that contains the canvas' 2d methods, used for drawing shapes and adding colors
-
-let about = document.getElementById('about'); // Gets the about button to redirect to about page
 
 //assign variables to html elements
 var setting = document.getElementById('setting screen');
@@ -78,12 +76,11 @@ window.addEventListener('keydown', e => {
  * Mouse event listener that detects if user moves mouse
  * @Pre mouse has been moved
  * @Post updates variable keeping track of mouse, which will update paddle's position
- */ 
+ */
 window.addEventListener('mousemove', // window will call this function every time the mouse moves, updating its position
-    function(e) 
+    function(e)
     {
         mouse.x = e.x;
         mouse.y = e.y;
     }
 );
-
