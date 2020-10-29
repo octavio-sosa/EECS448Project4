@@ -1,6 +1,6 @@
 class Powers{
   constructor(amount){
-    this.noOfHearts = amount / 4;
+    this.fallings = amount / 4;
     this.powers = [];
     for (let i=0; i<this.noOfHearts; i++){
       let power = {x: Math.floor(Math.random()*canvas.width),
