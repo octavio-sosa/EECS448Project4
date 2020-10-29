@@ -1,17 +1,10 @@
-
-const BRICK_ROWS = 5;
-const BRICK_COLS = 8;
-const TOTAL_BRICKS = BRICK_ROWS * BRICK_COLS;
-
 let PADDLE_WIDTH = canvas.width / 6;
 let PADDLE_HEIGHT = canvas.height / 30;
 
-let totalBricks = BRICK_ROWS * BRICK_COLS; // Keeps track of total number of bricks
-let numCurrentBricks = totalBricks; // Initialize to whatever the initial number of bricks is
 let gameObjects = [] // array to iterate through during game loop
 let paddle = new Paddle(); // instantiate paddle
 let ball = new Ball(); // instantiate ball
-let brickset = new Brickset(BRICK_ROWS, BRICK_COLS, true); //instantiate brickset with number of rows and columns of bricks
+let brickset = new Brickset(); //instantiate brickset with number of rows and columns of bricks
 let targetScore = Math.floor(brickset.bricks.length/4)
 let playerStatus = new PlayerStatus(targetScore)
 
@@ -37,6 +30,17 @@ var resume = function Resume()
     paused = false;
 }
 
+function setRandomColor()
+{
+    clr_idx = Math.floor(Math.random() * clrs.length);
+    if (Math.random() >= 0.5)
+    {
+        let temp = clrs[clr_idx][0];
+        clrs[clr_idx][0] = clrs[clr_idx][1];
+        clrs[clr_idx][1] = temp;
+    }
+}
+
 /**
  * Inverts colors of game
  * @Pre user has selected this option in the menu
@@ -53,16 +57,16 @@ var inv = function InvertColors()
   ctx.fillStyle = clrs[1];
 }
 
-
 /**
  * Animates game on screen
  * @Pre game objects have been created and user has selected to start game
  * @Post updates and draws every game object while unpaused
  */
-var ani = function animate() // main game loop occurs here
+
+function animate() // main game loop occurs here
 {
     requestAnimationFrame(animate); // waits until this animate is done and then calls it again
-    if (!paused & !lost & playerStatus.currentScore < TOTAL_BRICKS)
+    if (!paused & !playerHasLost & !playerHasWon)
     {
         menu.style.display = 'none';
         setting.style.display = 'none';
@@ -81,13 +85,13 @@ var ani = function animate() // main game loop occurs here
         }
         gameObjects[1].detect_collisions(gameObjects[0], gameObjects[2]);
     }
-    else if (paused & !lost)
+    else if (paused & !playerHasLost)
     {
         startBtn.innerHTML = "Resume";
         startBtn.onclick = resume;
         menu.style.display = 'block';
     }
-    else if (lost)
+    else if (playerHasLost)
     {
         lose.style.display = 'block';
 		}
@@ -97,8 +101,14 @@ var ani = function animate() // main game loop occurs here
     }
 }
 
+var start = function startGame()
+{
+    setRandomColor();
+    animate();
+}
+
 invertcolorBtn.onclick = inv;
-startBtn.onclick = ani; // start the loop
+startBtn.onclick = start; // start the loop
 
 
 /**
@@ -107,7 +117,7 @@ startBtn.onclick = ani; // start the loop
  * @Post returns all game objects to original status and position
  */
 var reset = function gameRestart(){
-
+  setRandomColor();
 	ctx.clearRect(0, 0 , window.innerWidth, window.innerHeight); // clears the previous frame
 	gameObjects[0].resetPaddle();
 	gameObjects[1].resetBall();
@@ -118,7 +128,8 @@ var reset = function gameRestart(){
 		gameObjects[i].update(); // call update on each object
 		gameObjects[i].draw();
   }
-  lost = false;
+  playerHasWon = false;
+  playerHasLost = false;
 }
 nextBtn.onclick = reset;
 tryBtn.onclick = reset;

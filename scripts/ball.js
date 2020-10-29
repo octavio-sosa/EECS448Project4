@@ -14,7 +14,7 @@ class Ball
         this.y = this.start_y;
         this.vel = {x: 0, y: 0} // initial velocities
         simulate_ball = false
-        this.unit_vector = Math.sqrt(canvas.height**2 + canvas.width **2) / 200;
+        this.unit_vector = Math.sqrt(canvas.height**2 + canvas.width **2) / 150;
         this.arrowAim = new Aim(this.start_x, this.start_y);
     }
 
@@ -34,10 +34,6 @@ class Ball
 
             this.x += this.vel.x; //increment x position based on velocity
             this.y += this.vel.y; //increment y position based on velocity
-            if(numCurrentBricks <= totalBricks/2)
-            {
-                this.unit_vector = canvas.height / 70;
-            }
         }
         else
         {

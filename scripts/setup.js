@@ -23,11 +23,26 @@ var backmainBtn_w = document.getElementById('backmain_w');
 var tryBtn = document.getElementById('tryagain');
 var backmainBtn_l = document.getElementById('backmain_l');
 
-let clrs = [["#FFFFFF", "#000000"], ["#BF0436", "#020F59"], ["#ff787f", "#f13005"], ["#254019", "#7CA653"]];
+let clrs = [["#FFFFFF", "#000000"], ["#5B0E2D", "#FFA781"], ["#F2BC94", "#30110D"], ["#F9858B", "#761137"], ["#143D59", "#F4B41A"]];
 let clr_idx = 2;
 
+function setRandomColor()
+{
+    let clr_idx = Math.floor(Math.random() * clrs.length);
+    console.log(clr_idx);
+    if (Math.random() >= 0.5)
+    {
+        console.log("in here");
+        let temp = clrs[clr_idx][0];
+        clrs[clr_idx][0] = clrs[clr_idx][1];
+        clrs[clr_idx][1] = temp;
+    }
+}
+
+
 let paused = false;
-let lost = false;
+let playerHasLost = false;
+let playerHasWon = false;
 let simulate_ball = false;
 
 let mouse = // create variable which will be used to update things based on the mouse's position
