@@ -10,7 +10,7 @@ class Powers{
   }
   draw(){
     var img = new Image();
-    img.src = "doubleball.png";
+    img.src = "assets/images/doubleball.png";
     for (let i=0; i<this.powers.length; i++){
       let power = this.powers[i];
       ctx.drawImage(img, power.x, power.y, 30, 30);
