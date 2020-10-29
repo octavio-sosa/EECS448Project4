@@ -9,10 +9,11 @@ class Powers{
     }
   }
   draw(){
+    var img = new Image();
+    img.src = "doubleball.png";
     for (let i=0; i<this.powers.length; i++){
       let power = this.powers[i];
-      ctx.fillStyle = 'pink';
-      ctx.fillRect(power.x, power.y, 20, 20);
+      ctx.drawImage(img, power.x, power.y, 30, 30);
       power.y = power.y+1;
       if (power.y > canvas.height){
         power.y = 0;
