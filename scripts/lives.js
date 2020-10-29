@@ -27,7 +27,7 @@ class Lives {
 
     this.playerLives = this.buildLives(currentLives)
     if(currentLives === 0) {
-      lost = true
+      playerHasLost = true
     }
   }
 
