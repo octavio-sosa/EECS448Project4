@@ -11,6 +11,8 @@ class Brickset
         this.brick_height = canvas.height / 25;
         this.spacing = 1;
         this.bricks = [];
+        this.total_bricks = 0;
+        this.remaining_bricks = 0;
         this.rows = 0;
         this.cols = 0;
         this.height = 0;
@@ -43,7 +45,9 @@ class Brickset
     generate_standard()
     {
         this.rows = Math.random() * 2 + 6;
-        this.cols = 15 - this.rows; 
+        this.cols = 15 - this.rows;
+        this.total_bricks = this.rows * this.cols;
+        this.remaining_bricks = this.total_bricks; 
         if (Math.random() >= 0.5) this.spacing = this.brick_length / 4;
         let row_length = (this.cols * this.brick_length) + ((this.cols - 1) * this.spacing);
         let starting_x_pos = (canvas.width - row_length) / 2;
@@ -74,15 +78,18 @@ class Brickset
                              y: starting_y_pos + (i * (this.brick_height + this.spacing)),
                              alive: true};
                 this.bricks.push(brick);
+                this.total_bricks += 1;
             }
         }
+        this.remaining_bricks = this.total_bricks;
     }
 
     generate_wall()
     {
         this.rows = Math.random() * 2 + 4;
         this.cols = 15;
-        
+        this.total_bricks = this.rows * this.cols;
+        this.remaining_bricks = this.total_bricks; 
         let starting_y_pos = canvas.height / 8;
         for (let i = 0; i < this.rows; i++)
         {
@@ -100,6 +107,8 @@ class Brickset
     {
         this.rows = 6;
         this.cols = 15;
+        this.total_bricks = this.rows * this.cols;
+        this.remaining_bricks = this.total_bricks; 
         let y_spacing = this.brick_height * 2.5;
 
         let starting_y_pos = canvas.height / 12;
@@ -119,6 +128,8 @@ class Brickset
     {
         this.cols = 3;
         this.rows = Math.random() * 2 + 8;
+        this.total_bricks = this.rows * this.cols;
+        this.remaining_bricks = this.total_bricks; 
         let row_length = (this.cols * this.brick_length) + ((this.cols - 1) * this.spacing);
         let starting_x1_pos = (canvas.width - row_length) / 2;
         let starting_x2_pos = (canvas.width - row_length) / 8;

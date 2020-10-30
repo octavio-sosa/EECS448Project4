@@ -19,8 +19,8 @@ class Lives {
 
 /**
  * Updates the current number of lives
- * @pre global 'lost' variable must be declared
- * @post 'lost' var set to true when all lives lost
+ * @pre global 'playerHasLost' variable must be declared
+ * @post 'playerHasLost' var set to true when all lives lost
  * @param {int} currentLives: integer representing the current lives of the player
  */
   update(currentLives) {
