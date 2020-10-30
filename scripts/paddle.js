@@ -71,7 +71,7 @@ class Paddle // the thing the player controls
                 && Powers.powers[i].y < this.y + this.height
                 && Powers.powers[i].y + Powers.powers[i].power_height > this.y)
                 {
-                    alert("item has hit paddle");
+                    console.log("item has hit paddle");
                     Powers.powers.splice(i, 1);
                 }
         }
