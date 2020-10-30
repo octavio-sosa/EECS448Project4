@@ -48,14 +48,30 @@ class Paddle // the thing the player controls
     }
 
 
-    /*
-    * @Pre: The window has been resized, and an event listener has called this method
-    * @Post: The paddle's size and y-position will be updated to correspond with the new window size
-    */
+    /**
+     * @Pre The window has been resized, and an event listener has called this method
+     * @Post The paddle's size and y-position will be updated to correspond with the new window size
+     */
     resize()
     {
         this.width = PADDLE_WIDTH; // width of paddle
         this.height = PADDLE_HEIGHT; // height of paddle
         this.y = canvas.height - this.height; // initial y position
+    }
+
+    /**
+     * Function to detect collisions with items
+     */
+
+    detect_collision(Powers)
+    {
+        for(let i = 0; i<Powers.fallings; i++){
+            if (   Powers.powers[i].x < this.x + this.width
+                && Powers.powers[i].x + Powers.powers[i].power_width > this.x
+                && Powers.powers[i].y < this.y + this.height
+                && Powers.powers[i].y + Powers.powers[i].power_height > this.y) {
+                    alert("item has hit paddle");
+            }
+        }
     }
 }

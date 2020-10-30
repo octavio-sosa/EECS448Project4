@@ -1,10 +1,13 @@
 class Powers{
   constructor(){
-    this.fallings = 20;
+    this.fallings = 2
     this.powers = [];
-    for (let i=0; i<this.fallings; i++){
+    for (let i=0; i < this.fallings; i++){
       let power = {x: Math.floor(Math.random()*canvas.width),
-                   y: Math.floor(Math.random()*canvas.height)};
+                   y: Math.floor(Math.random()*canvas.height),
+                   power_width: canvas.width / 15,
+                   power_height: canvas.height / 25
+                  };
       this.powers.push(power);
     }
   }

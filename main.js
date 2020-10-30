@@ -18,7 +18,8 @@ const OBJ_KEYS = {
 	PADDLE: 0,
 	BALL: 1,
 	BRICKSET: 2,
-	PLAYERSTATUS: 3
+  PLAYERSTATUS: 3,
+  POWERS: 4
 }
 
 /**
@@ -89,7 +90,8 @@ function animate() // main game loop occurs here
           gameObjects[i].update(); // call update on each object
           gameObjects[i].draw();
         }
-        gameObjects[1].detect_collisions(gameObjects[0], gameObjects[2]);
+        gameObjects[1].detect_collisions(gameObjects[0], gameObjects[2]); // Have ball check for collisions
+        gameObjects[0].detect_collision(gameObjects[4]); // Have paddle check for collision with powers
     }
     else if (paused & !playerHasLost)
     {
