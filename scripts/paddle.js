@@ -69,9 +69,11 @@ class Paddle // the thing the player controls
             if (   Powers.powers[i].x < this.x + this.width
                 && Powers.powers[i].x + Powers.powers[i].power_width > this.x
                 && Powers.powers[i].y < this.y + this.height
-                && Powers.powers[i].y + Powers.powers[i].power_height > this.y) {
+                && Powers.powers[i].y + Powers.powers[i].power_height > this.y)
+                {
                     alert("item has hit paddle");
-            }
+                    Powers.powers.splice(i, 1);
+                }
         }
     }
 }
