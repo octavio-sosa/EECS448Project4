@@ -78,6 +78,11 @@ function animate() // main game loop occurs here
         ctx.fillStyle = clrs[clr_idx][0];
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         ctx.fillStyle = clrs[clr_idx][1];
+        ctx.strokeStyle = clrs[clr_idx][1];
+        ctx.lineWidth = 1;
+        ctx.moveTo(canvas.width / 2, 0);
+        ctx.lineTo(canvas.width / 2, canvas.height);
+        ctx.stroke();
 
         for (let i = 0; i < gameObjects.length; i++) // iterate through game objects
         {
@@ -123,7 +128,8 @@ var reset = function gameRestart(){
 	gameObjects[0].resetPaddle();
 	gameObjects[1].resetBall();
 	gameObjects[2].resetBrick();
-	gameObjects[3].resetStatus();
+  gameObjects[3].resetStatus();
+
 	for (let i = 0; i < gameObjects.length; i++) // iterate through game objects
 	{
 		gameObjects[i].update(); // call update on each object
@@ -190,7 +196,7 @@ window.addEventListener('resize', () => // if the user shrinks/expands their bro
 
     if (gameObjects.length > 0) // if the objects have been created
     {
-      for (let i = 0; i < gameObjects.length - 1; i++) // iterate through game objects
+      for (let i = 0; i < gameObjects.length - 2; i++) // iterate through game objects
       {
         gameObjects[i].resize();
       }

@@ -44,11 +44,13 @@ class Brickset
 
     generate_standard()
     {
-        this.rows = Math.random() * 2 + 6;
-        this.cols = 15 - this.rows;
+        this.rows = Math.floor(Math.random() * 2 + 6);
+        this.cols = Math.floor(15 - this.rows);
         this.total_bricks = this.rows * this.cols;
         this.remaining_bricks = this.total_bricks; 
-        if (Math.random() >= 0.5) this.spacing = this.brick_length / 4;
+
+        if (Math.random() >= 0.5) this.spacing = this.brick_length / 4
+
         let row_length = (this.cols * this.brick_length) + ((this.cols - 1) * this.spacing);
         let starting_x_pos = (canvas.width - row_length) / 2;
         let starting_y_pos = canvas.height / 8;
@@ -67,7 +69,7 @@ class Brickset
 
     generate_pyramid()
     {
-        this.height = Math.random() * 3 + 9;
+        this.height = Math.floor(Math.random() * 3 + 9);
         let starting_x_pos = (canvas.width - this.brick_length) / 2;
         let starting_y_pos = canvas.height / 20;
         for (let i = 0; i < this.height; i++)
@@ -86,7 +88,7 @@ class Brickset
 
     generate_wall()
     {
-        this.rows = Math.random() * 2 + 4;
+        this.rows = Math.floor(Math.random() * 2 + 4);
         this.cols = 15;
         this.total_bricks = this.rows * this.cols;
         this.remaining_bricks = this.total_bricks; 
@@ -127,7 +129,7 @@ class Brickset
     generate_3_column()
     {
         this.cols = 3;
-        this.rows = Math.random() * 2 + 8;
+        this.rows = Math.floor(Math.random() * 2 + 8);
         this.total_bricks = this.rows * this.cols;
         this.remaining_bricks = this.total_bricks; 
         let row_length = (this.cols * this.brick_length) + ((this.cols - 1) * this.spacing);
