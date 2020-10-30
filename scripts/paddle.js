@@ -60,7 +60,9 @@ class Paddle // the thing the player controls
     }
 
     /**
-     * Function to detect collisions with items
+     * Function to detect collisions with items, removes the power from the array of powers if there is a collision with the paddle.
+     * @Pre Assumes powers are initialized correctly
+     * @Post Removes the power from the array of powers when collides with the paddle
      */
 
     detect_collision(Powers)
