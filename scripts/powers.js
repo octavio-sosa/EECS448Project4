@@ -39,9 +39,8 @@ class Powers{
     for (let i=0; i<this.powers.length; i++){
       let power = this.powers[i];
       ctx.drawImage(img, power.x, power.y, 50, 50);
-      power.y = power.y+2;
-      if (power.y > canvas.height){
-        power.y = 0;
+      if (power.y < canvas.height){
+        power.y = power.y+2;
       }
       this.catchBall(power);
     }
