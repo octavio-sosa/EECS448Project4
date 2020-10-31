@@ -57,7 +57,7 @@ def viewHandImg():
             rectangles = hp.get_rectangles(frame)
             handHist = hp.get_handHist(frame, rectangles)
             while True:
-                handImg = hp.get_handImg(frame, handHist)
+                handImg = hp.getHandImg(frame, handHist)
                 cv2.imshow('Hand', handImg) 
                 ret, frame = capture.read()
                 pressed_key = cv2.waitKey(1)

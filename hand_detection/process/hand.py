@@ -83,7 +83,7 @@ def get_handHist(frame, rectangles):
 
     return handHistNorm
 
-def get_handImg(frame, handHist):
+def getHandImg(frame, handHist):
     """
     hyper-params to tune: 
         - kernel disc size
@@ -105,6 +105,28 @@ def get_handImg(frame, handHist):
     thresh = cv2.merge((thresh, thresh, thresh))
     
     # get hand img
-    hand_img = cv2.bitwise_and(frame, thresh) 
+    handImg = cv2.bitwise_and(frame, thresh) 
 
-    return hand_img
+    return handImg
+
+def drawPOI(frame, handHist):
+    handImg = getHandImg(frame, handHist)
+    contours = getContours(handHist)
+    maxContour = max(contours, key=cv2.contourArea) #hand outline
+    handCentroid = getCentroid(maxContour)
+
+    #draw handCentroid
+    radius = 5
+    centroidColor = [255, 0, 255] 
+    lineThickness = -1 #fill circle with -1 value
+    cv2.circle(frame, handCentroid, radius, centroidColor, lineThickness)
+
+    if maxContour: #test TODO
+        #get fingerTipPoint
+        handHull = cv2.convexHull(maxContour, returnPoints=False)
+        handDefects = cv2.convexityDefects(maxContour, handHull)
+        fingerTipPoint = getFurthestPoint(handDefects, maxContour, handCentroid)
+
+        #draw finger-tip
+        tipColor = [0, 0, 255]
+        cv2.circle(frame, fingerTipPoint, radius, tipColor, lineThickness)
