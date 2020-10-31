@@ -21,7 +21,7 @@ class Paddle // the thing the player controls
      */
     update()
     {
-        if (mouse.x != undefined) 
+        if (mouse.x != undefined)
         {
             this.x = Math.min(Math.max(mouse.x - (this.width / 2), 0), canvas.width - this.width); // move paddle based on mouse position if it is defined (it is undefined until it moves)
         }
@@ -68,7 +68,7 @@ class Paddle // the thing the player controls
     detect_collision(Powers)
     {
         for(let i = 0; i<Powers.fallings; i++){
-            if (   Powers.powers[i].x < this.x + this.width
+            if (Powers.powers[i].x < this.x + this.width
                 && Powers.powers[i].x + Powers.powers[i].power_width > this.x
                 && Powers.powers[i].y < this.y + this.height
                 && Powers.powers[i].y + Powers.powers[i].power_height > this.y)

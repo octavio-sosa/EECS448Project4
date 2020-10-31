@@ -7,7 +7,7 @@ let ball = new Ball(); // instantiate ball
 let brickset = new Brickset(); //instantiate brickset with number of rows and columns of bricks
 let targetScore = Math.floor(brickset.bricks.length/4);
 let playerStatus = new PlayerStatus(targetScore);
-let powers = new Powers();
+let powers = new Powers(PADDLE_WIDTH, PADDLE_HEIGHT);
 
 gameObjects.push(paddle); // add paddle to array
 gameObjects.push(ball); // add ball to array
@@ -91,7 +91,7 @@ function animate() // main game loop occurs here
           gameObjects[i].draw();
         }
         gameObjects[1].detect_collisions(gameObjects[0], gameObjects[2]); // Have ball check for collisions
-        gameObjects[0].detect_collision(gameObjects[4]); // Have paddle check for collision with powers
+        //gameObjects[0].detect_collision(gameObjects[4]); // Have paddle check for collision with powers
     }
     else if (paused & !playerHasLost)
     {
