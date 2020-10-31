@@ -79,11 +79,6 @@ function animate() // main game loop occurs here
         ctx.fillStyle = clrs[clr_idx][0];
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         ctx.fillStyle = clrs[clr_idx][1];
-        ctx.strokeStyle = clrs[clr_idx][1];
-        ctx.lineWidth = 1;
-        ctx.moveTo(canvas.width / 2, 0);
-        ctx.lineTo(canvas.width / 2, canvas.height);
-        ctx.stroke();
 
         for (let i = 0; i < gameObjects.length; i++) // iterate through game objects
         {
@@ -113,6 +108,7 @@ var start = function startGame()
 {
     setRandomColor();
     animate();
+    displayNotification("LEVEL 1");
 }
 
 invertcolorBtn.onclick = inv;

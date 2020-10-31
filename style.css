@@ -56,3 +56,13 @@ body {
   ul.menu li {
       margin: 0.8em 0;
   }
+
+  .notification {
+      position: absolute;
+      display: none;
+      font-size: 128px;
+      font-family: 'Roboto Slab', serif;
+      top: 20%;
+      width: 100%;
+      text-align: center;
+  }

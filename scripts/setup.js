@@ -1,7 +1,9 @@
-let canvas = document.querySelector('canvas'); // create variable to reference the canvas html element
+let canvas = document.querySelector('canvas'); // create variable to reference the canvas html element 
 canvas.width = window.innerWidth; // make the canvas' width equal to the width of the user's browser
 canvas.height = window.innerHeight; // make the canvas' height equal to the height of the user's browser
 let ctx = canvas.getContext('2d'); // a variable that contains the canvas' 2d methods, used for drawing shapes and adding colors
+
+let about = document.getElementById('about'); // Gets the about button to redirect to about page
 
 //assign variables to html elements
 var setting = document.getElementById('setting screen');
@@ -12,6 +14,8 @@ win.style.display = 'none';
 
 var lose = document.getElementById('lose screen');
 lose.style.display = 'none';
+
+var notif_elem = document.getElementById('notification');
 
 var startBtn = document.getElementById('start');
 var menu = document.getElementById('menu screen');
@@ -32,13 +36,29 @@ function setRandomColor()
     console.log(clr_idx);
     if (Math.random() >= 0.5)
     {
-        console.log("in here");
         let temp = clrs[clr_idx][0];
         clrs[clr_idx][0] = clrs[clr_idx][1];
         clrs[clr_idx][1] = temp;
     }
 }
 
+function displayNotification(notif)
+{
+    notif_elem.style.display = 'block';
+    notif_elem.innerHTML = "   " + notif + "   ";
+    function fade()
+    {
+        notif_elem.style.opacity -= 0.0001;
+        if (notif_elem.style.opacity > 0)
+        {
+            setInterval(fade, 100);
+        }
+        else notif_elem.style.display = 'none';
+    }
+
+    notif_elem.style.opacity = 1;
+    setInterval(fade, 1000);
+}
 
 let paused = false;
 let playerHasLost = false;
@@ -76,11 +96,12 @@ window.addEventListener('keydown', e => {
  * Mouse event listener that detects if user moves mouse
  * @Pre mouse has been moved
  * @Post updates variable keeping track of mouse, which will update paddle's position
- */
+ */ 
 window.addEventListener('mousemove', // window will call this function every time the mouse moves, updating its position
-    function(e)
+    function(e) 
     {
         mouse.x = e.x;
         mouse.y = e.y;
     }
 );
+
