@@ -79,12 +79,20 @@ def get_handHist(frame, rectangles):
     ranges = [0, 180, 0, 256]
 
     handHist = cv2.calcHist([roi], channels, mask, histSize, ranges)
-    
     handHistNorm = cv2.normalize(handHist, None, 0, 255, cv2.NORM_MINMAX)
 
     return handHistNorm
 
 def get_handImg(frame, handHist):
+    """
+    hyper-params to tune: 
+        - kernel disc size
+        - threshold value
+        - rectangle matrix shape
+        - color of walls in room where image is taken
+        - camera position and type
+        - image background
+    """
     frame_hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
     hand_mask = cv2.calcBackProject([frame_hsv], [0, 1], handHist, [0, 180, 0, 256], 1)
 
