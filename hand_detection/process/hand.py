@@ -79,10 +79,7 @@ def get_handHist(frame, rectangles):
     ranges = [0, 180, 0, 256]
 
     handHist = cv2.calcHist([roi], channels, mask, histSize, ranges)
-
-    #TODO
-    """
-    handHist_norm = cv2.normalize(handHist,
     
-    return handHist_norm
-    """
+    handHistNorm = cv2.normalize(handHist, None, 0, 255, cv2.NORM_MINMAX)
+
+    return handHistNorm

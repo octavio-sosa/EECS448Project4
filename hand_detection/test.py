@@ -18,8 +18,14 @@ def viewROI():
         elif pressed_key & 0xFF == ord('s'):
             rectangles = hp.get_rectangles(frame)
             roi = hp.get_regionsOfInterest(frame, rectangles)
+            roiHist = cv2.normalize(roi, None, 0, 255, cv2.NORM_MINMAX)
+
             handImg = cv2.cvtColor(roi, cv2.COLOR_HSV2BGR)
+            #handHist = cv2.cvtColor(roiHist, cv2.COLOR_HSV2BGR)
+
             cv2.imshow('handPix', handImg) 
+            #cv2.imshow('handHist', handHist)
+
             cv2.waitKey()
             break
         else:
