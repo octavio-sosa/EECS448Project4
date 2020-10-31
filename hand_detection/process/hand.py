@@ -87,7 +87,16 @@ def get_handHist(frame, rectangles):
 def get_handImg(frame, handHist):
     frame_hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
     hand_mask = cv2.calcBackProject([frame_hsv], [0, 1], handHist, [0, 180, 0, 256], 1)
+
+    # convolute mask with disc kernel
+    disc = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (51, 51))
+    cv2.filter2D(hand_mask, -1, disc, hand_mask)
     
-    #hand_img = cv2.bitwise_and(frame, hand_mask) 
-    #return hand_img
-    return hand_mask
+    # set threshold 
+    ret, thresh = cv2.threshold(hand_mask, 175, 255, cv2.THRESH_BINARY)
+    thresh = cv2.merge((thresh, thresh, thresh))
+    
+    # get hand img
+    hand_img = cv2.bitwise_and(frame, thresh) 
+
+    return hand_img

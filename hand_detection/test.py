@@ -2,6 +2,12 @@ import numpy as np
 import cv2
 import process.hand as hp
 
+def run():
+    #viewROI()
+    viewHandImg()
+
+run()
+
 def viewArrSizes():
     roi = np.zeros([90,10,3]) #90 matrices of size 10 rows x 3 cols
     print(roi)
@@ -50,20 +56,18 @@ def viewHandImg():
         elif pressed_key & 0xFF == ord('s'):
             rectangles = hp.get_rectangles(frame)
             handHist = hp.get_handHist(frame, rectangles)
-            handImg = hp.get_handImg(frame, handHist)
-
-            cv2.imshow('Hand', handImg) 
-            cv2.waitKey()
-            break
+            while True:
+                handImg = hp.get_handImg(frame, handHist)
+                cv2.imshow('Hand', handImg) 
+                ret, frame = capture.read()
+                pressed_key = cv2.waitKey(1)
+                if pressed_key & 0xFF == ord('q'):
+                    capture.release()
+                    break
         else:
             frame = hp.draw_rect(frame)
+            frame = cv2.flip(frame, 1)
             cv2.imshow('Hand-scan', frame)
 
     capture.release()
     cv2.destroyAllWindows()
-
-def run():
-    #viewROI()
-    viewHandImg()
-
-run()
