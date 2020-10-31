@@ -18,13 +18,9 @@ def viewROI():
         elif pressed_key & 0xFF == ord('s'):
             rectangles = hp.get_rectangles(frame)
             roi = hp.get_regionsOfInterest(frame, rectangles)
-            roiHist = cv2.normalize(roi, None, 0, 255, cv2.NORM_MINMAX)
 
             handImg = cv2.cvtColor(roi, cv2.COLOR_HSV2BGR)
-            #handHist = cv2.cvtColor(roiHist, cv2.COLOR_HSV2BGR)
-
             cv2.imshow('handPix', handImg) 
-            #cv2.imshow('handHist', handHist)
 
             cv2.waitKey()
             break
@@ -42,7 +38,32 @@ def getPixelShape(rectangles):
 
     return (startCoord, endCoord)
 
+def viewHandImg():
+    capture = cv2.VideoCapture(0)
+
+    while capture.isOpened():
+        ret, frame = capture.read()
+        pressed_key = cv2.waitKey(1)
+
+        if pressed_key & 0xFF == ord('q'):
+            break
+        elif pressed_key & 0xFF == ord('s'):
+            rectangles = hp.get_rectangles(frame)
+            handHist = hp.get_handHist(frame, rectangles)
+            handImg = hp.get_handImg(frame, handHist)
+
+            cv2.imshow('Hand', handImg) 
+            cv2.waitKey()
+            break
+        else:
+            frame = hp.draw_rect(frame)
+            cv2.imshow('Hand-scan', frame)
+
+    capture.release()
+    cv2.destroyAllWindows()
+
 def run():
-    viewROI()
+    #viewROI()
+    viewHandImg()
 
 run()

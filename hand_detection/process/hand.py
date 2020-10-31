@@ -83,3 +83,11 @@ def get_handHist(frame, rectangles):
     handHistNorm = cv2.normalize(handHist, None, 0, 255, cv2.NORM_MINMAX)
 
     return handHistNorm
+
+def get_handImg(frame, handHist):
+    frame_hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+    hand_mask = cv2.calcBackProject([frame_hsv], [0, 1], handHist, [0, 180, 0, 256], 1)
+    
+    #hand_img = cv2.bitwise_and(frame, hand_mask) 
+    #return hand_img
+    return hand_mask
