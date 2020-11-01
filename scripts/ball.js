@@ -14,7 +14,7 @@ class Ball
         this.y = this.start_y;
         this.vel = {x: 0, y: 0} // initial velocities
         simulate_ball = false
-        this.unit_vector = Math.sqrt(canvas.height**2 + canvas.width **2) / 200;
+        this.unit_vector = (Math.sqrt(canvas.height**2 + canvas.width **2) / 200) * (Math.log10(level) + 1);
         this.arrowAim = new Aim(this.start_x, this.start_y);
     }
 
@@ -89,7 +89,16 @@ class Ball
             if (y - this.radius <= 0) this.vel.y *= -1;
 
             //wall collision
-            if (x + this.radius >= canvas.width || x - this.radius <= 0) this.vel.x *= -1;
+            if (x + this.radius > canvas.width)
+            {
+                this.vel.x *= -1;
+                this.x = canvas.width - this.radius;
+            }
+            else if (x - this.radius <= 0)
+            {
+                this.vel.x *= -1;
+                this.x = 0 + this.radius;
+            }
 
             let x_collide_distance = brickset.brick_length / 2 + this.radius;
             let y_collide_distance = brickset.brick_height / 2 + this.radius;
@@ -123,7 +132,6 @@ class Ball
             {
                 if (this.x + (this.radius / 2) >= paddle.x && this.x <= paddle.x + paddle.width)
                 {
-                    console.log("hit paddle");
                     this.y = canvas.height - paddle.height - this.radius;
                     this.vel.y *= -1;
                     let mid_paddle = paddle.width / 2;
@@ -145,8 +153,9 @@ class Ball
     * @Post: resets ball to initial velocity
     */
     resetBall() {
-      simulate_ball = false
-      this.vel = {x: 0, y: 0}
+      simulate_ball = false;
+      this.vel = {x: 0, y: 0};
+      this.unit_vector = (Math.sqrt(canvas.height**2 + canvas.width **2) / 200) * (Math.log10(level) + 1);
     }
 
     /*
@@ -156,6 +165,6 @@ class Ball
     resize()
     {
         this.radius = canvas.height / 40; // radius of ball dependent on screen size
-        this.unit_vector = Math.sqrt(canvas.height**2 + canvas.width **2) / 200;
+        this.unit_vector = (Math.sqrt(canvas.height**2 + canvas.width **2) / 200) * (Math.log10(level) + 1)
     }
 }

@@ -1,5 +1,6 @@
 let PADDLE_WIDTH = canvas.width / 6;
 let PADDLE_HEIGHT = canvas.height / 30;
+let level = 3;
 
 let gameObjects = [] // array to iterate through during game loop
 let paddle = new Paddle(); // instantiate paddle
@@ -9,6 +10,7 @@ let targetScore = Math.floor(brickset.bricks.length/4);
 let playerStatus = new PlayerStatus(targetScore);
 let totalfallings = 2;
 let powers = new Powers(PADDLE_WIDTH, PADDLE_HEIGHT, totalfallings);
+
 
 gameObjects.push(paddle); // add paddle to array
 gameObjects.push(ball); // add ball to array
@@ -68,6 +70,7 @@ var inv = function InvertColors()
 
 function animate() // main game loop occurs here
 {
+  console.log(Math.log10(level) + 1);
     requestAnimationFrame(animate); // waits until this animate is done and then calls it again
     if (!paused & !playerHasLost & !playerHasWon)
     {
@@ -109,7 +112,7 @@ var start = function startGame()
 {
     setRandomColor();
     animate();
-    displayNotification("LEVEL 1");
+    displayNotification("LEVEL " + level);
 }
 
 invertcolorBtn.onclick = inv;
@@ -122,6 +125,7 @@ startBtn.onclick = start; // start the loop
  * @Post returns all game objects to original status and position
  */
 var reset = function gameRestart(){
+  level = 1;
   setRandomColor();
 	ctx.clearRect(0, 0 , window.innerWidth, window.innerHeight); // clears the previous frame
 	gameObjects[0].resetPaddle();
@@ -136,9 +140,31 @@ var reset = function gameRestart(){
   }
   playerHasWon = false;
   playerHasLost = false;
+  displayNotification("LEVEL " + level);
 }
-nextBtn.onclick = reset;
 tryBtn.onclick = reset;
+
+
+var nextlevel = function nextLevel()
+{
+  level++;
+  setRandomColor();
+	ctx.clearRect(0, 0 , window.innerWidth, window.innerHeight); // clears the previous frame
+	gameObjects[0].resetPaddle();
+	gameObjects[1].resetBall();
+	gameObjects[2].resetBrick();
+  //gameObjects[3].resetStatus();
+
+	for (let i = 0; i < gameObjects.length; i++) // iterate through game objects
+	{
+		gameObjects[i].update(); // call update on each object
+		gameObjects[i].draw();
+  }
+  playerHasWon = false;
+  playerHasLost = false;
+  displayNotification("LEVEL " + level);
+}
+nextBtn.onclick = nextlevel;
 
 /**
  * Opens option menu

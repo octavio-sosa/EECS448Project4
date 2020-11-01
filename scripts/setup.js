@@ -45,19 +45,18 @@ function setRandomColor()
 function displayNotification(notif)
 {
     notif_elem.style.display = 'block';
-    notif_elem.innerHTML = "   " + notif + "   ";
+    notif_elem.innerHTML = notif;
     function fade()
     {
-        notif_elem.style.opacity -= 0.0001;
+        notif_elem.style.opacity -= 0.01;
         if (notif_elem.style.opacity > 0)
         {
-            setInterval(fade, 100);
+            setTimeout(fade, 10);
         }
         else notif_elem.style.display = 'none';
     }
-
     notif_elem.style.opacity = 1;
-    setInterval(fade, 1000);
+    setTimeout(fade, 1000);
 }
 
 let paused = false;
