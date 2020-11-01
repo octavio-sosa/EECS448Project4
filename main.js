@@ -9,7 +9,8 @@ let brickset = new Brickset(); //instantiate brickset with number of rows and co
 let targetScore = Math.floor(brickset.bricks.length/4);
 let playerStatus = new PlayerStatus(targetScore);
 let totalfallings = 2;
-let powers = new Powers(PADDLE_WIDTH, PADDLE_HEIGHT, totalfallings);
+let randomtype = parseInt(Math.random()*(4-1+1)+1);
+let powers = new Powers(PADDLE_WIDTH, PADDLE_HEIGHT, totalfallings, roundtype);
 
 
 gameObjects.push(paddle); // add paddle to array
