@@ -1,2 +1,2 @@
 Session.vim
-*.pyc
+/process/__pycache__/*.pyc
