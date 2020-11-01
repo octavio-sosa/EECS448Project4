@@ -111,15 +111,22 @@ def getHandImg(frame, handHist):
 
 def getContours(imgMasked):
     grayHist = cv2.cvtColor(imgMasked, cv2.COLOR_BGR2GRAY)
-    #ret, thresh = cv2.threshold(grayHist, 0, 255, 0) #original line
     ret, thresh = cv2.threshold(grayHist, 0, 255, cv2.THRESH_BINARY)
     contours, hierarchy = cv2.findContours(thresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
 
     return contours
 
 def getCentroid(contour):
+    moments = cv2.moments(contour)
 
-    return 0
+    x_bar = None
+    y_bar = None
+
+    if moments['m00']:
+        x_bar = int(moments['m10'] / moments['m00'])
+        y_bar = int(moments['m01'] / moments['m00'])
+
+    return x_bar, y_bar
 
 def getFurthestPoint(contourDefects, contour, centroid):
     
@@ -127,7 +134,7 @@ def getFurthestPoint(contourDefects, contour, centroid):
 
 def drawPOI(frame, handHist):
     handImg = getHandImg(frame, handHist)
-    contours = getContours(handHist)
+    contours = getContours(handImg)
     largestContour = max(contours, key=cv2.contourArea) #hand outline
     handCentroid = getCentroid(largestContour)
 
@@ -137,6 +144,8 @@ def drawPOI(frame, handHist):
     lineThickness = -1 #fill circle with -1 value
     cv2.circle(frame, handCentroid, radius, centroidColor, lineThickness)
 
+    return frame
+"""
     if largestContour: #TODO test
         #get fingerTipPoint
         handHull = cv2.convexHull(largestContour, returnPoints=False)
@@ -146,3 +155,4 @@ def drawPOI(frame, handHist):
         #draw finger-tip
         tipColor = [0, 0, 255]
         cv2.circle(frame, fingerTipPoint, radius, tipColor, lineThickness)
+"""
