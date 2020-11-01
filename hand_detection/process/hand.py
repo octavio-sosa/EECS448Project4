@@ -92,7 +92,8 @@ def getHandImg(frame, handHist):
         - color of walls in room where image is taken
         - camera position and type
         - image background
-        - hand perspective, orientation, and shape
+        - hand perspective, orientation, and shape during scan
+        - multiple hand scans at different positions
     """
     frame_hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
     hand_mask = cv2.calcBackProject([frame_hsv], [0, 1], handHist, [0, 180, 0, 256], 1)
