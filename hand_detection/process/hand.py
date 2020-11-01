@@ -100,7 +100,7 @@ def getHandImg(frame, handHist):
     hand_mask = cv2.calcBackProject([frame_hsv], [0, 1], handHist, [0, 180, 0, 256], 1)
 
     # convolute mask with disc kernel
-    disc = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (51, 51))
+    disc = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (41, 41))
     cv2.filter2D(hand_mask, -1, disc, hand_mask)
     
     # set threshold 
@@ -165,7 +165,7 @@ def drawPOI(frame, handHist):
     handCentroid = getCentroid(largestContour)
 
     #draw handCentroid
-    radius = 5
+    radius = 10
     centroidColor = [255, 0, 0] 
     lineThickness = -1 #fill circle with -1 value
     cv2.circle(frame, handCentroid, radius, centroidColor, lineThickness)

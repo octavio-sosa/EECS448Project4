@@ -132,9 +132,9 @@ def viewPOI():
 
 def run():
     #viewROI()
-    viewHandImg()
+    #viewHandImg()
     #viewContours()
-    #viewPOI()
+    viewPOI()
 
 run()
 
