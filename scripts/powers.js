@@ -16,12 +16,13 @@ class Powers{
       this.powers.push(power);
     }
   }
-  isCatch (item) {
+  isCatch (item){
     return(item.x < gameObjects[OBJ_KEYS.PADDLE].x + this.paddleW
     && item.x + item.power_width > gameObjects[OBJ_KEYS.PADDLE].x
     && item.y < gameObjects[OBJ_KEYS.PADDLE].y + this.paddleH
     && item.y + item.power_height > gameObjects[OBJ_KEYS.PADDLE].y)
   }
+
   catchBall(index, item){
     if (item.isLive){
       if (this.isCatch(item)){
@@ -37,24 +38,33 @@ class Powers{
         item.isLive = false;
         this.powers.splice(index, 1);
         console.log('catchHeart');
+        gameObjects[OBJ_KEYS.PLAYERSTATUS].currentLives++;
       }
     }
   }
-   catchPlonger(index, item){
+  catchPlonger(index, item){
     if (item.isLive){
       if (this.isCatch(item)){
         item.isLive = false;
         this.powers.splice(index, 1);
         console.log('catchPlonger');
+        if(gameObjects[OBJ_KEYS.PADDLE].width>(canvas.width/9)
+          &&gameObjects[OBJ_KEYS.PADDLE].width<(canvas.width/3)){
+            gameObjects[OBJ_KEYS.PADDLE].width += 40;
+          }
       }
     }
   }
-   catchPshorter(index, item){
+  catchPshorter(index, item){
     if (item.isLive){
       if (this.isCatch(item)){
         item.isLive = false;
         this.powers.splice(index, 1);
         console.log('catchPshorter');
+        if(gameObjects[OBJ_KEYS.PADDLE].width>(canvas.width/9)
+          &&gameObjects[OBJ_KEYS.PADDLE].width<(canvas.width/3)){
+            gameObjects[OBJ_KEYS.PADDLE].width -= 40;
+          }
       }
     }
   }
@@ -65,6 +75,7 @@ class Powers{
     if(this.powerstype==3) { this.drawPlonger();}
     if(this.powerstype==4) { this.drawPshorter();}
   }
+
   drawBall(){
     var img = new Image();
     img.src = "assets/images/x2ball.png";
@@ -116,8 +127,9 @@ class Powers{
 
 
   update(){
-
+    
   }
+
   resetPowers(){
     this.powers = [];
     for (let i=0; i < this.fallings; i++){
