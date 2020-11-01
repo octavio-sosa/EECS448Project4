@@ -1,14 +1,16 @@
 class Powers{
-  constructor(x, y, num){
+  constructor(x, y, num, itemtype){
     this.paddleW = x;
     this.paddleH = y;
     this.fallings = num;
+    this.powerstype = itemtype;
     this.powers = [];
     for (let i=0; i < this.fallings; i++){
       let power = {x: Math.floor(Math.random()*(canvas.width-50)),
                    y: 0,
                    power_width: canvas.width / 15,
                    power_height: canvas.height / 25,
+                   power_type: itemtype,
                    isLive: true
                   };
       this.powers.push(power);
@@ -25,12 +27,43 @@ class Powers{
       if (this.isCatch(item)){
         item.isLive = false;
         this.powers.splice(index, 1);
-        console.log('catch');
+        console.log('catchBall');
       }
     }
   }
+  catchHeart(index, item){
+    if (item.isLive){
+      if (this.isCatch(item)){
+        item.isLive = false;
+        this.powers.splice(index, 1);
+        console.log('catchHeart');
+      }
+    }
+  }
+   catchPlonger(index, item){
+    if (item.isLive){
+      if (this.isCatch(item)){
+        item.isLive = false;
+        this.powers.splice(index, 1);
+        console.log('catchPlonger');
+      }
+    }
+  }
+   catchPshorter(index, item){
+    if (item.isLive){
+      if (this.isCatch(item)){
+        item.isLive = false;
+        this.powers.splice(index, 1);
+        console.log('catchPshorter');
+      }
+    }
+  }
+
   draw(){
-    this.drawBall();
+    if(this.powerstype==1) { this.drawBall();}
+    if(this.powerstype==2) { this.drawHeart();}
+    if(this.powerstype==3) { this.drawPlonger();}
+    if(this.powerstype==4) { this.drawPshorter();}
   }
   drawBall(){
     var img = new Image();
@@ -44,6 +77,44 @@ class Powers{
       this.catchBall(i,power);
     }
   }
+  drawHeart(){
+    var img = new Image();
+    img.src = "assets/images/heart.png";
+    for (let i=0; i<this.powers.length; i++){
+      let power = this.powers[i];
+      ctx.drawImage(img, power.x, power.y, 50, 50);
+      if (power.y < canvas.height){
+        power.y = power.y+2;
+      }
+      this.catchHeart(i,power);
+    }
+  }
+  drawPlonger(){
+    var img = new Image();
+    img.src = "assets/images/paddle_long.png";
+    for (let i=0; i<this.powers.length; i++){
+      let power = this.powers[i];
+      ctx.drawImage(img, power.x, power.y, 50, 50);
+      if (power.y < canvas.height){
+        power.y = power.y+2;
+      }
+      this.catchPlonger(i,power);
+    }
+  }
+  drawPshorter(){
+    var img = new Image();
+    img.src = "assets/images/paddle_short.png";
+    for (let i=0; i<this.powers.length; i++){
+      let power = this.powers[i];
+      ctx.drawImage(img, power.x, power.y, 50, 50);
+      if (power.y < canvas.height){
+        power.y = power.y+2;
+      }
+      this.catchPshorter(i,power);
+    }
+  }
+
+
   update(){
 
   }
