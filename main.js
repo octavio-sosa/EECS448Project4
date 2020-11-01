@@ -7,7 +7,8 @@ let ball = new Ball(); // instantiate ball
 let brickset = new Brickset(); //instantiate brickset with number of rows and columns of bricks
 let targetScore = Math.floor(brickset.bricks.length/4);
 let playerStatus = new PlayerStatus(targetScore);
-let powers = new Powers(PADDLE_WIDTH, PADDLE_HEIGHT);
+let totalfallings = 2;
+let powers = new Powers(PADDLE_WIDTH, PADDLE_HEIGHT, totalfallings);
 
 gameObjects.push(paddle); // add paddle to array
 gameObjects.push(ball); // add ball to array

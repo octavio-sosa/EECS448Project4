@@ -1,7 +1,7 @@
 class Ball
 {
     /**
-     * Class that initializes the ball object 
+     * Class that initializes the ball object
      * @Post initializes ball object
      * @constructor
      */
@@ -28,7 +28,7 @@ class Ball
         if (simulate_ball)
         {
             let velocity_scale = this.unit_vector * (1 / (Math.sqrt(this.vel.x**2 + this.vel.y**2)));
-            
+
             this.vel.x = velocity_scale * this.vel.x;
             this.vel.y = velocity_scale * this.vel.y
 
@@ -48,7 +48,7 @@ class Ball
      */
     lock_to_paddle()
     {
-        this.y = canvas.height - PADDLE_HEIGHT - this.radius - 1; 
+        this.y = canvas.height - PADDLE_HEIGHT - this.radius - 1;
         this.x = Math.min(Math.max(mouse.x, PADDLE_WIDTH / 2), canvas.width - PADDLE_WIDTH / 2);
         this.arrowAim.update(this.x, this.y)
         this.vel = this.arrowAim.launchVector
@@ -75,7 +75,7 @@ class Ball
     /*
     * @Pre: assumes ball is initialized and simulated
     * @Post: checks for collisions against the paddle and the bricks
-    * @Param: paddle: Object the user controls that the ball bounces off of. 
+    * @Param: paddle: Object the user controls that the ball bounces off of.
     *         brickset: set of bricks that the ball will bounce off of.
     */
     detect_collisions(paddle, brickset)
@@ -84,16 +84,16 @@ class Ball
         {
             let y = this.y;
             let x = this.x;
-    
+
             //ceiling collision
             if (y - this.radius <= 0) this.vel.y *= -1;
-    
+
             //wall collision
             if (x + this.radius >= canvas.width || x - this.radius <= 0) this.vel.x *= -1;
-    
+
             let x_collide_distance = brickset.brick_length / 2 + this.radius;
             let y_collide_distance = brickset.brick_height / 2 + this.radius;
-    
+
             for (let i = 0; i < brickset.bricks.length; i++)
             {
                 let brick = brickset.bricks[i];
@@ -101,10 +101,10 @@ class Ball
                 {
                     let b_cx = brick.x + (brickset.brick_length / 2); // center of brick's x position
                     let b_cy = brick.y + (brickset.brick_height / 2); // center of y position
-        
+
                     let x_vector = Math.abs(b_cx - x); // distance from center of brick's x to ball
                     let y_vector = Math.abs(b_cy - y);
-        
+
                     if (x_vector <= x_collide_distance && y_vector <= y_collide_distance) // if both vectors are less than or equal to the max distance of a collision, there must be a collision
                     {
                         let prev_x = Math.abs(b_cx - (x - this.vel.x));
@@ -117,7 +117,7 @@ class Ball
                     }
                 }
             }
-    
+
             //paddle collision
             if (this.y >= canvas.height - paddle.height - this.radius && this.y < canvas.height - paddle.height * 0.85)
             {
@@ -159,4 +159,3 @@ class Ball
         this.unit_vector = Math.sqrt(canvas.height**2 + canvas.width **2) / 200;
     }
 }
-
