@@ -39,3 +39,110 @@ def get_rectangles(frame):
         r = r+8
 
     return rectangles
+
+def get_regionsOfInterest(frame, rectangles):
+    hsvFrame = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+    width, height = get_rectShape(rectangles)
+    rows = rectangles.shape[0]
+    cols = rectangles.shape[1]
+    channels = 3 
+
+    roi = np.zeros((rows*height, cols*width, channels), dtype=hsvFrame.dtype)
+
+    for r in range(rows):
+        rowPix = rectangles[r][0][0][1] #row_r, col_0, start_point, y_coord
+        for c in range(cols):
+            colPix = rectangles[0][c][0][0] #row_0, col_c, start_point, x_coord
+
+            hsvRect = hsvFrame[rowPix:rowPix+height, colPix:colPix+width]
+            roi[r*height:(r+1)*height, c*width:(c+1)*width] = hsvRect
+
+    return roi
+
+
+def get_rectShape(rectangles):
+
+    one_rectangle = rectangles[0][0]
+    startCoord = one_rectangle[0]
+    endCoord = one_rectangle[1]
+    width = endCoord[0] - startCoord[0]
+    height = endCoord[1] - startCoord[1]
+
+    return width, height
+
+def get_handHist(frame, rectangles):
+    roi = get_regionsOfInterest(frame, rectangles)
+
+    channels = [0, 1]
+    mask = None
+    histSize = [180, 256]
+    ranges = [0, 180, 0, 256]
+
+    handHist = cv2.calcHist([roi], channels, mask, histSize, ranges)
+    handHistNorm = cv2.normalize(handHist, None, 0, 255, cv2.NORM_MINMAX)
+
+    return handHistNorm
+
+def getHandImg(frame, handHist):
+    """
+    hyper-params to tune: 
+        - kernel disc size
+        - threshold value
+        - rectangle matrix shape
+        - color of walls in room where image is taken
+        - camera position and type
+        - image background
+    """
+    frame_hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+    hand_mask = cv2.calcBackProject([frame_hsv], [0, 1], handHist, [0, 180, 0, 256], 1)
+
+    # convolute mask with disc kernel
+    disc = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (51, 51))
+    cv2.filter2D(hand_mask, -1, disc, hand_mask)
+    
+    # set threshold 
+    ret, thresh = cv2.threshold(hand_mask, 175, 255, cv2.THRESH_BINARY)
+    thresh = cv2.merge((thresh, thresh, thresh))
+    
+    # get hand img
+    handImg = cv2.bitwise_and(frame, thresh) 
+
+    return handImg
+
+def getContours(imgMasked):
+    grayHist = cv2.cvtColor(imgMasked, cv2.COLOR_BGR2GRAY)
+    #ret, thresh = cv2.threshold(grayHist, 0, 255, 0) #original line
+    ret, thresh = cv2.threshold(grayHist, 0, 255, cv2.THRESH_BINARY)
+    contours, hierarchy = cv2.findContours(thresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+
+    return contours
+
+def getCentroid(contour):
+
+    return 0
+
+def getFurthestPoint(contourDefects, contour, centroid):
+    
+    return 0
+
+def drawPOI(frame, handHist):
+    handImg = getHandImg(frame, handHist)
+    contours = getContours(handHist)
+    largestContour = max(contours, key=cv2.contourArea) #hand outline
+    handCentroid = getCentroid(largestContour)
+
+    #draw handCentroid
+    radius = 5
+    centroidColor = [255, 0, 255] 
+    lineThickness = -1 #fill circle with -1 value
+    cv2.circle(frame, handCentroid, radius, centroidColor, lineThickness)
+
+    if largestContour: #TODO test
+        #get fingerTipPoint
+        handHull = cv2.convexHull(largestContour, returnPoints=False)
+        handDefects = cv2.convexityDefects(largestContour, handHull)
+        fingerTipPoint = getFurthestPoint(handDefects, largestContour, handCentroid)
+
+        #draw finger-tip
+        tipColor = [0, 0, 255]
+        cv2.circle(frame, fingerTipPoint, radius, tipColor, lineThickness)
