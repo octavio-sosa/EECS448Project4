@@ -1,6 +1,6 @@
 let PADDLE_WIDTH = canvas.width / 6;
 let PADDLE_HEIGHT = canvas.height / 30;
-let level = 3;
+let level = 1;
 
 let gameObjects = [] // array to iterate through during game loop
 let paddle = new Paddle(); // instantiate paddle
