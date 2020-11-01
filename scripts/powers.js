@@ -1,18 +1,17 @@
 class Powers{
-  constructor(x, y){
+  constructor(x, y, num){
     this.paddleW = x;
     this.paddleH = y;
-    this.fallings = 2;
+    this.fallings = num;
     this.powers = [];
     for (let i=0; i < this.fallings; i++){
-      let power = {x: Math.floor(Math.random()*canvas.width),
-                   y: canvas.height/20,
+      let power = {x: Math.floor(Math.random()*(canvas.width-50)),
+                   y: 0,
                    power_width: canvas.width / 15,
                    power_height: canvas.height / 25,
                    isLive: true
                   };
       this.powers.push(power);
-      //this.isLive = true;
     }
   }
   isCatch (item) {
@@ -21,11 +20,11 @@ class Powers{
     && item.y < gameObjects[OBJ_KEYS.PADDLE].y + this.paddleH
     && item.y + item.power_height > gameObjects[OBJ_KEYS.PADDLE].y)
   }
-  catchBall(item){
+  catchBall(index, item){
     if (item.isLive){
       if (this.isCatch(item)){
         item.isLive = false;
-        this.powers.splice(item, 1);
+        this.powers.splice(index, 1);
         console.log('catch');
       }
     }
@@ -42,7 +41,7 @@ class Powers{
       if (power.y < canvas.height){
         power.y = power.y+2;
       }
-      this.catchBall(power);
+      this.catchBall(i,power);
     }
   }
   update(){
