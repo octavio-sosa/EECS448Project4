@@ -92,6 +92,7 @@ def getHandImg(frame, handHist):
         - color of walls in room where image is taken
         - camera position and type
         - image background
+        - hand perspective, orientation, and shape
     """
     frame_hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
     hand_mask = cv2.calcBackProject([frame_hsv], [0, 1], handHist, [0, 180, 0, 256], 1)
@@ -129,8 +130,28 @@ def getCentroid(contour):
     return x_bar, y_bar
 
 def getFurthestPoint(contourDefects, contour, centroid):
-    
-    return 0
+    """ get defect point furthest from centroid
+    """
+    furthestPoint = None
+
+    if contourDefects.any() and all(centroid): #data-structures have values
+        defectsIndices = contourDefects[:, 0][:, 0] # [all_defects, defectData][all_defects, contour_index_of_defectStartpoint]
+        x_bar, y_bar = centroid
+
+        x = np.array(contour[defectsIndices][:, 0][:, 0], dtype=np.float) 
+        y = np.array(contour[defectsIndices][:, 0][:, 0], dtype=np.float)
+
+        x_sqDev = cv2.pow(cv2.subtract(x, x_bar), 2)
+        y_sqDev = cv2.pow(cv2.subtract(y, y_bar), 2)
+
+        distance = cv2.sqrt(cv2.add(x_sqDev, y_sqDev))
+        maxDistIndex = np.argmax(distance)
+
+        if maxDistIndex < len(defectsIndices):
+            furthestDefect = defectsIndices[maxDistIndex]
+            furthestPoint = tuple(contour[furthestDefect][0])
+
+    return furthestPoint
 
 def drawPOI(frame, handHist):
     handImg = getHandImg(frame, handHist)
@@ -140,19 +161,19 @@ def drawPOI(frame, handHist):
 
     #draw handCentroid
     radius = 5
-    centroidColor = [255, 0, 255] 
+    centroidColor = [255, 0, 0] 
     lineThickness = -1 #fill circle with -1 value
     cv2.circle(frame, handCentroid, radius, centroidColor, lineThickness)
 
-    return frame
-"""
-    if largestContour: #TODO test
+    if largestContour.any(): 
         #get fingerTipPoint
         handHull = cv2.convexHull(largestContour, returnPoints=False)
         handDefects = cv2.convexityDefects(largestContour, handHull)
         fingerTipPoint = getFurthestPoint(handDefects, largestContour, handCentroid)
 
         #draw finger-tip
-        tipColor = [0, 0, 255]
-        cv2.circle(frame, fingerTipPoint, radius, tipColor, lineThickness)
-"""
+        if all(fingerTipPoint): #there are valid coordinates
+            tipColor = [0, 0, 255]
+            cv2.circle(frame, fingerTipPoint, radius, tipColor, lineThickness)
+
+    return frame

@@ -96,7 +96,7 @@ def viewContours():
     capture.release()
     cv2.destroyAllWindows()
 
-def viewCentroid():
+def viewPOI():
     capture = cv2.VideoCapture(0)
     isHandHist = False
 
@@ -125,7 +125,7 @@ def run():
     #viewROI()
     #viewHandImg()
     #viewContours()
-    viewCentroid()
+    viewPOI()
 
 run()
 
