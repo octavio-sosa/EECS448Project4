@@ -27,13 +27,13 @@ var backmainBtn_w = document.getElementById('backmain_w');
 var tryBtn = document.getElementById('tryagain');
 var backmainBtn_l = document.getElementById('backmain_l');
 
-let clrs = [["#FFFFFF", "#000000"], ["#5B0E2D", "#FFA781"], ["#F2BC94", "#30110D"], ["#F9858B", "#761137"], ["#143D59", "#F4B41A"]];
-let clr_idx = 2;
+let clrs = [["#FFFFFF", "#000000", "#DAA520"], ["#5B0E2D", "#FFA781", "#FFFFFF"], ["#F2BC94", "#30110D", "#DAA520"],
+             ["#F9858B", "#761137", "#FFFFFF"], ["#143D59", "#F4B41A", "#FFFFFF"]];
+let clr_idx = 0;
 
 function setRandomColor()
 {
     let clr_idx = Math.floor(Math.random() * clrs.length);
-    console.log(clr_idx);
     if (Math.random() >= 0.5)
     {
         let temp = clrs[clr_idx][0];
@@ -46,6 +46,7 @@ function displayNotification(notif)
 {
     notif_elem.style.display = 'block';
     notif_elem.innerHTML = notif;
+    notif_elem.style.color = clrs[clr_idx][2];
     function fade()
     {
         notif_elem.style.opacity -= 0.01;
