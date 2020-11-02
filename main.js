@@ -241,9 +241,23 @@ const OtherBall = function (x, y, radius){
 
 }
 OtherBall.prototype = {
-  updateposition: function(){
+  updateposition: function(width, height){
     this.x += Math.cos(this.direction);
     this.y += Math.sin(this.direction);
+
+		if(this.x - this.radius < 0) {
+			this.x = this.radius;
+			this.direction = Math.atan2(Math.sin(this.direction), Math.cos(this.direction) * -1);
+		}
+		else if (this.x + this.radius > width) {
+			this.x = width - this.radius;
+			this.direction = Math.atan2(Math.sin(this.direction), Math.cos(this.direction) * -1);
+		}
+		if(this.y - this.radius < 0) {
+			this.y = this.radius;
+			this.direction = Math.atan2(Math.sin(this.direction) * -1, Math.cos(this.direction));
+		}
+		
   }
 }
 
@@ -255,7 +269,7 @@ for (let i=0; i<5; i++){
 function loop(){
   for (let i=1; i<gameObjects[1].numofBall; i++){
     let ball = balls[i];
-    ball.updateposition();
+    ball.updateposition(canvas.width, canvas.height);
     ctx.beginPath();
     ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI*2);
     ctx.fill();
