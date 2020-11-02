@@ -238,12 +238,14 @@ const OtherBall = function (x, y, radius){
   this.radius = radius;
   this.x = x;
   this.y = y;
+	this.vel = {x: 0, y: 0};
 
 }
 OtherBall.prototype = {
   updateposition: function(width, height){
     this.x += Math.cos(this.direction);
     this.y += Math.sin(this.direction);
+
 
 		if(this.x - this.radius < 0) {
 			this.x = this.radius;
@@ -257,7 +259,7 @@ OtherBall.prototype = {
 			this.y = this.radius;
 			this.direction = Math.atan2(Math.sin(this.direction) * -1, Math.cos(this.direction));
 		}
-		
+
   }
 }
 

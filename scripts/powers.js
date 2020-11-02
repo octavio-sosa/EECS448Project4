@@ -72,10 +72,12 @@ class Powers{
   }
 
   draw(){
-    if(this.powerstype==1) { this.drawBall();}
-    if(this.powerstype==2) { this.drawHeart();}
-    if(this.powerstype==3) { this.drawPlonger();}
-    if(this.powerstype==4) { this.drawPshorter();}
+    if(this.powerstype == 1) { this.drawBall();}
+    else if(this.powerstype == 2) { this.drawHeart();}
+    else if(this.powerstype == 3) { this.drawPlonger();}
+    else if(this.powerstype == 4) { this.drawPshorter();}
+    //else if(this.powerstype == 5) { this.drawBigBall();}
+    //else if(this.powerstype == 6) { this.drawSmallBall();}
   }
 
   drawBall(){
@@ -126,10 +128,16 @@ class Powers{
       this.catchPshorter(i,power);
     }
   }
+  /*
+  drawBigBall(){
 
+  }
+  drawSmallBall(){
 
+  }
+  */
   update(){
-    
+
   }
 
   resetPowers(){
