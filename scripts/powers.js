@@ -52,7 +52,15 @@ class Powers{
         console.log('catchPlonger');
         if(gameObjects[OBJ_KEYS.PADDLE].width>(canvas.width/10)
           &&gameObjects[OBJ_KEYS.PADDLE].width<(canvas.width/3)){
-            gameObjects[OBJ_KEYS.PADDLE].width += 60;
+            let added_width = 0;
+            let max_added_width = gameObjects[OBJ_KEYS.PADDLE].width / 3;
+            function expandSize()
+            {
+              gameObjects[OBJ_KEYS.PADDLE].width += 1;
+              added_width += 1;
+              if (added_width < max_added_width) setTimeout(expandSize, 10);
+            }
+            setTimeout(expandSize, 10);
           }
       }
     }
@@ -65,7 +73,16 @@ class Powers{
         console.log('catchPshorter');
         if(gameObjects[OBJ_KEYS.PADDLE].width>(canvas.width/10)
           &&gameObjects[OBJ_KEYS.PADDLE].width<(canvas.width/3)){
-            gameObjects[OBJ_KEYS.PADDLE].width -= 60;
+            let subtracted_width = 0;
+            let max_subtracted_width = gameObjects[OBJ_KEYS.PADDLE].width / 3;
+            function reduceSize()
+            {
+              gameObjects[OBJ_KEYS.PADDLE].width -= 1;
+              subtracted_width += 1;
+
+              if (subtracted_width < max_subtracted_width) setTimeout(reduceSize, 10);
+            }
+            setTimeout(reduceSize, 10);
           }
       }
     }
@@ -153,7 +170,7 @@ class Powers{
       this.catchPshorter(i,power);
     }
   }
-  /*
+/*
   drawBigBall(){
     var img = new Image();
     img.src = "assets/images/bigball.png";
