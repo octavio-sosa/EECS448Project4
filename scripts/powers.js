@@ -71,6 +71,28 @@ class Powers{
     }
   }
 
+  catchBball(index, item){
+    if (item.isLive){
+      if (this.isCatch(item)){
+        item.isLive = false;
+        this.powers.splice(index, 1);
+        console.log('catchBball');
+        gameObjects[OBJ_KEYS.BALL].radius += 5;
+      }
+    }
+  }
+
+  catchSball(index, item){
+    if (item.isLive){
+      if (this.isCatch(item)){
+        item.isLive = false;
+        this.powers.splice(index, 1);
+        console.log('catchBall');
+        gameObjects[OBJ_KEYS.BALL].radius -= 5;
+      }
+    }
+  }
+
   draw(){
     if(this.powerstype == 1) { this.drawBall();}
     else if(this.powerstype == 2) { this.drawHeart();}
@@ -130,10 +152,28 @@ class Powers{
   }
   /*
   drawBigBall(){
-
+    var img = new Image();
+    img.src = "assets/images/bigball.png";
+    for (let i=0; i<this.powers.length; i++){
+      let power = this.powers[i];
+      ctx.drawImage(img, power.x, power.y, 50, 50);
+      if (power.y < canvas.height){
+        power.y = power.y+2;
+      }
+      this.catchBball(i,power);
+    }
   }
   drawSmallBall(){
-
+    var img = new Image();
+    img.src = "assets/images/smallball.png";
+    for (let i=0; i<this.powers.length; i++){
+      let power = this.powers[i];
+      ctx.drawImage(img, power.x, power.y, 50, 50);
+      if (power.y < canvas.height){
+        power.y = power.y+2;
+      }
+      this.catchSball(i,power);
+    }
   }
   */
   update(){
