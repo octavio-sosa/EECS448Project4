@@ -88,7 +88,10 @@ class Powers{
         item.isLive = false;
         this.powers.splice(index, 1);
         console.log('catchBall');
-        gameObjects[OBJ_KEYS.BALL].radius -= 5;
+        if (gameObjects[OBJ_KEYS.BALL].radius > 0){
+          gameObjects[OBJ_KEYS.BALL].radius -= 10;
+
+        }
       }
     }
   }
