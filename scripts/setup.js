@@ -27,7 +27,8 @@ var backmainBtn_w = document.getElementById('backmain_w');
 var tryBtn = document.getElementById('tryagain');
 var backmainBtn_l = document.getElementById('backmain_l');
 
-let clrs = [["#FFFFFF", "#000000"], ["#5B0E2D", "#FFA781"], ["#F2BC94", "#30110D"], ["#F9858B", "#761137"], ["#143D59", "#F4B41A"]];
+let clrs = [["#FFFFFF", "#000000"], ["#5B0E2D", "#FFA781"], ["#F2BC94", "#30110D"], ["#F9858B", "#761137"], 
+            ["#143D59", "#F4B41A"], ["#358597", "#F4A896"], ["#533549", "#F6B042"], ["#191919", "#FDF5A6"]];
 let clr_idx = 2;
 
 function setRandomColor()
