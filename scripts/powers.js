@@ -48,9 +48,9 @@ class Powers{
         item.isLive = false;
         this.powers.splice(index, 1);
         console.log('catchPlonger');
-        if(gameObjects[OBJ_KEYS.PADDLE].width>(canvas.width/9)
+        if(gameObjects[OBJ_KEYS.PADDLE].width>(canvas.width/10)
           &&gameObjects[OBJ_KEYS.PADDLE].width<(canvas.width/3)){
-            gameObjects[OBJ_KEYS.PADDLE].width += 40;
+            gameObjects[OBJ_KEYS.PADDLE].width += 60;
           }
       }
     }
@@ -61,9 +61,9 @@ class Powers{
         item.isLive = false;
         this.powers.splice(index, 1);
         console.log('catchPshorter');
-        if(gameObjects[OBJ_KEYS.PADDLE].width>(canvas.width/9)
+        if(gameObjects[OBJ_KEYS.PADDLE].width>(canvas.width/10)
           &&gameObjects[OBJ_KEYS.PADDLE].width<(canvas.width/3)){
-            gameObjects[OBJ_KEYS.PADDLE].width -= 40;
+            gameObjects[OBJ_KEYS.PADDLE].width -= 60;
           }
       }
     }
@@ -136,7 +136,8 @@ class Powers{
       let power = {x: Math.floor(Math.random()*canvas.width),
                    y: canvas.height/20,
                    power_width: canvas.width / 15,
-                   power_height: canvas.height / 25
+                   power_height: canvas.height / 25,
+                   power_type: itemtype,
                   };
       this.powers.push(power);
     }
