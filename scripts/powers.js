@@ -28,6 +28,8 @@ class Powers{
         item.isLive = false;
         this.powers.splice(index, 1);
         console.log('catchBall');
+        gameObjects[OBJ_KEYS.BALL].numofBall += 1;
+
       }
     }
   }

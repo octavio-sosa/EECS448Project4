@@ -10,7 +10,7 @@ let targetScore = Math.floor(brickset.bricks.length/4);
 let playerStatus = new PlayerStatus(targetScore);
 let totalfallings = 2;
 let randomtype = parseInt(Math.random()*(4-1+1)+1);
-let powers = new Powers(PADDLE_WIDTH, PADDLE_HEIGHT, totalfallings, randomtype);
+let powers = new Powers(PADDLE_WIDTH, PADDLE_HEIGHT, totalfallings, 1);
 
 
 gameObjects.push(paddle); // add paddle to array
@@ -90,6 +90,9 @@ function animate() // main game loop occurs here
           gameObjects[i].update(); // call update on each object
           gameObjects[i].draw();
         }
+				if (gameObjects[1].numofBall > 1){
+					loop();
+				}
         gameObjects[1].detect_collisions(gameObjects[0], gameObjects[2]); // Have ball check for collisions
         //gameObjects[0].detect_collision(gameObjects[4]); // Have paddle check for collision with powers
     }
@@ -229,3 +232,33 @@ window.addEventListener('resize', () => // if the user shrinks/expands their bro
     }
 
 });
+
+const OtherBall = function (x, y, radius){
+  this.direction = Math.random() * Math.PI*2;
+  this.radius = radius;
+  this.x = x;
+  this.y = y;
+
+}
+OtherBall.prototype = {
+  updateposition: function(){
+    this.x += Math.cos(this.direction);
+    this.y += Math.sin(this.direction);
+  }
+}
+
+var balls = new Array();
+for (let i=0; i<5; i++){
+  balls.push(new OtherBall(300, 400, gameObjects[1].radius));
+}
+
+function loop(){
+  for (let i=1; i<gameObjects[1].numofBall; i++){
+    let ball = balls[i];
+    ball.updateposition();
+    ctx.beginPath();
+    ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI*2);
+    ctx.fill();
+
+  }
+}

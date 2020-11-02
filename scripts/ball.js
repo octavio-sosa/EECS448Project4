@@ -13,6 +13,7 @@ class Ball
         this.x = this.start_x;
         this.y = this.start_y;
         this.vel = {x: 0, y: 0} // initial velocities
+        this.numofBall = 1;
         simulate_ball = false
         this.unit_vector = (Math.sqrt(canvas.height**2 + canvas.width **2) / 200) * (Math.log10(level) + 1);
         this.arrowAim = new Aim(this.start_x, this.start_y);
