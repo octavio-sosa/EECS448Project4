@@ -45,6 +45,8 @@ class Paddle // the thing the player controls
     resetPaddle(){
       this.x = canvas.width / 2;  // initial x position
       this.y = canvas.height - this.height; // initial y position
+      this.width = PADDLE_WIDTH; // width of paddle
+      this.height = PADDLE_HEIGHT; //height of paddle
     }
 
 
