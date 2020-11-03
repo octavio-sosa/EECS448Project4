@@ -37,7 +37,7 @@ class Score {
     if(currentScore === targetScore) {
       //add life
       gameObjects[OBJ_KEYS.PLAYERSTATUS].targetScore *= 2
-      gameObjects[OBJ_KEYS.PLAYERSTATUS].currentLives++ 
+      //gameObjects[OBJ_KEYS.PLAYERSTATUS].currentLives++ 
     }
   }
 

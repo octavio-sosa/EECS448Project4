@@ -10,7 +10,7 @@ let targetScore = Math.floor(brickset.bricks.length/4);
 let playerStatus = new PlayerStatus(targetScore);
 let totalfallings = 1;
 let randomtype = parseInt(Math.random()*(4-1+1)+1);
-let powers = new Powers(PADDLE_WIDTH, PADDLE_HEIGHT, totalfallings, 2);
+let powers = new Powers(PADDLE_WIDTH, PADDLE_HEIGHT, totalfallings, randomtype);
 
 
 gameObjects.push(paddle); // add paddle to array
@@ -97,8 +97,6 @@ function animate() // main game loop occurs here
 				if (gameObjects[1].hitBricks == true){
 					gameObjects[4].update();
 					gameObjects[4].draw();
-					//randomtype = parseInt(Math.random()*(4-1+1)+1);
-					//gameObjects[4].resetPowers(3);
 				}
         //gameObjects[0].detect_collision(gameObjects[4]); // Have paddle check for collision with powers
     }
