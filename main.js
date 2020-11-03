@@ -6,18 +6,19 @@ let gameObjects = [] // array to iterate through during game loop
 let paddle = new Paddle(); // instantiate paddle
 let ball = new Ball(); // instantiate ball
 let brickset = new Brickset(); //instantiate brickset with number of rows and columns of bricks
-let targetScore = Math.floor(brickset.bricks.length/4);
-let playerStatus = new PlayerStatus(targetScore);
-let totalfallings = 1;
-let randomtype = parseInt(Math.random()*(4-1+1)+1);
-let powers = new Powers(paddle, totalfallings, randomtype);
+let targetScore = Math.floor(brickset.bricks.length/4); // sets the target score
+let playerStatus = new PlayerStatus(targetScore); // initializes the players status object
+let totalfallings = 1; // 1 power
+let randomtype = parseInt(Math.random()*(4-1+1)+1); // Gets random number to choose powerup
+let powers = new Powers(paddle, totalfallings, randomtype); // initializes powerup
 
 
 gameObjects.push(paddle); // add paddle to array
 gameObjects.push(ball); // add ball to array
-gameObjects.push(brickset);
-gameObjects.push(playerStatus);
-gameObjects.push(powers);
+gameObjects.push(brickset); // add brickset to array
+gameObjects.push(playerStatus); // add playerstatus to array
+gameObjects.push(powers); // add powers to array
+
 const OBJ_KEYS = {
 	PADDLE: 0,
 	BALL: 1,
@@ -36,6 +37,11 @@ var resume = function Resume()
     paused = false;
 }
 
+/**
+ * Sets the color to a random colorscheme
+ * @Pre Gives game a random color
+ * @Post Game color will be changed to random color
+ */
 function setRandomColor()
 {
     clr_idx = Math.floor(Math.random() * clrs.length);
@@ -68,7 +74,6 @@ var inv = function InvertColors()
  * @Pre game objects have been created and user has selected to start game
  * @Post updates and draws every game object while unpaused
  */
-
 function animate() // main game loop occurs here
 {
     console.log(clr_idx);
@@ -113,6 +118,11 @@ function animate() // main game loop occurs here
     }
 }
 
+/**
+ * Starts the game with a random color
+ * @Pre Game starts and color and level are chosen
+ * @Post Chooses color of game
+ */
 var start = function startGame()
 {
     setRandomColor();
@@ -149,7 +159,11 @@ var reset = function gameRestart(){
 }
 tryBtn.onclick = reset;
 
-
+/**
+ * Goes to next level once first level is beat
+ * @Pre Assumes game has been initialized properly
+ * @Post Game will advance to next level
+ */
 var nextlevel = function nextLevel()
 {
   level++;
