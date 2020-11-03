@@ -146,7 +146,11 @@ class Ball
             if (this.y - 2 * this.radius > canvas.height)
             {
                 gameObjects[OBJ_KEYS.PLAYERSTATUS].currentLives--
-                if (gameObjects[OBJ_KEYS.PLAYERSTATUS].currentLives > 0) this.resetBall();
+                if (gameObjects[OBJ_KEYS.PLAYERSTATUS].currentLives > 0)
+                {
+                    this.resetBall();
+                    gameObjects[OBJ_KEYS.PADDLE].resetPaddle();
+                }
             }
         }
     }

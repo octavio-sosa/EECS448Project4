@@ -57,8 +57,8 @@ class Powers{
         item.isLive = false;
         this.powers.splice(index, 1);
         console.log('catchPlonger');
-        if(gameObjects[OBJ_KEYS.PADDLE].width>(canvas.width/10)
-          &&gameObjects[OBJ_KEYS.PADDLE].width<(canvas.width/3)){
+        console.log(gameObjects[OBJ_KEYS.PADDLE].width);
+        if(gameObjects[OBJ_KEYS.PADDLE].width<(canvas.width/3)){
             let added_width = 0;
             let max_added_width = gameObjects[OBJ_KEYS.PADDLE].width / 3;
             function expandSize()
@@ -68,6 +68,7 @@ class Powers{
               if (added_width < max_added_width) setTimeout(expandSize, 10);
             }
             setTimeout(expandSize, 10);
+            console.log(gameObjects[OBJ_KEYS.PADDLE].width);
           }
           gameObjects[OBJ_KEYS.BALL].hitBricks = false;
           console.log(gameObjects[OBJ_KEYS.BALL].hitBricks);
@@ -82,8 +83,7 @@ class Powers{
         item.isLive = false;
         this.powers.splice(index, 1);
         console.log('catchPshorter');
-        if(gameObjects[OBJ_KEYS.PADDLE].width>(canvas.width/10)
-          &&gameObjects[OBJ_KEYS.PADDLE].width<(canvas.width/3)){
+        if(gameObjects[OBJ_KEYS.PADDLE].width>(canvas.width/10)){
             let subtracted_width = 0;
             let max_subtracted_width = gameObjects[OBJ_KEYS.PADDLE].width / 3;
             function reduceSize()
