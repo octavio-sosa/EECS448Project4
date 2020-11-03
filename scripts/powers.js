@@ -158,7 +158,7 @@ class Powers{
   }
   drawHeart(){
     var img = new Image();
-    img.src = "assets/images/heart.png";
+    img.src = "assets/images/+1live.png";
     for (let i=0; i<this.powers.length; i++){
       let power = this.powers[i];
       ctx.drawImage(img, power.x, power.y, 50, 50);
