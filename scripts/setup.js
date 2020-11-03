@@ -27,14 +27,26 @@ var backmainBtn_w = document.getElementById('backmain_w');
 var tryBtn = document.getElementById('tryagain');
 var backmainBtn_l = document.getElementById('backmain_l');
 
-let clrs = [["#FFFFFF", "#000000"], ["#5B0E2D", "#FFA781"], ["#F2BC94", "#30110D"], ["#F9858B", "#761137"], 
-            ["#143D59", "#F4B41A"], ["#358597", "#F4A896"], ["#533549", "#F6B042"], ["#191919", "#FDF5A6"]];
-let clr_idx = 2;
+let clrs = [["#FFFFFF", "#000000", "#DAA520"], ["#5B0E2D", "#FFA781", "#FFFFFF"], ["#F2BC94", "#30110D", "#DAA520"],
+            ["#F9858B", "#761137", "#FFFFFF"], ["#143D59", "#F4B41A", "#FFFFFF"], ["#358597", "#F4A896", "#000000"],
+            ["#533549", "#F6B042", "#000000"], ["#191919", "#FDF5A6", "#DAA520"]];
+
+/*Guide to clrs (I am mildly colorblind so I may be kind of wrong - Connor)
+* Index 0: Black / White / Gold
+* Index 1: Pink / Tan / White
+* Index 2: Light Brown / Dark Brown / Gold
+* Index 3: Light Pink / Dark Pink / White
+* Index 4: Blue / Yellow / White
+* Index 5: Blue / Coral / White
+* Index 6: Purple / Yellow / Black
+* Index 7: Dark Brown / Ivory / Gold
+*/
+
+let clr_idx = 7;
 
 function setRandomColor()
 {
     let clr_idx = Math.floor(Math.random() * clrs.length);
-    console.log(clr_idx);
     if (Math.random() >= 0.5)
     {
         let temp = clrs[clr_idx][0];
@@ -47,6 +59,7 @@ function displayNotification(notif)
 {
     notif_elem.style.display = 'block';
     notif_elem.innerHTML = notif;
+    notif_elem.style.color = clrs[clr_idx][2];
     function fade()
     {
         notif_elem.style.opacity -= 0.01;

@@ -9,7 +9,8 @@ let brickset = new Brickset(); //instantiate brickset with number of rows and co
 let targetScore = Math.floor(brickset.bricks.length/4);
 let playerStatus = new PlayerStatus(targetScore);
 let totalfallings = 2;
-let powers = new Powers(PADDLE_WIDTH, PADDLE_HEIGHT, totalfallings);
+let randomtype = parseInt(Math.random()*(4-1+1)+1);
+let powers = new Powers(PADDLE_WIDTH, PADDLE_HEIGHT, totalfallings, 4);
 
 
 gameObjects.push(paddle); // add paddle to array
@@ -70,7 +71,7 @@ var inv = function InvertColors()
 
 function animate() // main game loop occurs here
 {
-  console.log(Math.log10(level) + 1);
+    console.log(clr_idx);
     requestAnimationFrame(animate); // waits until this animate is done and then calls it again
     if (!paused & !playerHasLost & !playerHasWon)
     {
@@ -89,6 +90,9 @@ function animate() // main game loop occurs here
           gameObjects[i].update(); // call update on each object
           gameObjects[i].draw();
         }
+				if (gameObjects[1].numofBall > 1){
+					loop();
+				}
         gameObjects[1].detect_collisions(gameObjects[0], gameObjects[2]); // Have ball check for collisions
         //gameObjects[0].detect_collision(gameObjects[4]); // Have paddle check for collision with powers
     }
@@ -228,3 +232,49 @@ window.addEventListener('resize', () => // if the user shrinks/expands their bro
     }
 
 });
+
+const OtherBall = function (x, y, radius){
+  this.direction = Math.random() * Math.PI*2;
+  this.radius = radius;
+  this.x = x;
+  this.y = y;
+	this.vel = {x: 0, y: 0};
+
+}
+OtherBall.prototype = {
+  updateposition: function(width, height){
+    this.x += Math.cos(this.direction);
+    this.y += Math.sin(this.direction);
+
+
+		if(this.x - this.radius < 0) {
+			this.x = this.radius;
+			this.direction = Math.atan2(Math.sin(this.direction), Math.cos(this.direction) * -1);
+		}
+		else if (this.x + this.radius > width) {
+			this.x = width - this.radius;
+			this.direction = Math.atan2(Math.sin(this.direction), Math.cos(this.direction) * -1);
+		}
+		if(this.y - this.radius < 0) {
+			this.y = this.radius;
+			this.direction = Math.atan2(Math.sin(this.direction) * -1, Math.cos(this.direction));
+		}
+
+  }
+}
+
+var balls = new Array();
+for (let i=0; i<5; i++){
+  balls.push(new OtherBall(300, 400, gameObjects[1].radius));
+}
+
+function loop(){
+  for (let i=1; i<gameObjects[1].numofBall; i++){
+    let ball = balls[i];
+    ball.updateposition(canvas.width, canvas.height);
+    ctx.beginPath();
+    ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI*2);
+    ctx.fill();
+
+  }
+}
