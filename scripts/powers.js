@@ -30,6 +30,9 @@ class Powers{
         this.powers.splice(index, 1);
         console.log('catchBall');
         gameObjects[OBJ_KEYS.BALL].numofBall += 1;
+        gameObjects[OBJ_KEYS.BALL].hitBricks = false;
+        console.log(gameObjects[OBJ_KEYS.BALL].hitBricks);
+        this.resetPowers(parseInt(Math.random()*(4-1+1)+1));
 
       }
     }
@@ -41,6 +44,10 @@ class Powers{
         this.powers.splice(index, 1);
         console.log('catchHeart');
         gameObjects[OBJ_KEYS.PLAYERSTATUS].currentLives++;
+        gameObjects[OBJ_KEYS.BALL].hitBricks = false;
+        console.log(gameObjects[OBJ_KEYS.BALL].hitBricks);
+        this.resetPowers(parseInt(Math.random()*(4-1+1)+1));
+
       }
     }
   }
@@ -62,6 +69,10 @@ class Powers{
             }
             setTimeout(expandSize, 10);
           }
+          gameObjects[OBJ_KEYS.BALL].hitBricks = false;
+          console.log(gameObjects[OBJ_KEYS.BALL].hitBricks);
+          this.resetPowers(parseInt(Math.random()*(4-1+1)+1));
+
       }
     }
   }
@@ -84,6 +95,10 @@ class Powers{
             }
             setTimeout(reduceSize, 10);
           }
+          gameObjects[OBJ_KEYS.BALL].hitBricks = false;
+          console.log(gameObjects[OBJ_KEYS.BALL].hitBricks);
+          this.resetPowers(parseInt(Math.random()*(4-1+1)+1));
+
       }
     }
   }
@@ -95,6 +110,10 @@ class Powers{
         this.powers.splice(index, 1);
         console.log('catchBball');
         gameObjects[OBJ_KEYS.BALL].radius += 5;
+        gameObjects[OBJ_KEYS.BALL].hitBricks = false;
+        console.log(gameObjects[OBJ_KEYS.BALL].hitBricks);
+        this.resetPowers(parseInt(Math.random()*(4-1+1)+1));
+
       }
     }
   }
@@ -107,6 +126,9 @@ class Powers{
         console.log('catchBall');
         if (gameObjects[OBJ_KEYS.BALL].radius > 0){
           gameObjects[OBJ_KEYS.BALL].radius -= 10;
+          gameObjects[OBJ_KEYS.BALL].hitBricks = false;
+          console.log(gameObjects[OBJ_KEYS.BALL].hitBricks);
+          this.resetPowers(parseInt(Math.random()*(4-1+1)+1));
 
         }
       }
@@ -200,17 +222,24 @@ class Powers{
 
   }
 
-  resetPowers(){
+  resetPowers(itemtype){
+    console.log("reset powers");
     this.powers = [];
+    this.powerstype = itemtype;
     for (let i=0; i < this.fallings; i++){
       let power = {x: Math.floor(Math.random()*canvas.width),
                    y: canvas.height/20,
                    power_width: canvas.width / 15,
                    power_height: canvas.height / 25,
                    power_type: itemtype,
+                   isLive: true
+
                   };
       this.powers.push(power);
+
     }
+    this.update();
+    this.draw()
   }
   resize(){
 

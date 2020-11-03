@@ -8,9 +8,9 @@ let ball = new Ball(); // instantiate ball
 let brickset = new Brickset(); //instantiate brickset with number of rows and columns of bricks
 let targetScore = Math.floor(brickset.bricks.length/4);
 let playerStatus = new PlayerStatus(targetScore);
-let totalfallings = 2;
+let totalfallings = 1;
 let randomtype = parseInt(Math.random()*(4-1+1)+1);
-let powers = new Powers(PADDLE_WIDTH, PADDLE_HEIGHT, totalfallings, randomtype);
+let powers = new Powers(PADDLE_WIDTH, PADDLE_HEIGHT, totalfallings, 2);
 
 
 gameObjects.push(paddle); // add paddle to array
@@ -94,9 +94,11 @@ function animate() // main game loop occurs here
 					loop();
 				}
         gameObjects[1].detect_collisions(gameObjects[0], gameObjects[2]); // Have ball check for collisions
-				if (! gameObjects[1].hitBricks == true){
+				if (gameObjects[1].hitBricks == true){
 					gameObjects[4].update();
 					gameObjects[4].draw();
+					//randomtype = parseInt(Math.random()*(4-1+1)+1);
+					//gameObjects[4].resetPowers(3);
 				}
         //gameObjects[0].detect_collision(gameObjects[4]); // Have paddle check for collision with powers
     }
