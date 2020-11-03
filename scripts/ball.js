@@ -17,6 +17,7 @@ class Ball
         simulate_ball = false
         this.unit_vector = (Math.sqrt(canvas.height**2 + canvas.width **2) / 200) * (Math.log10(level) + 1);
         this.arrowAim = new Aim(this.start_x, this.start_y);
+        this.hitBricks = false;
     }
 
     /**
@@ -124,6 +125,7 @@ class Ball
                         brickset.bricks[i].alive = false;
                         brickset.remaining_bricks -= 1;
                         gameObjects[OBJ_KEYS.PLAYERSTATUS].currentScore++;
+                        this.hitBricks = true;
                     }
                 }
             }

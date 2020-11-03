@@ -85,7 +85,7 @@ function animate() // main game loop occurs here
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         ctx.fillStyle = clrs[clr_idx][1];
 
-        for (let i = 0; i < gameObjects.length; i++) // iterate through game objects
+        for (let i = 0; i < gameObjects.length-1; i++) // iterate through game objects
         {
           gameObjects[i].update(); // call update on each object
           gameObjects[i].draw();
@@ -94,6 +94,10 @@ function animate() // main game loop occurs here
 					loop();
 				}
         gameObjects[1].detect_collisions(gameObjects[0], gameObjects[2]); // Have ball check for collisions
+				if (gameObjects[1].hitBricks == true){
+					gameObjects[4].update();
+					gameObjects[4].draw();
+				}
         //gameObjects[0].detect_collision(gameObjects[4]); // Have paddle check for collision with powers
     }
     else if (paused & !playerHasLost)
