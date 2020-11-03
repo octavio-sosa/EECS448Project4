@@ -1,7 +1,7 @@
 class Powers{
-  constructor(x, y, num, itemtype){
-    this.paddleW = x;
-    this.paddleH = y;
+  constructor(paddle, num, itemtype){
+    this.paddleW = paddle.width;
+    this.paddleH = paddle.height;
     this.fallings = num;
     this.powerstype = itemtype;
     this.powers = [];
@@ -17,9 +17,9 @@ class Powers{
     }
   }
   isCatch (item){
-    return(item.x < gameObjects[OBJ_KEYS.PADDLE].x + this.paddleW
+    return(item.x < gameObjects[OBJ_KEYS.PADDLE].x + gameObjects[OBJ_KEYS.PADDLE].width
     && item.x + item.power_width > gameObjects[OBJ_KEYS.PADDLE].x
-    && item.y < gameObjects[OBJ_KEYS.PADDLE].y + this.paddleH
+    && item.y < gameObjects[OBJ_KEYS.PADDLE].y + gameObjects[OBJ_KEYS.PADDLE].height
     && item.y + item.power_height > gameObjects[OBJ_KEYS.PADDLE].y)
   }
 
@@ -68,7 +68,7 @@ class Powers{
               if (added_width < max_added_width) setTimeout(expandSize, 10);
             }
             setTimeout(expandSize, 10);
-            console.log(gameObjects[OBJ_KEYS.PADDLE].width);
+            //this.paddleW = gameObjects[OBJ_KEYS.PADDLE].width;      //update paddle info
           }
           gameObjects[OBJ_KEYS.BALL].hitBricks = false;
           console.log(gameObjects[OBJ_KEYS.BALL].hitBricks);
@@ -90,10 +90,10 @@ class Powers{
             {
               gameObjects[OBJ_KEYS.PADDLE].width -= 1;
               subtracted_width += 1;
-
               if (subtracted_width < max_subtracted_width) setTimeout(reduceSize, 10);
             }
             setTimeout(reduceSize, 10);
+            //this.paddleW = gameObjects[OBJ_KEYS.PADDLE].width;     //update paddle info
           }
           gameObjects[OBJ_KEYS.BALL].hitBricks = false;
           console.log(gameObjects[OBJ_KEYS.BALL].hitBricks);
