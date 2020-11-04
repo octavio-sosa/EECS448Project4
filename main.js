@@ -9,7 +9,7 @@ let brickset = new Brickset(); //instantiate brickset with number of rows and co
 let targetScore = Math.floor(brickset.bricks.length/4); // sets the target score
 let playerStatus = new PlayerStatus(targetScore); // initializes the players status object
 let totalfallings = 1; // 1 power
-let randomtype = parseInt(Math.random()*(6-1+1)+1); // Gets random number to choose powerup
+let randomtype = parseInt(Math.random()*(8-1+1)+1); // Gets random number to choose powerup
 let powers = new Powers(paddle, totalfallings, randomtype); // initializes powerup
 
 
