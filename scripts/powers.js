@@ -6,7 +6,7 @@ class Powers{
     this.powerstype = itemtype;
     this.powers = [];
     for (let i=0; i < this.fallings; i++){
-      let power = {x: Math.floor(Math.random()*(canvas.width-50)),
+      let power = {x: Math.floor(Math.random()*(window.innerWidth)),
                    y: 0,
                    power_width: canvas.width / 15,
                    power_height: canvas.height / 25,
@@ -184,7 +184,7 @@ class Powers{
         console.log('not catchHeart');
         gameObjects[OBJ_KEYS.BALL].hitBricks = false;
         console.log(gameObjects[OBJ_KEYS.BALL].hitBricks);
-        this.resetPowers(parseInt(Math.random()*(6-1+1)+1)); 
+        this.resetPowers(parseInt(Math.random()*(6-1+1)+1));
       }
 
     }
