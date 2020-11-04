@@ -258,14 +258,14 @@ class Powers{
   }
 
   draw(){
-    if(this.powerstype == 1) { this.drawPlonger();}
-    else if(this.powerstype == 2) { this.drawPlonger();}
+    if(this.powerstype == 1) { this.drawBall();}
+    else if(this.powerstype == 2) { this.drawHeart();}
     else if(this.powerstype == 3) { this.drawPlonger();}
-    else if(this.powerstype == 4) { this.drawPlonger();}
-    else if(this.powerstype == 5) { this.drawPlonger();}
-    else if(this.powerstype == 6) { this.drawPlonger();}
-    else if(this.powerstype == 7) { this.drawPlonger();}
-    else if(this.powerstype == 8) { this.drawPlonger();}
+    else if(this.powerstype == 4) { this.drawPshorter();}
+    else if(this.powerstype == 5) { this.drawBigBall();}
+    else if(this.powerstype == 6) { this.drawSmallBall();}
+    else if(this.powerstype == 7) { this.drawBallfast();}
+    else if(this.powerstype == 8) { this.drawBallslow();}
   }
 
   drawBall(){
