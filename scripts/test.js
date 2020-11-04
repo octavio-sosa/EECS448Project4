@@ -1,4 +1,4 @@
-class Score {
+class test {
     /**
      * 
      * @constructor
@@ -9,4 +9,17 @@ class Score {
      */
     constructor()
     {}
+
+    runTests()
+    {
+        this.test1();
+    }
+    test1(){
+        console.log("Test1: Is Player initialized correctly?")
+        if(playerStatus.currentLives != 0)
+        {
+            console.log("\nPlayer has ", playerStatus.currentLives)
+        }
+    }
+
 }
