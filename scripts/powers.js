@@ -202,6 +202,8 @@ class Powers{
             && gameObjects[OBJ_KEYS.BALL].speed.y < 2){
           gameObjects[OBJ_KEYS.BALL].speed.x *= 1.2;
           gameObjects[OBJ_KEYS.BALL].speed.y *= 1.2;
+          console.log("speed_X = ",gameObjects[OBJ_KEYS.BALL].speed.x);  // testing ball speed
+          console.log("speed_Y = ",gameObjects[OBJ_KEYS.BALL].speed.y);
           gameObjects[OBJ_KEYS.BALL].hitBricks = false;
           console.log(gameObjects[OBJ_KEYS.BALL].hitBricks);
           this.resetPowers(parseInt(Math.random()*(8-1+1)+1));
@@ -250,14 +252,14 @@ class Powers{
   }
 
   draw(){
-    if(this.powerstype == 1) { this.drawBall();}
-    else if(this.powerstype == 2) { this.drawHeart();}
-    else if(this.powerstype == 3) { this.drawPlonger();}
-    else if(this.powerstype == 4) { this.drawPshorter();}
-    else if(this.powerstype == 5) { this.drawBigBall();}
-    else if(this.powerstype == 6) { this.drawSmallBall();}
+    if(this.powerstype == 1) { this.drawBallfast();}
+    else if(this.powerstype == 2) { this.drawBallfast();}
+    else if(this.powerstype == 3) { this.drawBallfast();}
+    else if(this.powerstype == 4) { this.drawBallfast();}
+    else if(this.powerstype == 5) { this.drawBallfast();}
+    else if(this.powerstype == 6) { this.drawBallfast();}
     else if(this.powerstype == 7) { this.drawBallfast();}
-    else if(this.powerstype == 8) { this.drawBallslow();}
+    else if(this.powerstype == 8) { this.drawBallfast();}
   }
 
   drawBall(){

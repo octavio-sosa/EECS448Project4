@@ -13,6 +13,7 @@ class Ball
         this.x = this.start_x;
         this.y = this.start_y;
         this.vel = {x: 0, y: 0} // initial velocities
+        this.speed = {x: 1, y: 1} // initial +/- speed
         this.numofBall = 1;
         simulate_ball = false
         this.unit_vector = (Math.sqrt(canvas.height**2 + canvas.width **2) / 200) * (Math.log10(level) + 1);
@@ -31,8 +32,8 @@ class Ball
         {
             let velocity_scale = this.unit_vector * (1 / (Math.sqrt(this.vel.x**2 + this.vel.y**2)));
 
-            this.vel.x = velocity_scale * this.vel.x;
-            this.vel.y = velocity_scale * this.vel.y
+            this.vel.x = velocity_scale * this.vel.x * this.speed.x
+            this.vel.y = velocity_scale * this.vel.y * this.speed.y
 
             this.x += this.vel.x; //increment x position based on velocity
             this.y += this.vel.y; //increment y position based on velocity
