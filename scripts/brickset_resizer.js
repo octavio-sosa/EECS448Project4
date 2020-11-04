@@ -37,6 +37,9 @@ class Brickset_Resizer
             case 6:
                 this.resize_zigzag();
                 break;
+            case 7:
+                this.resize_crisscross();
+                break;
         }
     }
 
@@ -45,6 +48,7 @@ class Brickset_Resizer
         this.row_length = (this.brickset.cols * this.brickset.brick_length) + ((this.brickset.cols - 1) * this.brickset.spacing);
         this.starting_x_pos = (canvas.width - this.row_length) / 2;
         this.starting_y_pos = canvas.height / 8;
+        if (this.brickset.spacing > 1) this.starting_y_pos /= 2;
         let k = 0;
 
         for (let i = 0; i < this.brickset.rows; i++)
@@ -183,8 +187,8 @@ class Brickset_Resizer
     resize_zigzag()
     {
         let starting_x1_pos = (canvas.width - this.brickset.brick_length * this.brickset.height) / 2;
-        let starting_x2_pos = 1;//(canvas.width - this.brick_length * this.height) 0;
-        let starting_x3_pos = (canvas.width - this.brickset.brick_length * this.brickset.height) - 1;
+        let starting_x2_pos = 2;//(canvas.width - this.brick_length * this.height) 0;
+        let starting_x3_pos = (canvas.width - this.brickset.brick_length * this.brickset.height) - 2;
         //top 3 pyramids
 
         let k = 0;
@@ -238,6 +242,46 @@ class Brickset_Resizer
                     brick2.y = starting_y_pos + (i * (this.brickset.brick_height + this.brickset.spacing));
                 } 
                 k+=2;
+            }
+        }
+    }
+
+    resize_crisscross()
+    {
+        let cols = this.brickset.cols;
+        let rows = this.brickset.rows;
+        let bh = this.brickset.brick_height;
+        let bl = this.brickset.brick_length;
+        let s = this.brickset.spacing;
+        let k = 0;
+
+        for (let i = 0; i < cols; i++)
+        {
+            for (let j = 0; j < rows; j++)
+            {
+                let brick = this.brickset.bricks[k]
+                if (brick.alive)
+                {
+                    brick.x = (1 + (3 * i)) * (bl + s);
+                    brick.y = j * (bh + s);
+                }
+                k++;
+            }
+        }
+        for (let i = 0; i < 15; i++)
+        {
+            for (let j = 0; j < 3; j++)
+            {
+                if ((i - 1) % 3 != 0)
+                {
+                    let brick = this.brickset.bricks[k];
+                    if (brick.alive)
+                    {
+                        brick.x = i * (bl + s);
+                        brick.y = (3 + (4 * j)) * (bh + s);   
+                    }
+                    k++;
+                }
             }
         }
     }

@@ -55,8 +55,8 @@ class Brickset
 
     generate_standard()
     {
-        this.rows = Math.floor(Math.random() * 2 + 6);
-        this.cols = Math.floor(15 - this.rows);
+        this.rows = Math.floor(Math.random() * 2 + 8);
+        this.cols = Math.floor(17 - this.rows);
         this.total_bricks = this.rows * this.cols;
         this.remaining_bricks = this.total_bricks; 
 
@@ -65,6 +65,7 @@ class Brickset
         let row_length = (this.cols * this.brick_length) + ((this.cols - 1) * this.spacing);
         let starting_x_pos = (canvas.width - row_length) / 2;
         let starting_y_pos = canvas.height / 8;
+        if (this.spacing > 1) starting_y_pos /= 2;
 
         for (let i = 0; i < this.rows; i++)
         {
@@ -80,7 +81,7 @@ class Brickset
 
     generate_pyramid()
     {
-        this.height = Math.floor(Math.random() * 3 + 9);
+        this.height = Math.floor(Math.random() * 3 + 11);
         let starting_x_pos = (canvas.width - this.brick_length) / 2;
         let starting_y_pos = canvas.height / 20;
         for (let i = 0; i < this.height; i++)
@@ -99,7 +100,7 @@ class Brickset
 
     generate_wall()
     {
-        this.rows = Math.floor(Math.random() * 2 + 4);
+        this.rows = Math.floor(Math.random() * 2 + 6);
         this.cols = 15;
         this.total_bricks = this.rows * this.cols;
         this.remaining_bricks = this.total_bricks; 
@@ -140,7 +141,7 @@ class Brickset
     generate_3_column()
     {
         this.cols = 3;
-        this.rows = Math.floor(Math.random() * 2 + 8);
+        this.rows = Math.floor(Math.random() * 2 + 10);
         this.total_bricks = this.rows * this.cols;
         this.remaining_bricks = this.total_bricks; 
         let row_length = (this.cols * this.brick_length) + ((this.cols - 1) * this.spacing);
@@ -172,7 +173,7 @@ class Brickset
     generate_alternating()
     {
         this.spacing = 1;
-        this.rows = Math.floor(Math.random() * 2 + 6);
+        this.rows = Math.floor(Math.random() * 2 + 9);
         this.cols = 15;
         this.total_bricks = this.rows * this.cols / 2;
         this.remaining_bricks = this.total_bricks; 
@@ -198,8 +199,8 @@ class Brickset
         //1st pyramid, attached to ceiling
         this.height = 5;
         let starting_x1_pos = (canvas.width - this.brick_length * this.height) / 2;
-        let starting_x2_pos = 1;
-        let starting_x3_pos = (canvas.width - this.brick_length * this.height) - 1;
+        let starting_x2_pos = 2;
+        let starting_x3_pos = (canvas.width - this.brick_length * this.height) - 2;
         //top 3 pyramids
         for (let i = 0; i < this.height; i++)
         {
@@ -250,10 +251,8 @@ class Brickset
 
     generate_crisscross()
     {
-        //columns
         this.cols = 5;
-        this.rows = 15;
-
+        this.rows = 12;
         for (let i = 0; i < this.cols; i++)
         {
             for (let j = 0; j < this.rows; j++)
@@ -280,8 +279,6 @@ class Brickset
                 }
             }
         }
-
-
     }
 
     //@Post no effect, this class is skipped over in the game loop
