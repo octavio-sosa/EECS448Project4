@@ -92,7 +92,7 @@ class Powers{
           }
           gameObjects[OBJ_KEYS.BALL].hitBricks = false;
           console.log(gameObjects[OBJ_KEYS.BALL].hitBricks);
-          this.resetPowers(3);
+          this.resetPowers(parseInt(Math.random()*(8-1+1)+1));
 
       }
       else if (this.isNotCatch(item)){
@@ -228,10 +228,12 @@ class Powers{
         item.isLive = false;
         this.powers.splice(index, 1);
         console.log('catchBslow');
-        if (gameObjects[OBJ_KEYS.BALL].speed.x > 0.5
-            && gameObjects[OBJ_KEYS.BALL].speed.y > 0.5){
+        if (gameObjects[OBJ_KEYS.BALL].speed.x > 0.52
+            && gameObjects[OBJ_KEYS.BALL].speed.y > 0.52){
           gameObjects[OBJ_KEYS.BALL].speed.x *= 0.8;
           gameObjects[OBJ_KEYS.BALL].speed.y *= 0.8;
+          console.log("speed_X = ",gameObjects[OBJ_KEYS.BALL].speed.x);  // testing ball speed
+          console.log("speed_Y = ",gameObjects[OBJ_KEYS.BALL].speed.y);
           gameObjects[OBJ_KEYS.BALL].hitBricks = false;
           console.log(gameObjects[OBJ_KEYS.BALL].hitBricks);
           this.resetPowers(parseInt(Math.random()*(8-1+1)+1));
@@ -252,14 +254,14 @@ class Powers{
   }
 
   draw(){
-    if(this.powerstype == 1) { this.drawBallfast();}
-    else if(this.powerstype == 2) { this.drawBallfast();}
-    else if(this.powerstype == 3) { this.drawBallfast();}
-    else if(this.powerstype == 4) { this.drawBallfast();}
-    else if(this.powerstype == 5) { this.drawBallfast();}
-    else if(this.powerstype == 6) { this.drawBallfast();}
+    if(this.powerstype == 1) { this.drawBall();}
+    else if(this.powerstype == 2) { this.drawHeart();}
+    else if(this.powerstype == 3) { this.drawPlonger();}
+    else if(this.powerstype == 4) { this.drawPshorter();}
+    else if(this.powerstype == 5) { this.drawBigBall();}
+    else if(this.powerstype == 6) { this.drawSmallBall();}
     else if(this.powerstype == 7) { this.drawBallfast();}
-    else if(this.powerstype == 8) { this.drawBallfast();}
+    else if(this.powerstype == 8) { this.drawBallslow();}
   }
 
   drawBall(){
@@ -279,7 +281,7 @@ class Powers{
     img.src = "assets/images/+live.png";
     for (let i=0; i<this.powers.length; i++){
       let power = this.powers[i];
-      ctx.drawImage(img, power.x, power.y, 60, 50);
+      ctx.drawImage(img, power.x, power.y, 55, 45);
       if (power.y < canvas.height){
         power.y = power.y+2;
       }
@@ -336,10 +338,10 @@ class Powers{
   }
   drawBallfast(){
     var img = new Image();
-    img.src = "assets/images/bball.png";
+    img.src = "assets/images/ballfast.png";             
     for (let i=0; i<this.powers.length; i++){
       let power = this.powers[i];
-      ctx.drawImage(img, power.x, power.y, 40, 40);
+      ctx.drawImage(img, power.x, power.y, 78, 60);
       if (power.y < canvas.height){
         power.y = power.y+2;
       }
@@ -348,10 +350,10 @@ class Powers{
   }
   drawBallslow(){
     var img = new Image();
-    img.src = "assets/images/sball.png";
+    img.src = "assets/images/ballslow.png";             
     for (let i=0; i<this.powers.length; i++){
       let power = this.powers[i];
-      ctx.drawImage(img, power.x, power.y, 40, 40);
+      ctx.drawImage(img, power.x, power.y, 78, 60);
       if (power.y < canvas.height){
         power.y = power.y+2;
       }
