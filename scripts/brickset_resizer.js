@@ -10,7 +10,7 @@ class Brickset_Resizer
 
     resize()
     {
-        this.brickset.brick_length = canvas.width / 15;
+        this.brickset.brick_length = canvas.width / 15 - 1;
         this.brickset.brick_height = canvas.height / 25;
         if (this.brickset.spacing > 1) this.brickset.spacing = this.brickset.brick_length / 4;
 
@@ -177,6 +177,67 @@ class Brickset_Resizer
                     }
                     k++;
                 }
+            }
+        }
+    }
+    resize_zigzag()
+    {
+        let starting_x1_pos = (canvas.width - this.brickset.brick_length * this.brickset.height) / 2;
+        let starting_x2_pos = 1;//(canvas.width - this.brick_length * this.height) 0;
+        let starting_x3_pos = (canvas.width - this.brickset.brick_length * this.brickset.height) - 1;
+        //top 3 pyramids
+
+        let k = 0;
+        for (let i = 0; i < this.brickset.height; i++)
+        {
+            for (let j = this.brickset.height - 1; j >= i; j--)
+            {
+                let brick1 = this.brickset.bricks[k]
+                let brick2 = this.brickset.bricks[k + 1];
+                let brick3 = this.brickset.bricks[k + 2];
+                if (brick1.alive)
+                {
+                    brick1.x = starting_x1_pos - (i * this.brickset.brick_length / 2) + (j * (this.brickset.brick_length + this.brickset.spacing)); 
+                    brick1.y = i * (this.brickset.brick_height + this.brickset.spacing);
+                }
+
+                if (brick2.alive)
+                {
+                    brick2.x = starting_x2_pos - (i * this.brickset.brick_length / 2) + (j * (this.brickset.brick_length + this.brickset.spacing)); 
+                    brick2.y = i * (this.brickset.brick_height + this.brickset.spacing);
+                }
+
+                if (brick3.alive)
+                {
+                    brick3.x = starting_x3_pos - (i * this.brickset.brick_length / 2) + (j * (this.brickset.brick_length + this.brickset.spacing)); 
+                    brick3.y = i * (this.brickset.brick_height + this.brickset.spacing); 
+                }
+                k += 3;
+            }
+        }
+
+        starting_x1_pos = canvas.width / 3 - (this.brickset.brick_length / 2);
+        starting_x2_pos = canvas.width * (2/3)- (this.brickset.brick_length / 2);
+        let starting_y_pos = canvas.height / 4;
+        for (let i = 0; i < this.brickset.height; i++)
+        {
+            for (let j = 0; j < i + 1; j++)
+            {
+                let brick1 = this.brickset.bricks[k];
+                let brick2 = this.brickset.bricks[k + 1];
+
+                if (brick1.alive)
+                {
+                    brick1.x = starting_x1_pos - (i * this.brickset.brick_length / 2) + (j * (this.brickset.brick_length + this.brickset.spacing));
+                    brick1.y = starting_y_pos + (i * (this.brickset.brick_height + this.brickset.spacing));
+                } 
+
+                if (brick2.alive)
+                {
+                    brick2.x = starting_x2_pos - (i * this.brickset.brick_length / 2) + (j * (this.brickset.brick_length + this.brickset.spacing));
+                    brick2.y = starting_y_pos + (i * (this.brickset.brick_height + this.brickset.spacing));
+                } 
+                k+=2;
             }
         }
     }

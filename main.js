@@ -230,5 +230,7 @@ window.addEventListener('resize', () => // if the user shrinks/expands their bro
         gameObjects[i].resize();
       }
     }
+    prev_width = canvas.width;
+    prev_height = canvas.height;
 
 });

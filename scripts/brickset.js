@@ -17,14 +17,14 @@ class Brickset
         this.cols = 0;
         this.height = 0;
         this.NUM_TYPES = 6
-        this.brickset_type = Math.floor(Math.random() * this.NUM_TYPES);
+        this.brickset_type = 6;//Math.floor(Math.random() * this.NUM_TYPES);
         this.generate();
         this.brickset_resizer = new Brickset_Resizer(this);
     }
 
     generate()
     {
-        switch (7)// (this.brickset_type)
+        switch (this.brickset_type)
         {
             case 0:
                 this.generate_standard();
@@ -198,7 +198,7 @@ class Brickset
         //1st pyramid, attached to ceiling
         this.height = 5;
         let starting_x1_pos = (canvas.width - this.brick_length * this.height) / 2;
-        let starting_x2_pos = 1;//(canvas.width - this.brick_length * this.height) 0;
+        let starting_x2_pos = 1;
         let starting_x3_pos = (canvas.width - this.brick_length * this.height) - 1;
         //top 3 pyramids
         for (let i = 0; i < this.height; i++)
@@ -251,24 +251,37 @@ class Brickset
     generate_crisscross()
     {
         //columns
-        this.cols = 4;
-        this.rows = 10;
-        let col_xs = [];
-        for (let i = 1; i < this.cols + 1; i++)
-        {
-            col_xs[i] = canvas.width * (i / (this.cols + 1));
-        }
-        for (let i = 0; i < col_xs.length; i++)
+        this.cols = 5;
+        this.rows = 15;
+
+        for (let i = 0; i < this.cols; i++)
         {
             for (let j = 0; j < this.rows; j++)
             {
-                let brick = {x: col_xs[i],
+                let brick = {x: (1 + (3 * i)) * (this.brick_length + this.spacing),
                              y: j * (this.brick_height + this.spacing),
                              alive: true};
                 this.bricks.push(brick);
                 this.total_bricks += 1;
             }
         }
+
+        for (let i = 0; i < 15; i++)
+        {
+            for (let j = 0; j < 3; j++)
+            {
+                if ((i - 1) % 3 != 0)
+                {
+                    let brick = {x: i * (this.brick_length + this.spacing),
+                                 y: (3 + (4 * j)) * (this.brick_height + this.spacing),
+                                 alive: true};
+                    this.bricks.push(brick);
+                    this.total_bricks += 1;
+                }
+            }
+        }
+
+
     }
 
     //@Post no effect, this class is skipped over in the game loop
