@@ -24,7 +24,7 @@ class Powers{
   }
 
   isNotCatch(item){
-    return (item.y > gameObjects[OBJ_KEYS.PADDLE].y + gameObjects[OBJ_KEYS.PADDLE].height);
+    return (item.y > gameObjects[OBJ_KEYS.PADDLE].y);
   }
 
   catchBall(index, item){
