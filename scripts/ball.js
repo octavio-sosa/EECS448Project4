@@ -89,7 +89,11 @@ class Ball
             let x = this.x;
 
             //ceiling collision
-            if (y - this.radius <= 0) this.vel.y *= -1;
+            if (y - this.radius <= 0) 
+            {
+                this.vel.y *= -1;
+                this.y = this.radius;
+            }
 
             //wall collision
             if (x + this.radius > canvas.width)

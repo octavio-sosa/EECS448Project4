@@ -76,7 +76,6 @@ var inv = function InvertColors()
  */
 function animate() // main game loop occurs here
 {
-    console.log(clr_idx);
     requestAnimationFrame(animate); // waits until this animate is done and then calls it again
     if (!paused & !playerHasLost & !playerHasWon)
     {
@@ -245,5 +244,7 @@ window.addEventListener('resize', () => // if the user shrinks/expands their bro
         gameObjects[i].resize();
       }
     }
+    prev_width = canvas.width;
+    prev_height = canvas.height;
 
 });
