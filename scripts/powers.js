@@ -76,8 +76,12 @@ class Powers{
       if (this.isCatch(item)){
         item.isLive = false;
         this.powers.splice(index, 1);
-        console.log('catchPlonger');
-        console.log(gameObjects[OBJ_KEYS.PADDLE].width);
+
+        console.log('catchPlonger');        
+        console.log('width = ', gameObjects[OBJ_KEYS.PADDLE].width);              //testing width_size
+        console.log('init_width = ', gameObjects[OBJ_KEYS.PADDLE].init_width);
+        console.log('width_size = ', gameObjects[OBJ_KEYS.PADDLE].width_size);
+
         if(gameObjects[OBJ_KEYS.PADDLE].width<(canvas.width/3)){
             let added_width = 0;
             let max_added_width = gameObjects[OBJ_KEYS.PADDLE].width / 3;
@@ -88,12 +92,17 @@ class Powers{
               if (added_width < max_added_width) setTimeout(expandSize, 10);
             }
             setTimeout(expandSize, 10);
-            //this.paddleW = gameObjects[OBJ_KEYS.PADDLE].width;      //update paddle info
           }
+          console.log('width = ', gameObjects[OBJ_KEYS.PADDLE].width);
+          console.log('init_width = ', gameObjects[OBJ_KEYS.PADDLE].init_width);
+
+          gameObjects[OBJ_KEYS.PADDLE].width_size = gameObjects[OBJ_KEYS.PADDLE].width / gameObjects[OBJ_KEYS.PADDLE].init_width;
+          
+          console.log('width_size = ', gameObjects[OBJ_KEYS.PADDLE].width_size);
+
           gameObjects[OBJ_KEYS.BALL].hitBricks = false;
           console.log(gameObjects[OBJ_KEYS.BALL].hitBricks);
           this.resetPowers(parseInt(Math.random()*(8-1+1)+1));
-
       }
       else if (this.isNotCatch(item)){
         item.isLive = false;
@@ -124,8 +133,15 @@ class Powers{
             setTimeout(reduceSize, 10);
             //this.paddleW = gameObjects[OBJ_KEYS.PADDLE].width;     //update paddle info
           }
+          console.log('width = ', gameObjects[OBJ_KEYS.PADDLE].width);
+          console.log('init_width = ', gameObjects[OBJ_KEYS.PADDLE].init_width);
+
+          gameObjects[OBJ_KEYS.PADDLE].width_size = gameObjects[OBJ_KEYS.PADDLE].width / gameObjects[OBJ_KEYS.PADDLE].init_width;
+          
+          console.log('width_size = ', gameObjects[OBJ_KEYS.PADDLE].width_size);
           gameObjects[OBJ_KEYS.BALL].hitBricks = false;
           console.log(gameObjects[OBJ_KEYS.BALL].hitBricks);
+          console.log('width_size = ', gameObjects[OBJ_KEYS.PADDLE].width_size);
           this.resetPowers(parseInt(Math.random()*(8-1+1)+1));
 
       }
