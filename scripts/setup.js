@@ -1,6 +1,10 @@
 let canvas = document.querySelector('canvas'); // create variable to reference the canvas html element 
 canvas.width = window.innerWidth; // make the canvas' width equal to the width of the user's browser
 canvas.height = window.innerHeight; // make the canvas' height equal to the height of the user's browser
+
+var prev_width = canvas.width;
+var prev_height = canvas.height;
+
 let ctx = canvas.getContext('2d'); // a variable that contains the canvas' 2d methods, used for drawing shapes and adding colors
 
 let about = document.getElementById('about'); // Gets the about button to redirect to about page
