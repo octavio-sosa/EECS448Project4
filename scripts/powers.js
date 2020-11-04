@@ -36,7 +36,7 @@ class Powers{
         gameObjects[OBJ_KEYS.BALL].numofBall += 1;
         gameObjects[OBJ_KEYS.BALL].hitBricks = false;
         console.log(gameObjects[OBJ_KEYS.BALL].hitBricks);
-        this.resetPowers(parseInt(Math.random()*(6-1+1)+1));
+        this.resetPowers(parseInt(Math.random()*(8-1+1)+1));
 
       }
       else if (this.isNotCatch(item)){
@@ -45,7 +45,7 @@ class Powers{
         console.log('not catchHeart');
         gameObjects[OBJ_KEYS.BALL].hitBricks = false;
         console.log(gameObjects[OBJ_KEYS.BALL].hitBricks);
-        this.resetPowers(parseInt(Math.random()*(6-1+1)+1));
+        this.resetPowers(parseInt(Math.random()*(8-1+1)+1));
       }
     }
   }
@@ -58,7 +58,7 @@ class Powers{
         gameObjects[OBJ_KEYS.PLAYERSTATUS].currentLives++;
         gameObjects[OBJ_KEYS.BALL].hitBricks = false;
         console.log(gameObjects[OBJ_KEYS.BALL].hitBricks);
-        this.resetPowers(parseInt(Math.random()*(6-1+1)+1));
+        this.resetPowers(parseInt(Math.random()*(8-1+1)+1));
 
       }
       else if (this.isNotCatch(item)){
@@ -67,7 +67,7 @@ class Powers{
         console.log('not catchHeart');
         gameObjects[OBJ_KEYS.BALL].hitBricks = false;
         console.log(gameObjects[OBJ_KEYS.BALL].hitBricks);
-        this.resetPowers(parseInt(Math.random()*(6-1+1)+1));
+        this.resetPowers(parseInt(Math.random()*(8-1+1)+1));
       }
     }
   }
@@ -101,7 +101,7 @@ class Powers{
         console.log('not catchHeart');
         gameObjects[OBJ_KEYS.BALL].hitBricks = false;
         console.log(gameObjects[OBJ_KEYS.BALL].hitBricks);
-        this.resetPowers(parseInt(Math.random()*(6-1+1)+1));
+        this.resetPowers(parseInt(Math.random()*(8-1+1)+1));
       }
 
     }
@@ -126,7 +126,7 @@ class Powers{
           }
           gameObjects[OBJ_KEYS.BALL].hitBricks = false;
           console.log(gameObjects[OBJ_KEYS.BALL].hitBricks);
-          this.resetPowers(parseInt(Math.random()*(6-1+1)+1));
+          this.resetPowers(parseInt(Math.random()*(8-1+1)+1));
 
       }
       else if (this.isNotCatch(item)){
@@ -135,7 +135,7 @@ class Powers{
         console.log('not catchHeart');
         gameObjects[OBJ_KEYS.BALL].hitBricks = false;
         console.log(gameObjects[OBJ_KEYS.BALL].hitBricks);
-        this.resetPowers(parseInt(Math.random()*(6-1+1)+1));
+        this.resetPowers(parseInt(Math.random()*(8-1+1)+1));
       }
 
     }
@@ -150,7 +150,7 @@ class Powers{
         gameObjects[OBJ_KEYS.BALL].radius += 10;
         gameObjects[OBJ_KEYS.BALL].hitBricks = false;
         console.log(gameObjects[OBJ_KEYS.BALL].hitBricks);
-        this.resetPowers(parseInt(Math.random()*(6-1+1)+1));
+        this.resetPowers(parseInt(Math.random()*(8-1+1)+1));
 
       }
       else if (this.isNotCatch(item)){
@@ -159,7 +159,7 @@ class Powers{
         console.log('not catchHeart');
         gameObjects[OBJ_KEYS.BALL].hitBricks = false;
         console.log(gameObjects[OBJ_KEYS.BALL].hitBricks);
-        this.resetPowers(parseInt(Math.random()*(6-1+1)+1));
+        this.resetPowers(parseInt(Math.random()*(8-1+1)+1));
       }
     }
   }
@@ -174,7 +174,7 @@ class Powers{
           gameObjects[OBJ_KEYS.BALL].radius -= 10;
           gameObjects[OBJ_KEYS.BALL].hitBricks = false;
           console.log(gameObjects[OBJ_KEYS.BALL].hitBricks);
-          this.resetPowers(parseInt(Math.random()*(6-1+1)+1));
+          this.resetPowers(parseInt(Math.random()*(8-1+1)+1));
 
         }
       }
@@ -184,7 +184,7 @@ class Powers{
         console.log('not catchHeart');
         gameObjects[OBJ_KEYS.BALL].hitBricks = false;
         console.log(gameObjects[OBJ_KEYS.BALL].hitBricks);
-        this.resetPowers(parseInt(Math.random()*(6-1+1)+1));
+        this.resetPowers(parseInt(Math.random()*(8-1+1)+1));
       }
 
     }
@@ -204,7 +204,7 @@ class Powers{
           gameObjects[OBJ_KEYS.BALL].speed.y *= 1.2;
           gameObjects[OBJ_KEYS.BALL].hitBricks = false;
           console.log(gameObjects[OBJ_KEYS.BALL].hitBricks);
-          this.resetPowers(parseInt(Math.random()*(6-1+1)+1));
+          this.resetPowers(parseInt(Math.random()*(8-1+1)+1));
           console.log("velX = ",gameObjects[OBJ_KEYS.BALL].vel.x);  // testing ball vel after add speed
           console.log("velY = ",gameObjects[OBJ_KEYS.BALL].vel.y);
         }
@@ -215,7 +215,7 @@ class Powers{
         console.log('not catchBfast');
         gameObjects[OBJ_KEYS.BALL].hitBricks = false;
         console.log(gameObjects[OBJ_KEYS.BALL].hitBricks);
-        this.resetPowers(parseInt(Math.random()*(6-1+1)+1)); 
+        this.resetPowers(parseInt(Math.random()*(8-1+1)+1)); 
       }
     }
   }
@@ -232,7 +232,7 @@ class Powers{
           gameObjects[OBJ_KEYS.BALL].speed.y *= 0.8;
           gameObjects[OBJ_KEYS.BALL].hitBricks = false;
           console.log(gameObjects[OBJ_KEYS.BALL].hitBricks);
-          this.resetPowers(parseInt(Math.random()*(6-1+1)+1));
+          this.resetPowers(parseInt(Math.random()*(8-1+1)+1));
           console.log("velX = ",gameObjects[OBJ_KEYS.BALL].vel.x);
           console.log("velY = ",gameObjects[OBJ_KEYS.BALL].vel.y);
         }
@@ -243,7 +243,7 @@ class Powers{
         console.log('not catchBslow');
         gameObjects[OBJ_KEYS.BALL].hitBricks = false;
         console.log(gameObjects[OBJ_KEYS.BALL].hitBricks);
-        this.resetPowers(parseInt(Math.random()*(6-1+1)+1)); 
+        this.resetPowers(parseInt(Math.random()*(8-1+1)+1)); 
       }
 
     }
@@ -256,6 +256,8 @@ class Powers{
     else if(this.powerstype == 4) { this.drawPshorter();}
     else if(this.powerstype == 5) { this.drawBigBall();}
     else if(this.powerstype == 6) { this.drawSmallBall();}
+    else if(this.powerstype == 7) { this.drawBallfast();}
+    else if(this.powerstype == 8) { this.drawBallslow();}
   }
 
   drawBall(){
@@ -330,6 +332,32 @@ class Powers{
       this.catchSball(i,power);
     }
   }
+  drawBallfast(){
+    var img = new Image();
+    img.src = "assets/images/bball.png";
+    for (let i=0; i<this.powers.length; i++){
+      let power = this.powers[i];
+      ctx.drawImage(img, power.x, power.y, 40, 40);
+      if (power.y < canvas.height){
+        power.y = power.y+2;
+      }
+      this.catchBfast(i,power);
+    }
+  }
+  drawBallslow(){
+    var img = new Image();
+    img.src = "assets/images/sball.png";
+    for (let i=0; i<this.powers.length; i++){
+      let power = this.powers[i];
+      ctx.drawImage(img, power.x, power.y, 40, 40);
+      if (power.y < canvas.height){
+        power.y = power.y+2;
+      }
+      this.catchBslow(i,power);
+    }
+  }
+
+
   update(){
 
   }
