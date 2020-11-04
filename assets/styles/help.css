@@ -1,0 +1,26 @@
+.help-screen{
+    width: 300px;
+    padding: 40px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0,0,0,.8);
+    text-align: center;
+    box-shadow: 0 15px 25px rgba(0,0,0,.9);
+    border-radius: 10px;
+}
+
+.instructions{
+    color: white;
+    font-size: 30px;
+    font-weight: 100;
+}
+
+.back-button{
+    border-radius: 10px;
+    box-shadow: 0 15px 25px rgba(0,0,0,.9);
+    background: rgb(107, 107, 107);
+    color: white;
+    height: 24px;
+}
