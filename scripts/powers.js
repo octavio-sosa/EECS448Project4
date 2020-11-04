@@ -190,6 +190,65 @@ class Powers{
     }
   }
 
+  catchBfast(index, item){
+    if (item.isLive){
+      if (this.isCatch(item)){
+        item.isLive = false;
+        this.powers.splice(index, 1);
+        console.log("velX = ",gameObjects[OBJ_KEYS.BALL].vel.x);    // testing ball vel before add speed
+        console.log("velY = ",gameObjects[OBJ_KEYS.BALL].vel.y);    //
+        console.log('catchBfast');
+        if (gameObjects[OBJ_KEYS.BALL].speed.x < 2
+            && gameObjects[OBJ_KEYS.BALL].speed.y < 2){
+          gameObjects[OBJ_KEYS.BALL].speed.x *= 1.2;
+          gameObjects[OBJ_KEYS.BALL].speed.y *= 1.2;
+          gameObjects[OBJ_KEYS.BALL].hitBricks = false;
+          console.log(gameObjects[OBJ_KEYS.BALL].hitBricks);
+          this.resetPowers(parseInt(Math.random()*(6-1+1)+1));
+          console.log("velX = ",gameObjects[OBJ_KEYS.BALL].vel.x);  // testing ball vel after add speed
+          console.log("velY = ",gameObjects[OBJ_KEYS.BALL].vel.y);
+        }
+      }
+      else if (this.isNotCatch(item)){
+        item.isLive = false;
+        this.powers.splice(index, 1);
+        console.log('not catchBfast');
+        gameObjects[OBJ_KEYS.BALL].hitBricks = false;
+        console.log(gameObjects[OBJ_KEYS.BALL].hitBricks);
+        this.resetPowers(parseInt(Math.random()*(6-1+1)+1)); 
+      }
+    }
+  }
+
+  catchBslow(index, item){
+    if (item.isLive){
+      if (this.isCatch(item)){
+        item.isLive = false;
+        this.powers.splice(index, 1);
+        console.log('catchBslow');
+        if (gameObjects[OBJ_KEYS.BALL].speed.x > 0.5
+            && gameObjects[OBJ_KEYS.BALL].speed.y > 0.5){
+          gameObjects[OBJ_KEYS.BALL].speed.x *= 0.8;
+          gameObjects[OBJ_KEYS.BALL].speed.y *= 0.8;
+          gameObjects[OBJ_KEYS.BALL].hitBricks = false;
+          console.log(gameObjects[OBJ_KEYS.BALL].hitBricks);
+          this.resetPowers(parseInt(Math.random()*(6-1+1)+1));
+          console.log("velX = ",gameObjects[OBJ_KEYS.BALL].vel.x);
+          console.log("velY = ",gameObjects[OBJ_KEYS.BALL].vel.y);
+        }
+      }
+      else if (this.isNotCatch(item)){
+        item.isLive = false;
+        this.powers.splice(index, 1);
+        console.log('not catchBslow');
+        gameObjects[OBJ_KEYS.BALL].hitBricks = false;
+        console.log(gameObjects[OBJ_KEYS.BALL].hitBricks);
+        this.resetPowers(parseInt(Math.random()*(6-1+1)+1)); 
+      }
+
+    }
+  }
+
   draw(){
     if(this.powerstype == 1) { this.drawBall();}
     else if(this.powerstype == 2) { this.drawHeart();}
