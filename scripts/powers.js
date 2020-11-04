@@ -184,7 +184,7 @@ class Powers{
         console.log('not catchHeart');
         gameObjects[OBJ_KEYS.BALL].hitBricks = false;
         console.log(gameObjects[OBJ_KEYS.BALL].hitBricks);
-        this.resetPowers(parseInt(Math.random()*(6-1+1)+1));
+        this.resetPowers(parseInt(Math.random()*(6-1+1)+1)); 
       }
 
     }
