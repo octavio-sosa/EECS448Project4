@@ -48,7 +48,7 @@ class Brickset
                 this.generate_zigzag();
                 break;
             case 7:
-                this.generate_X();
+                this.generate_crisscross();
                 break;
         }
     }
@@ -248,39 +248,27 @@ class Brickset
         this.remaining_bricks = this.total_bricks;
     }
 
-    generate_X()
+    generate_crisscross()
     {
-        //1st pyramid, ceiling
-        this.height = 7
-        let starting_x_pos = (canvas.width - this.brick_length * this.height) / 2;
-        for (let i = 0; i < this.height; i++)
+        //columns
+        this.cols = 4;
+        this.rows = 10;
+        let col_xs = [];
+        for (let i = 1; i < this.cols + 1; i++)
         {
-            for (let j = this.height - 1; j >= i; j--)
-            {
-                let brick = {x: starting_x_pos - (i * this.brick_length / 2) + (j * (this.brick_length + this.spacing)),
-                             y: (i * (this.brick_height + this.spacing)),
-                             alive: true};
-
-                this.bricks.push(brick);
-                this.total_bricks += 1;
-            }
+            col_xs[i] = canvas.width * (i / (this.cols + 1));
         }
-
-        //2nd vertical, opposite of 1st
-        starting_x_pos = (canvas.width - this.brick_length) / 2;
-        let starting_y_pos = canvas.height / 3;
-        for (let i = 0; i < this.height; i++)
+        for (let i = 0; i < col_xs.length; i++)
         {
-            for (let j = 0; j < i + 1; j++)
+            for (let j = 0; j < this.rows; j++)
             {
-                let brick = {x: starting_x_pos - (i * this.brick_length / 2) + (j * (this.brick_length + this.spacing)),
-                             y: starting_y_pos + (i * (this.brick_height + this.spacing)),
+                let brick = {x: col_xs[i],
+                             y: j * (this.brick_height + this.spacing),
                              alive: true};
                 this.bricks.push(brick);
                 this.total_bricks += 1;
             }
         }
-        this.remaining_bricks = this.total_bricks;
     }
 
     //@Post no effect, this class is skipped over in the game loop
