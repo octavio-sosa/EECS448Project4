@@ -163,6 +163,7 @@ class Ball
     resetBall() {
       simulate_ball = false;
       this.vel = {x: 0, y: 0};
+      this.radius = canvas.height / 40; // radius of ball dependent on screen size
       this.unit_vector = (Math.sqrt(canvas.height**2 + canvas.width **2) / 200) * (Math.log10(level) + 1);
     }
 

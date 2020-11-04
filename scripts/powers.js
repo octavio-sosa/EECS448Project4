@@ -147,7 +147,7 @@ class Powers{
         item.isLive = false;
         this.powers.splice(index, 1);
         console.log('catchBball');
-        gameObjects[OBJ_KEYS.BALL].radius += 5;
+        gameObjects[OBJ_KEYS.BALL].radius += 10;
         gameObjects[OBJ_KEYS.BALL].hitBricks = false;
         console.log(gameObjects[OBJ_KEYS.BALL].hitBricks);
         this.resetPowers(parseInt(Math.random()*(6-1+1)+1));
