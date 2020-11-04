@@ -7,7 +7,8 @@ class Ball
      */
     constructor()
     {
-        this.radius = canvas.height / 40; // radius of ball dependent on screen size
+        this.radius_size = 1;
+        this.radius = this.radius_size * canvas.height / 40; // radius of ball dependent on screen size
         this.start_x = canvas.width / 2; // initial position is middle of the screen
         this.start_y = canvas.height - PADDLE_HEIGHT - this.radius - 1; // 1 pixel above paddle to avoid collision
         this.x = this.start_x;
@@ -164,7 +165,8 @@ class Ball
     resetBall() {
       simulate_ball = false;
       this.vel = {x: 0, y: 0};
-      his.speed = {x: 1, y: 1};
+      this.speed = {x: 1, y: 1};
+      this.radius_size = 1;
       this.radius = canvas.height / 40; // radius of ball dependent on screen size
       this.unit_vector = (Math.sqrt(canvas.height**2 + canvas.width **2) / 200) * (Math.log10(level) + 1);
     }
@@ -175,7 +177,7 @@ class Ball
     */
     resize()
     {
-        this.radius = canvas.height / 40; // radius of ball dependent on screen size
+        this.radius = this.radius_size * canvas.height / 40; // radius of ball dependent on screen size
         this.unit_vector = (Math.sqrt(canvas.height**2 + canvas.width **2) / 200) * (Math.log10(level) + 1)
     }
 }
