@@ -217,7 +217,7 @@ class Powers{
         console.log('not catchBfast');
         gameObjects[OBJ_KEYS.BALL].hitBricks = false;
         console.log(gameObjects[OBJ_KEYS.BALL].hitBricks);
-        this.resetPowers(parseInt(Math.random()*(8-1+1)+1)); 
+        this.resetPowers(parseInt(Math.random()*(8-1+1)+1));
       }
     }
   }
@@ -247,7 +247,7 @@ class Powers{
         console.log('not catchBslow');
         gameObjects[OBJ_KEYS.BALL].hitBricks = false;
         console.log(gameObjects[OBJ_KEYS.BALL].hitBricks);
-        this.resetPowers(parseInt(Math.random()*(8-1+1)+1)); 
+        this.resetPowers(parseInt(Math.random()*(8-1+1)+1));
       }
 
     }
@@ -338,10 +338,10 @@ class Powers{
   }
   drawBallfast(){
     var img = new Image();
-    img.src = "assets/images/ballfast.png";             
+    img.src = "assets/images/bfast.png";
     for (let i=0; i<this.powers.length; i++){
       let power = this.powers[i];
-      ctx.drawImage(img, power.x, power.y, 78, 60);
+      ctx.drawImage(img, power.x, power.y, 85, 70);
       if (power.y < canvas.height){
         power.y = power.y+2;
       }
@@ -350,10 +350,10 @@ class Powers{
   }
   drawBallslow(){
     var img = new Image();
-    img.src = "assets/images/ballslow.png";             
+    img.src = "assets/images/bslow.png";
     for (let i=0; i<this.powers.length; i++){
       let power = this.powers[i];
-      ctx.drawImage(img, power.x, power.y, 78, 60);
+      ctx.drawImage(img, power.x, power.y, 85, 70);
       if (power.y < canvas.height){
         power.y = power.y+2;
       }
