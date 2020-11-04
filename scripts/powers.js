@@ -36,7 +36,7 @@ class Powers{
         gameObjects[OBJ_KEYS.BALL].numofBall += 1;
         gameObjects[OBJ_KEYS.BALL].hitBricks = false;
         console.log(gameObjects[OBJ_KEYS.BALL].hitBricks);
-        this.resetPowers(parseInt(Math.random()*(4-1+1)+1));
+        this.resetPowers(parseInt(Math.random()*(6-1+1)+1));
 
       }
       else if (this.isNotCatch(item)){
@@ -45,7 +45,7 @@ class Powers{
         console.log('not catchHeart');
         gameObjects[OBJ_KEYS.BALL].hitBricks = false;
         console.log(gameObjects[OBJ_KEYS.BALL].hitBricks);
-        this.resetPowers(parseInt(Math.random()*(4-1+1)+1));
+        this.resetPowers(parseInt(Math.random()*(6-1+1)+1));
       }
     }
   }
@@ -58,7 +58,7 @@ class Powers{
         gameObjects[OBJ_KEYS.PLAYERSTATUS].currentLives++;
         gameObjects[OBJ_KEYS.BALL].hitBricks = false;
         console.log(gameObjects[OBJ_KEYS.BALL].hitBricks);
-        this.resetPowers(parseInt(Math.random()*(4-1+1)+1));
+        this.resetPowers(parseInt(Math.random()*(6-1+1)+1));
 
       }
       else if (this.isNotCatch(item)){
@@ -67,7 +67,7 @@ class Powers{
         console.log('not catchHeart');
         gameObjects[OBJ_KEYS.BALL].hitBricks = false;
         console.log(gameObjects[OBJ_KEYS.BALL].hitBricks);
-        this.resetPowers(parseInt(Math.random()*(4-1+1)+1));
+        this.resetPowers(parseInt(Math.random()*(6-1+1)+1));
       }
     }
   }
@@ -92,7 +92,7 @@ class Powers{
           }
           gameObjects[OBJ_KEYS.BALL].hitBricks = false;
           console.log(gameObjects[OBJ_KEYS.BALL].hitBricks);
-          this.resetPowers(parseInt(Math.random()*(4-1+1)+1));
+          this.resetPowers(3);
 
       }
       else if (this.isNotCatch(item)){
@@ -101,7 +101,7 @@ class Powers{
         console.log('not catchHeart');
         gameObjects[OBJ_KEYS.BALL].hitBricks = false;
         console.log(gameObjects[OBJ_KEYS.BALL].hitBricks);
-        this.resetPowers(parseInt(Math.random()*(4-1+1)+1));
+        this.resetPowers(parseInt(Math.random()*(6-1+1)+1));
       }
 
     }
@@ -126,7 +126,7 @@ class Powers{
           }
           gameObjects[OBJ_KEYS.BALL].hitBricks = false;
           console.log(gameObjects[OBJ_KEYS.BALL].hitBricks);
-          this.resetPowers(parseInt(Math.random()*(4-1+1)+1));
+          this.resetPowers(parseInt(Math.random()*(6-1+1)+1));
 
       }
       else if (this.isNotCatch(item)){
@@ -135,7 +135,7 @@ class Powers{
         console.log('not catchHeart');
         gameObjects[OBJ_KEYS.BALL].hitBricks = false;
         console.log(gameObjects[OBJ_KEYS.BALL].hitBricks);
-        this.resetPowers(parseInt(Math.random()*(4-1+1)+1));
+        this.resetPowers(parseInt(Math.random()*(6-1+1)+1));
       }
 
     }
@@ -150,7 +150,7 @@ class Powers{
         gameObjects[OBJ_KEYS.BALL].radius += 5;
         gameObjects[OBJ_KEYS.BALL].hitBricks = false;
         console.log(gameObjects[OBJ_KEYS.BALL].hitBricks);
-        this.resetPowers(parseInt(Math.random()*(4-1+1)+1));
+        this.resetPowers(parseInt(Math.random()*(6-1+1)+1));
 
       }
       else if (this.isNotCatch(item)){
@@ -159,7 +159,7 @@ class Powers{
         console.log('not catchHeart');
         gameObjects[OBJ_KEYS.BALL].hitBricks = false;
         console.log(gameObjects[OBJ_KEYS.BALL].hitBricks);
-        this.resetPowers(parseInt(Math.random()*(4-1+1)+1));
+        this.resetPowers(parseInt(Math.random()*(6-1+1)+1));
       }
     }
   }
@@ -174,7 +174,7 @@ class Powers{
           gameObjects[OBJ_KEYS.BALL].radius -= 10;
           gameObjects[OBJ_KEYS.BALL].hitBricks = false;
           console.log(gameObjects[OBJ_KEYS.BALL].hitBricks);
-          this.resetPowers(parseInt(Math.random()*(4-1+1)+1));
+          this.resetPowers(parseInt(Math.random()*(6-1+1)+1));
 
         }
       }
@@ -184,7 +184,7 @@ class Powers{
         console.log('not catchHeart');
         gameObjects[OBJ_KEYS.BALL].hitBricks = false;
         console.log(gameObjects[OBJ_KEYS.BALL].hitBricks);
-        this.resetPowers(parseInt(Math.random()*(4-1+1)+1));
+        this.resetPowers(parseInt(Math.random()*(6-1+1)+1));
       }
 
     }
@@ -195,16 +195,16 @@ class Powers{
     else if(this.powerstype == 2) { this.drawHeart();}
     else if(this.powerstype == 3) { this.drawPlonger();}
     else if(this.powerstype == 4) { this.drawPshorter();}
-    //else if(this.powerstype == 5) { this.drawBigBall();}
-    //else if(this.powerstype == 6) { this.drawSmallBall();}
+    else if(this.powerstype == 5) { this.drawBigBall();}
+    else if(this.powerstype == 6) { this.drawSmallBall();}
   }
 
   drawBall(){
     var img = new Image();
-    img.src = "assets/images/x2ball.png";
+    img.src = "assets/images/+ball.png";
     for (let i=0; i<this.powers.length; i++){
       let power = this.powers[i];
-      ctx.drawImage(img, power.x, power.y, 50, 50);
+      ctx.drawImage(img, power.x, power.y, 65, 55);
       if (power.y < canvas.height){
         power.y = power.y+2;
       }
@@ -213,10 +213,10 @@ class Powers{
   }
   drawHeart(){
     var img = new Image();
-    img.src = "assets/images/+1live.png";
+    img.src = "assets/images/+live.png";
     for (let i=0; i<this.powers.length; i++){
       let power = this.powers[i];
-      ctx.drawImage(img, power.x, power.y, 50, 50);
+      ctx.drawImage(img, power.x, power.y, 60, 50);
       if (power.y < canvas.height){
         power.y = power.y+2;
       }
@@ -225,10 +225,10 @@ class Powers{
   }
   drawPlonger(){
     var img = new Image();
-    img.src = "assets/images/paddle_long.png";
+    img.src = "assets/images/plong.png";
     for (let i=0; i<this.powers.length; i++){
       let power = this.powers[i];
-      ctx.drawImage(img, power.x, power.y, 50, 50);
+      ctx.drawImage(img, power.x, power.y, 80, 75);
       if (power.y < canvas.height){
         power.y = power.y+2;
       }
@@ -237,23 +237,22 @@ class Powers{
   }
   drawPshorter(){
     var img = new Image();
-    img.src = "assets/images/paddle_short.png";
+    img.src = "assets/images/psmall.png";
     for (let i=0; i<this.powers.length; i++){
       let power = this.powers[i];
-      ctx.drawImage(img, power.x, power.y, 50, 50);
+      ctx.drawImage(img, power.x, power.y, 80, 75);
       if (power.y < canvas.height){
         power.y = power.y+2;
       }
       this.catchPshorter(i,power);
     }
   }
-/*
   drawBigBall(){
     var img = new Image();
-    img.src = "assets/images/bigball.png";
+    img.src = "assets/images/bball.png";
     for (let i=0; i<this.powers.length; i++){
       let power = this.powers[i];
-      ctx.drawImage(img, power.x, power.y, 50, 50);
+      ctx.drawImage(img, power.x, power.y, 55, 45);
       if (power.y < canvas.height){
         power.y = power.y+2;
       }
@@ -262,17 +261,16 @@ class Powers{
   }
   drawSmallBall(){
     var img = new Image();
-    img.src = "assets/images/smallball.png";
+    img.src = "assets/images/sball.png";
     for (let i=0; i<this.powers.length; i++){
       let power = this.powers[i];
-      ctx.drawImage(img, power.x, power.y, 50, 50);
+      ctx.drawImage(img, power.x, power.y, 40, 40);
       if (power.y < canvas.height){
         power.y = power.y+2;
       }
       this.catchSball(i,power);
     }
   }
-  */
   update(){
 
   }
