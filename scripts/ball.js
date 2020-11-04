@@ -74,12 +74,12 @@ class Ball
         }
     }
 
-    /*
-    * @Pre: assumes ball is initialized and simulated
-    * @Post: checks for collisions against the paddle and the bricks
-    * @Param: paddle: Object the user controls that the ball bounces off of.
-    *         brickset: set of bricks that the ball will bounce off of.
-    */
+    /**
+     * @Pre assumes ball is initialized and simulated
+     * @Post checks for collisions against the paddle and the bricks
+     * @param {paddle}: Object the user controls that the ball bounces off of.
+     * @param {brickset}: set of bricks that the ball will bounce off of.
+     */
     detect_collisions(paddle, brickset)
     {
         if (simulate_ball)
