@@ -93,6 +93,7 @@ class Ball
             {
                 this.vel.y *= -1;
                 this.y = this.radius;
+                if (colorful_mode) setRandomColor();
             }
 
             //wall collision
@@ -100,11 +101,13 @@ class Ball
             {
                 this.vel.x *= -1;
                 this.x = canvas.width - this.radius;
+                if (colorful_mode) setRandomColor();
             }
             else if (x - this.radius <= 0)
             {
                 this.vel.x *= -1;
                 this.x = 0 + this.radius;
+                if (colorful_mode) setRandomColor();
             }
 
             let x_collide_distance = brickset.brick_length / 2 + this.radius;
@@ -129,7 +132,6 @@ class Ball
                         if (prev_y > y_collide_distance) this.vel.y *= -1;
                         brickset.bricks[i].alive = false;
                         this.hitBricks = !brickset.bricks[i].alive;
-                        console.log(this.hitBricks);
                         brickset.remaining_bricks -= 1;
                         gameObjects[OBJ_KEYS.PLAYERSTATUS].currentScore++;
                     }
@@ -145,6 +147,7 @@ class Ball
                     this.vel.y *= -1;
                     let mid_paddle = paddle.width / 2;
                     this.vel.x = (3/4 * this.unit_vector) * ((this.x - (paddle.x + mid_paddle)) / mid_paddle);
+                    if (colorful_mode) setRandomColor();
                 }
             }
             //lose life

@@ -50,7 +50,11 @@ let clr_idx = 7;
 
 function setRandomColor()
 {
-    let clr_idx = Math.floor(Math.random() * clrs.length);
+    do {
+        prev_idx = clr_idx
+        clr_idx = Math.floor(Math.random() * clrs.length);
+    } while (clr_idx == prev_idx);
+
     if (Math.random() >= 0.5)
     {
         let temp = clrs[clr_idx][0];
@@ -81,6 +85,7 @@ let paused = false;
 let playerHasLost = false;
 let playerHasWon = false;
 let simulate_ball = false;
+let colorful_mode = true;
 
 let mouse = // create variable which will be used to update things based on the mouse's position
 {
