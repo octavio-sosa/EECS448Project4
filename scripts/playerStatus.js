@@ -54,4 +54,8 @@ class PlayerStatus {
     this.statusObjects = [this.playerLives, this.playerScore]
 
   }
+
+  resize(){
+    
+  }
 }

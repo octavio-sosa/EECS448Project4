@@ -8,7 +8,9 @@ class Paddle // the thing the player controls
      */
     constructor()
     {
-        this.width = PADDLE_WIDTH; // width of paddle
+        this.width_size = 1;
+        this.init_width = 1 * PADDLE_WIDTH;
+        this.width = PADDLE_WIDTH * this.width_size; // width of paddle
         this.height = PADDLE_HEIGHT; // height of paddle
         this.x = canvas.width / 2;  // initial x position
         this.y = canvas.height - this.height; // initial y position
@@ -43,9 +45,11 @@ class Paddle // the thing the player controls
      * @Post resets paddle's location to center of screen
      */
     resetPaddle(){
+      this.width_size = 1;
+      this.init_width = 1 * PADDLE_WIDTH; 
       this.x = canvas.width / 2;  // initial x position
       this.y = canvas.height - this.height; // initial y position
-      this.width = PADDLE_WIDTH; // width of paddle
+      this.width = PADDLE_WIDTH * this.width_size; // width of paddle
       this.height = PADDLE_HEIGHT; //height of paddle
     }
 
@@ -56,7 +60,8 @@ class Paddle // the thing the player controls
      */
     resize()
     {
-        this.width = PADDLE_WIDTH; // width of paddle
+        this.init_width = 1 * PADDLE_WIDTH;
+        this.width = PADDLE_WIDTH * this.width_size; // width of paddle
         this.height = PADDLE_HEIGHT; // height of paddle
         this.y = canvas.height - this.height; // initial y position
     }
