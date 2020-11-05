@@ -11,7 +11,11 @@ let playerStatus = new PlayerStatus(targetScore); // initializes the players sta
 let totalfallings = 1; // 1 power
 let randomtype = parseInt(Math.random()*(8-1+1)+1); // Gets random number to choose powerup
 let powers = new Powers(paddle, totalfallings, 8); // initializes powerup
+let testing = new testSuite();
 
+testButton.addEventListener('click', () => {
+  testing.runTests();
+})
 
 gameObjects.push(paddle); // add paddle to array
 gameObjects.push(ball); // add ball to array

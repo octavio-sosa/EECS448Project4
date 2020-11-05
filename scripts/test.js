@@ -1,4 +1,4 @@
-class test {
+class testSuite {
     /**
      * 
      * @constructor
@@ -10,16 +10,18 @@ class test {
     constructor()
     {}
 
+    test1()
+    {
+        console.log("Test1: Is Player initialized correctly?")
+        if(playerStatus.currentLives != 0)
+        {
+            console.log("\nPlayer has ", playerStatus.currentLives, "lives, player is correctly initialized.\n")
+        }
+    }
     runTests()
     {
         this.test1();
     }
-    test1(){
-        console.log("Test1: Is Player initialized correctly?")
-        if(playerStatus.currentLives != 0)
-        {
-            console.log("\nPlayer has ", playerStatus.currentLives)
-        }
-    }
+
 
 }

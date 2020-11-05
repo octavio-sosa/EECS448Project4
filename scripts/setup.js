@@ -5,6 +5,8 @@ canvas.height = window.innerHeight; // make the canvas' height equal to the heig
 var prev_width = canvas.width;
 var prev_height = canvas.height;
 
+let testButton = document.getElementById('testButton')
+
 let ctx = canvas.getContext('2d'); // a variable that contains the canvas' 2d methods, used for drawing shapes and adding colors
 
 let about = document.getElementById('about'); // Gets the about button to redirect to about page
