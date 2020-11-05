@@ -1,5 +1,6 @@
 class Powers{
   constructor(paddle, num, itemtype){
+    this.power_size = 1;
     this.paddleW = paddle.width;
     this.paddleH = paddle.height;
     this.fallings = num;
@@ -77,7 +78,7 @@ class Powers{
         item.isLive = false;
         this.powers.splice(index, 1);
 
-        console.log('catchPlonger');        
+        console.log('catchPlonger');
         console.log('width = ', gameObjects[OBJ_KEYS.PADDLE].width);              //testing width_size
         console.log('init_width = ', gameObjects[OBJ_KEYS.PADDLE].init_width);
         console.log('width_size = ', gameObjects[OBJ_KEYS.PADDLE].width_size);
@@ -125,9 +126,9 @@ class Powers{
             let max_subtracted_width = gameObjects[OBJ_KEYS.PADDLE].width / 3;
             function reduceSize()
             {
-              console.log('init_width = ', gameObjects[OBJ_KEYS.PADDLE].init_width); 
+              console.log('init_width = ', gameObjects[OBJ_KEYS.PADDLE].init_width);
               gameObjects[OBJ_KEYS.PADDLE].width -= 1;
-              console.log('width = ', gameObjects[OBJ_KEYS.PADDLE].width);    
+              console.log('width = ', gameObjects[OBJ_KEYS.PADDLE].width);
               console.log('width_size = ', gameObjects[OBJ_KEYS.PADDLE].width_size);
               gameObjects[OBJ_KEYS.PADDLE].width_size = gameObjects[OBJ_KEYS.PADDLE].width / gameObjects[OBJ_KEYS.PADDLE].init_width;
               subtracted_width += 1;
@@ -310,7 +311,7 @@ class Powers{
     img.src = "assets/images/plong.png";
     for (let i=0; i<this.powers.length; i++){
       let power = this.powers[i];
-      ctx.drawImage(img, power.x, power.y, 80, 75);
+      ctx.drawImage(img, power.x, power.y, 90, 85);
       if (power.y < canvas.height){
         power.y = power.y+2;
       }
@@ -322,7 +323,7 @@ class Powers{
     img.src = "assets/images/psmall.png";
     for (let i=0; i<this.powers.length; i++){
       let power = this.powers[i];
-      ctx.drawImage(img, power.x, power.y, 80, 75);
+      ctx.drawImage(img, power.x, power.y, 90, 85);
       if (power.y < canvas.height){
         power.y = power.y+2;
       }
@@ -403,6 +404,10 @@ class Powers{
     this.draw()
   }
   resize(){
-
+    console.log("resize");
+    for (let i=0; i<this.fallings; i++){
+      this.ini_x = this.powers[i].x;
+      this.powers[i].x = Math.floor(Math.random()*(window.innerWidth-40));
+    }
   }
 }

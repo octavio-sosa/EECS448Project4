@@ -10,7 +10,7 @@ let targetScore = Math.floor(brickset.bricks.length/4); // sets the target score
 let playerStatus = new PlayerStatus(targetScore); // initializes the players status object
 let totalfallings = 1; // 1 power
 let randomtype = parseInt(Math.random()*(8-1+1)+1); // Gets random number to choose powerup
-let powers = new Powers(paddle, totalfallings, 8); // initializes powerup
+let powers = new Powers(paddle, totalfallings, randomtype); // initializes powerup
 let testing = new testSuite();
 
 testButton.addEventListener('click', () => {
@@ -243,7 +243,7 @@ window.addEventListener('resize', () => // if the user shrinks/expands their bro
 
     if (gameObjects.length > 0) // if the objects have been created
     {
-      for (let i = 0; i < gameObjects.length - 2; i++) // iterate through game objects
+      for (let i = 0; i < gameObjects.length; i++) // iterate through game objects
       {
         gameObjects[i].resize();
       }
