@@ -10,7 +10,7 @@ let targetScore = Math.floor(brickset.bricks.length/4); // sets the target score
 let playerStatus = new PlayerStatus(targetScore); // initializes the players status object
 let totalfallings = 1; // 1 power
 let randomtype = parseInt(Math.random()*(8-1+1)+1); // Gets random number to choose powerup
-let powers = new Powers(paddle, totalfallings, randomtype); // initializes powerup
+let powers = new Powers(paddle, totalfallings, 2); // initializes powerup
 let testing = new testSuite();
 
 testButton.addEventListener('click', () => {
@@ -150,11 +150,18 @@ var reset = function gameRestart(){
 	gameObjects[1].resetBall();
 	gameObjects[2].resetBrick();
   gameObjects[3].resetStatus();
+  gameObjects[4].resetPowers(0);
+  gameObjects[1].hitBricks = false;
 
-	for (let i = 0; i < gameObjects.length; i++) // iterate through game objects
+
+	for (let i = 0; i < gameObjects.length-1; i++) // iterate through game objects
 	{
 		gameObjects[i].update(); // call update on each object
 		gameObjects[i].draw();
+  }
+  if (gameObjects[1].hitBricks == true){
+    gameObjects[4].update();
+    gameObjects[4].draw();
   }
   playerHasWon = false;
   playerHasLost = false;
@@ -175,13 +182,20 @@ var nextlevel = function nextLevel()
 	gameObjects[0].resetPaddle();
 	gameObjects[1].resetBall();
 	gameObjects[2].resetBrick();
+  gameObjects[4].resetPowers(0);
+  gameObjects[1].hitBricks = false;
   //gameObjects[3].resetStatus();
 
-	for (let i = 0; i < gameObjects.length; i++) // iterate through game objects
+	for (let i = 0; i < gameObjects.length-1; i++) // iterate through game objects
 	{
 		gameObjects[i].update(); // call update on each object
 		gameObjects[i].draw();
   }
+  if (gameObjects[1].hitBricks == true){
+    gameObjects[4].update();
+    gameObjects[4].draw();
+  }
+
   playerHasWon = false;
   playerHasLost = false;
   displayNotification("LEVEL " + level);

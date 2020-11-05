@@ -273,7 +273,8 @@ class Powers{
   }
 
   draw(){
-    if(this.powerstype == 1) { this.drawBall();}
+    if (this.powerstype == 0) { this.empty();}
+    else if(this.powerstype == 1) { this.drawBall();}
     else if(this.powerstype == 2) { this.drawHeart();}
     else if(this.powerstype == 3) { this.drawPlonger();}
     else if(this.powerstype == 4) { this.drawPshorter();}
@@ -281,6 +282,12 @@ class Powers{
     else if(this.powerstype == 6) { this.drawSmallBall();}
     else if(this.powerstype == 7) { this.drawBallfast();}
     else if(this.powerstype == 8) { this.drawBallslow();}
+  }
+
+  empty(){
+    console.log("empty");
+    if (gameObjects[OBJ_KEYS.BALL].hitBricks == true)
+      this.resetPowers(parseInt(Math.random()*(8-1+1)+1));
   }
 
   drawBall(){
