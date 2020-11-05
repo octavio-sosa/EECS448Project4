@@ -17,10 +17,19 @@ class testSuite {
         {
             console.log("\nPlayer has ", playerStatus.currentLives, "lives, player is correctly initialized.\n")
         }
+        else
+        {
+            console.log("\nPlayer has not been initialized correctly!\n");
+        }
+    }
+    test2()
+    {
+        console.log("Test2: ")
     }
     runTests()
     {
         this.test1();
+        this.test2();
     }
 
 
