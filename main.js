@@ -17,8 +17,7 @@ testButton.addEventListener('click', () => {
   testing.runTests();
 })
 
-ballContainer.push(new Ball);
-ballContainer.push(new Ball);
+ballContainer.push(new Ball(true));
 gameObjects.push(paddle); // add paddle to array
 gameObjects.push(ballContainer); // add ball to array
 gameObjects.push(brickset); // add brickset to array
