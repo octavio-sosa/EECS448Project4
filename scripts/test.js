@@ -34,10 +34,15 @@ class testSuite {
             console.log("Player score is not correctly initialized!\n");
         }
     }
+    test3()
+    {
+        
+    }
     runTests()
     {
         this.test1();
         this.test2();
+        this.test3();
     }
 
 
