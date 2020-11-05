@@ -257,9 +257,9 @@ class BallContainer
     increaseSpeed() 
     {
         let speed = this.balls[0].speed_multiplier.x;
-        if (speed < 2)
+        if (speed < 1.75)
         {
-            speed *= 1.2;
+            speed *= 1.15;
             for (let i = 0; i < this.balls.length; i++)
             {
                 let ball = this.balls[i];
@@ -309,7 +309,7 @@ class BallContainer
         let subtracted_radius = this.balls[0].radius_multiplier;
         let max_subtracted_radius = subtracted_radius /= 1.5;
 
-        if (this.balls[0].radius_multiplier > 0.2)
+        if (this.balls[0].radius_multiplier > 0.3)
         {
             for (let i = 0; i < this.balls.length; i++)
             {
