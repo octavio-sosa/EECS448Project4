@@ -85,7 +85,6 @@ let paused = false;
 let playerHasLost = false;
 let playerHasWon = false;
 let simulate_ball = false;
-let colorful_mode = true;
 
 let mouse = // create variable which will be used to update things based on the mouse's position
 {

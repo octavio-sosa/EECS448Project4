@@ -134,23 +134,13 @@ class Powers{
         this.powers.splice(index, 1);
         gameObjects[OBJ_KEYS.BALL_CONTAINER].increaseSize();
         gameObjects[OBJ_KEYS.BALL_CONTAINER].hitBricks = false;
-        /*
-        //console.log('catchBball');
-        if(//gameObjects[OBJ_KEYS.BALL].radius_size<2.5){
-          //gameObjects[OBJ_KEYS.BALL].radius_size *= 1.3;
-          //gameObjects[OBJ_KEYS.BALL].radius *= 1.3;
-          console.logconsole.logconsole.log//
-          //console.log(//gameObjects[OBJ_KEYS.BALL_CONTAINER].hitBricks);
-          */
-          this.resetPowers(Math.floor((Math.random() * 8) + 1));
+        this.resetPowers(Math.floor((Math.random() * 8) + 1));
 
       }
       else if (this.isNotCatch(item)){
         item.isLive = false;
         this.powers.splice(index, 1);
-        //console.log('not catchHeart');
         gameObjects[OBJ_KEYS.BALL_CONTAINER].hitBricks = false;
-        //console.log(//gameObjects[OBJ_KEYS.BALL_CONTAINER].hitBricks);
         this.resetPowers(Math.floor((Math.random() * 8) + 1));
       }
     }
@@ -184,32 +174,11 @@ class Powers{
         gameObjects[OBJ_KEYS.BALL_CONTAINER].increaseSpeed();
         gameObjects[OBJ_KEYS.BALL_CONTAINER].hitBricks = false;
         this.resetPowers(Math.floor((Math.random() * 8) + 1));
-        
-        /*
-        //console.log("velX = ",//gameObjects[OBJ_KEYS.BALL].vel.x);    // testing ball vel before add speed
-        //console.log("velY = ",//gameObjects[OBJ_KEYS.BALL].vel.y);    //
-        //console.log('catchBfast');
-        if (//gameObjects[OBJ_KEYS.BALL].speed.x < 2
-            && //gameObjects[OBJ_KEYS.BALL].speed.y < 2){
-          //gameObjects[OBJ_KEYS.BALL].speed.x *= 1.2;
-          //gameObjects[OBJ_KEYS.BALL].speed.y *= 1.2;
-          //console.log("speed_X = ",//gameObjects[OBJ_KEYS.BALL].speed.x);  // testing ball speed
-          //console.log("speed_Y = ",//gameObjects[OBJ_KEYS.BALL].speed.y);
-          
-          //console.log(//gameObjects[OBJ_KEYS.BALL_CONTAINER].hitBricks);
-          
-          //console.log("velX = ",//gameObjects[OBJ_KEYS.BALL].vel.x);  // testing ball vel after add speed
-          //console.log("velY = ",//gameObjects[OBJ_KEYS.BALL].vel.y);
-          
-        }
-        */
       }
       else if (this.isNotCatch(item)){
         item.isLive = false;
         this.powers.splice(index, 1);
-        //console.log('not catchBfast');
         gameObjects[OBJ_KEYS.BALL_CONTAINER].hitBricks = false;
-        //console.log(//gameObjects[OBJ_KEYS.BALL_CONTAINER].hitBricks);
         this.resetPowers(Math.floor((Math.random() * 8) + 1));
       }
     }
@@ -223,21 +192,6 @@ class Powers{
         gameObjects[OBJ_KEYS.BALL_CONTAINER].decreaseSpeed();
         gameObjects[OBJ_KEYS.BALL_CONTAINER].hitBricks = false;
         this.resetPowers(parseInt(Math.random()*8)+1);
-        /*
-        //console.log('catchBslow');
-        if (//gameObjects[OBJ_KEYS.BALL].speed.x > 0.52
-            && //gameObjects[OBJ_KEYS.BALL].speed.y > 0.52){
-          //gameObjects[OBJ_KEYS.BALL].speed.x *= 0.8;
-          //gameObjects[OBJ_KEYS.BALL].speed.y *= 0.8;
-          //console.log("speed_X = ",//gameObjects[OBJ_KEYS.BALL].speed.x);  // testing ball speed
-          //console.log("speed_Y = ",//gameObjects[OBJ_KEYS.BALL].speed.y);
-          console.logconsole.logconsole.log//
-          //console.log(//gameObjects[OBJ_KEYS.BALL_CONTAINER].hitBricks);
-          
-          //console.log("velX = ",//gameObjects[OBJ_KEYS.BALL].vel.x);
-          //console.log("velY = ",//gameObjects[OBJ_KEYS.BALL].vel.y);
-        }
-        */
       }
       else if (this.isNotCatch(item)){
         item.isLive = false;
@@ -373,7 +327,7 @@ class Powers{
   }
 
   resetPowers(itemtype){
-    //console.log("reset powers");
+    console.log("reset powers");
     this.powers = [];
     this.power_initX = Math.floor(Math.random()*9+1) / 10
     this.powerstype = itemtype;
@@ -393,11 +347,11 @@ class Powers{
     this.draw()
   }
   resize(){
-    //console.log("resize");
-    //console.log('this.power_intX_percentage = ', this.power_initX);
+    console.log("resize");
+    console.log('this.power_intX_percentage = ', this.power_initX);
     for (let i=0; i<this.fallings; i++){
       this.powers[i].x = this.power_initX * canvas.width;
-      //console.log('this.powers[i].x = ', this.powers[i].x);
+      console.log('this.powers[i].x = ', this.powers[i].x);
     }
   }
 }
