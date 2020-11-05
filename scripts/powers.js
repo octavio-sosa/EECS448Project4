@@ -53,7 +53,10 @@ class Powers{
       if (this.isCatch(item)){
         item.isLive = false;
         this.powers.splice(index, 1);
-        gameObjects[OBJ_KEYS.PLAYERSTATUS].currentLives++;
+        if (gameObjects[OBJ_KEYS.PLAYERSTATUS].currentLives < 5)
+        {
+          gameObjects[OBJ_KEYS.PLAYERSTATUS].currentLives++;
+        }
         gameObjects[OBJ_KEYS.BALL_CONTAINER].hitBricks = false;
         this.resetPowers(Math.floor((Math.random() * 8) + 1));
 
