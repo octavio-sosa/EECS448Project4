@@ -16,8 +16,8 @@ class Brickset
         this.rows = 0;
         this.cols = 0;
         this.height = 0;
-        this.NUM_TYPES = 6
-        this.brickset_type = 6;//Math.floor(Math.random() * this.NUM_TYPES);
+        this.NUM_TYPES = 8;
+        this.brickset_type = Math.floor(Math.random() * this.NUM_TYPES);
         this.generate();
         this.brickset_resizer = new Brickset_Resizer(this);
     }

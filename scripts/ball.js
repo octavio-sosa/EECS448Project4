@@ -19,7 +19,6 @@ class Ball
         simulate_ball = false
         this.unit_vector = (Math.sqrt(canvas.height**2 + canvas.width **2) / 200) * (Math.log10(level) + 1);
         this.arrowAim = new Aim(this.start_x, this.start_y);
-        this.hitBricks = false;
     }
 
     /**
@@ -84,6 +83,7 @@ class Ball
      */
     detect_collisions(paddle, brickset)
     {
+        let brickIsHit = false;
         if (simulate_ball)
         {
             let y = this.y;
@@ -111,6 +111,7 @@ class Ball
             let x_collide_distance = brickset.brick_length / 2 + this.radius;
             let y_collide_distance = brickset.brick_height / 2 + this.radius;
 
+            
             for (let i = 0; i < brickset.bricks.length; i++)
             {
                 let brick = brickset.bricks[i];
@@ -129,8 +130,8 @@ class Ball
                         if (prev_x > x_collide_distance) this.vel.x *= -1;
                         if (prev_y > y_collide_distance) this.vel.y *= -1;
                         brickset.bricks[i].alive = false;
-                        this.hitBricks = !brickset.bricks[i].alive;
-                        console.log(this.hitBricks);
+                        brickIsHit = !brickset.bricks[i].alive;
+                        console.log(brickIsHit);
                         brickset.remaining_bricks -= 1;
                         gameObjects[OBJ_KEYS.PLAYERSTATUS].currentScore++;
                     }
@@ -148,40 +149,101 @@ class Ball
                     this.vel.x = (3/4 * this.unit_vector) * ((this.x - (paddle.x + mid_paddle)) / mid_paddle);
                 }
             }
-            //lose life
-            if (this.y - 2 * this.radius > canvas.height)
-            {
-                gameObjects[OBJ_KEYS.PLAYERSTATUS].currentLives--
-                if (gameObjects[OBJ_KEYS.PLAYERSTATUS].currentLives > 0)
-                {
-                    this.resetBall();
-                    gameObjects[OBJ_KEYS.PADDLE].resetPaddle();
-                }
-            }
+        }
+        return brickIsHit;
+    }
+
+    checkLost()
+    {
+        //lose life
+        if (this.y - 2 * this.radius > canvas.height)
+        {
+            return true;
         }
     }
 
-
-    /*
-    * @Pre: assumes ball is initialized
-    * @Post: resets ball to initial velocity
-    */
-    resetBall() {
-      simulate_ball = false;
-      this.vel = {x: 0, y: 0};
-      this.speed = {x: 1, y: 1};
-      this.radius_size = 1;
-      this.radius = canvas.height / 40; // radius of ball dependent on screen size
-      this.unit_vector = (Math.sqrt(canvas.height**2 + canvas.width **2) / 200) * (Math.log10(level) + 1);
-    }
-
-    /*
-    * @Pre: The window has been resized, and an event listener has called this method
-    * @Post: The ball's size will be updated to correspond with the new window size
-    */
     resize()
     {
         this.radius = this.radius_size * canvas.height / 40; // radius of ball dependent on screen size
         this.unit_vector = (Math.sqrt(canvas.height**2 + canvas.width **2) / 200) * (Math.log10(level) + 1)
+    }
+}
+
+class BallContainer
+{
+    constructor()
+    {
+        this.balls = [];
+        this.hitBricks = false;
+    }
+
+    push(ball)
+    {
+        this.balls.push(ball);
+    }
+
+    update()
+    {
+        for (let i = 0; i < this.balls.length; i++)
+        {
+            this.balls[i].update();
+        }
+    }
+
+    draw()
+    {
+        for (let i = 0; i < this.balls.length; i++)
+        {
+            this.balls[i].draw();
+        }
+    }
+
+    detect_collisions(paddle, brickset)
+    {
+        this.hitBricks = false;
+        for (let i = 0; i < this.balls.length; i++)
+        {
+             let hit = this.balls[i].detect_collisions(paddle, brickset);
+             if (hit) this.hitBricks = true;
+             let ballLost = this.balls[i].checkLost();
+             if (ballLost)
+             {
+                 this.remove(i);
+                 if (this.isEmpty())
+                 {
+                    gameObjects[OBJ_KEYS.PLAYERSTATUS].currentLives--
+                    if (gameObjects[OBJ_KEYS.PLAYERSTATUS].currentLives > 0)
+                    {
+                        this.resetBalls();
+                        gameObjects[OBJ_KEYS.PADDLE].resetPaddle();
+                    }
+                 }
+             }
+        }
+    }
+
+    isEmpty()
+    {
+        return (this.balls.length == 0);
+    }
+
+    remove(index)
+    {
+        this.balls.splice(index, 1);
+    }
+
+    resetBalls()
+    {
+        simulate_ball = false;
+        this.balls = [];
+        this.push(new Ball);
+    }
+
+    resize()
+    {
+        for (let i = 0; i < this.balls.length; i++)
+        {
+            this.balls[i].resize();
+        }
     }
 }

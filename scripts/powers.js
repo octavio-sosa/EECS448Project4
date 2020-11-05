@@ -286,7 +286,7 @@ class Powers{
 
   empty(){
     console.log("empty");
-    if (gameObjects[OBJ_KEYS.BALL].hitBricks == true)
+    if (gameObjects[OBJ_KEYS.BALL_CONTAINER].hitBricks == true)
       this.resetPowers(parseInt(Math.random()*(8-1+1)+1));
   }
 

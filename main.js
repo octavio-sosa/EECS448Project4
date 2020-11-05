@@ -4,7 +4,7 @@ let level = 1;
 
 let gameObjects = [] // array to iterate through during game loop
 let paddle = new Paddle(); // instantiate paddle
-let ball = new Ball(); // instantiate ball
+let ballContainer = new BallContainer;
 let brickset = new Brickset(); //instantiate brickset with number of rows and columns of bricks
 let targetScore = Math.floor(brickset.bricks.length/4); // sets the target score
 let playerStatus = new PlayerStatus(targetScore); // initializes the players status object
@@ -17,15 +17,17 @@ testButton.addEventListener('click', () => {
   testing.runTests();
 })
 
+ballContainer.push(new Ball);
+ballContainer.push(new Ball);
 gameObjects.push(paddle); // add paddle to array
-gameObjects.push(ball); // add ball to array
+gameObjects.push(ballContainer); // add ball to array
 gameObjects.push(brickset); // add brickset to array
 gameObjects.push(playerStatus); // add playerstatus to array
 gameObjects.push(powers); // add powers to array
 
 const OBJ_KEYS = {
 	PADDLE: 0,
-	BALL: 1,
+	BALL_CONTAINER: 1,
 	BRICKSET: 2,
   PLAYERSTATUS: 3,
   POWERS: 4
@@ -98,8 +100,8 @@ function animate() // main game loop occurs here
           gameObjects[i].update(); // call update on each object
           gameObjects[i].draw();
         }
-        gameObjects[1].detect_collisions(gameObjects[0], gameObjects[2]); // Have ball check for collisions
-				if (gameObjects[1].hitBricks == true){
+        gameObjects[OBJ_KEYS.BALL_CONTAINER].detect_collisions(gameObjects[0], gameObjects[2]); // Have ball check for collisions
+				if (gameObjects[OBJ_KEYS.BALL_CONTAINER].hitBricks){
 					gameObjects[4].update();
 					gameObjects[4].draw();
 				}
@@ -147,7 +149,7 @@ var reset = function gameRestart(){
   setRandomColor();
 	ctx.clearRect(0, 0 , window.innerWidth, window.innerHeight); // clears the previous frame
 	gameObjects[0].resetPaddle();
-	gameObjects[1].resetBall();
+	gameObjects[1].resetBalls();
 	gameObjects[2].resetBrick();
   gameObjects[3].resetStatus();
   gameObjects[4].resetPowers(0);
@@ -180,10 +182,10 @@ var nextlevel = function nextLevel()
   setRandomColor();
 	ctx.clearRect(0, 0 , window.innerWidth, window.innerHeight); // clears the previous frame
 	gameObjects[0].resetPaddle();
-	gameObjects[1].resetBall();
+	gameObjects[1].resetBalls();
 	gameObjects[2].resetBrick();
   gameObjects[4].resetPowers(0);
-  gameObjects[1].hitBricks = false;
+  //gameObjects[1].hitBricks = false;
   //gameObjects[3].resetStatus();
 
 	for (let i = 0; i < gameObjects.length-1; i++) // iterate through game objects
