@@ -1,13 +1,13 @@
 class Powers{
   constructor(paddle, num, itemtype){
-    this.power_initX_perc = Math.random();
+    this.power_initX = Math.floor(Math.random()*9+1) / 10;
     this.paddleW = paddle.width;
     this.paddleH = paddle.height;
     this.fallings = num;
     this.powerstype = itemtype;
     this.powers = [];
     for (let i=0; i < this.fallings; i++){
-      let power = {x: this.power_initX * window.innerWidth,
+      let power = {x: this.power_initX * canvas.width,
                    y: 0,
                    power_width: canvas.width / 15,
                    power_height: canvas.height / 25,
@@ -25,6 +25,7 @@ class Powers{
   }
 
   isNotCatch(item){
+    console.log('this.power_intX_percentage = ', this.power_initX);
     return (item.y > gameObjects[OBJ_KEYS.PADDLE].y);
   }
 
@@ -387,7 +388,7 @@ class Powers{
   resetPowers(itemtype){
     console.log("reset powers");
     this.powers = [];
-    this.power_initX = Math.random();
+    this.power_initX = Math.floor(Math.random()*9+1) / 10
     this.powerstype = itemtype;
     for (let i=0; i < this.fallings; i++){
       let power = {x: this.power_initX * canvas.width,
