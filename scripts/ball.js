@@ -7,14 +7,14 @@ class Ball
      */
     constructor(isOriginal)
     {
-        this.radius_multiplier = 2.5;
+        this.radius_multiplier = 1;
         this.radius = this.radius_multiplier * canvas.height / 40; // radius of ball dependent on screen size
         this.start_x = canvas.width / 2; // initial position is middle of the screen
         this.start_y = canvas.height - PADDLE_HEIGHT - this.radius - 1; // 1 pixel above paddle to avoid collision
         this.x = this.start_x;
         this.y = this.start_y;
         this.vel = {x: 0, y: 0} // initial velocities
-        this.speed = {x: 1, y: 1} // initial +/- speed
+        this.speed_multiplier = {x: 1, y: 1} // initial +/- speed
         this.numofBall = 1;
         if (isOriginal) simulate_ball = false
         this.unit_vector = (Math.sqrt(canvas.height**2 + canvas.width **2) / 200) * (Math.log10(level) + 1);
@@ -32,8 +32,8 @@ class Ball
         {
             let velocity_scale = this.unit_vector * (1 / (Math.sqrt(this.vel.x**2 + this.vel.y**2)));
 
-            this.vel.x = velocity_scale * this.vel.x * this.speed.x
-            this.vel.y = velocity_scale * this.vel.y * this.speed.y
+            this.vel.x = velocity_scale * this.vel.x * this.speed_multiplier.x
+            this.vel.y = velocity_scale * this.vel.y * this.speed_multiplier.y
 
             this.x += this.vel.x; //increment x position based on velocity
             this.y += this.vel.y; //increment y position based on velocity
@@ -247,17 +247,41 @@ class BallContainer
             let new_ball = new Ball(false);
             new_ball.x = original_ball.x;
             new_ball.y = original_ball.y;
-            new_ball.speed = original_ball.speed;
+            new_ball.speed_multiplier = original_ball.speed_multiplier;
             new_ball.radius_multiplier = original_ball.radius_multiplier;
             new_ball.vel.y = Math.random() * original_ball.vel.y;
+            new_ball.resize();
             this.push(new_ball);
         }
     }
     increaseSpeed() 
     {
-
+        let speed = this.balls[0].speed_multiplier.x;
+        if (speed < 2)
+        {
+            speed *= 1.2;
+            for (let i = 0; i < this.balls.length; i++)
+            {
+                let ball = this.balls[i];
+                ball.speed_multiplier.x = speed;
+                ball.speed_multiplier.y = speed;
+            }
+        }
     }
-    decreaseSpeed() {}
+    decreaseSpeed() 
+    {
+        let speed = this.balls[0].speed_multiplier.x;
+        if (speed > 0.5)
+        {
+            speed /= 1.2;
+            for (let i = 0; i < this.balls.length; i++)
+            {
+                let ball = this.balls[i];
+                ball.speed_multiplier.x = speed;
+                ball.speed_multiplier.y = speed;
+            }
+        }
+    }
     increaseSize() 
     {
         let added_radius = this.balls[0].radius_multiplier;
@@ -292,7 +316,7 @@ class BallContainer
                 let ball = this.balls[i];
                 function shrink()
                 {
-                    subtracted_radius -= 0.001;
+                    subtracted_radius -= 0.01;
                     ball.radius_multiplier = subtracted_radius;
                     ball.resize();
                     if (subtracted_radius > max_subtracted_radius) setTimeout(shrink, 10);

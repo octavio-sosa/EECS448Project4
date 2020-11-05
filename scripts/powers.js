@@ -6,6 +6,7 @@ class Powers{
     this.fallings = num;
     this.powerstype = itemtype;
     this.powers = [];
+    this.fall_speed = canvas.height / 200;
     for (let i=0; i < this.fallings; i++){
       let power = {x: this.power_initX * canvas.width,
                    y: 0,
@@ -251,8 +252,6 @@ class Powers{
   }
 
   draw(){
-    this.drawSmallBall();
-    /*
     if (this.powerstype == 0) { this.empty();}
     else if(this.powerstype == 1) { this.drawBall();}
     else if(this.powerstype == 2) { this.drawHeart();}
@@ -262,7 +261,7 @@ class Powers{
     else if(this.powerstype == 6) { this.drawSmallBall();}
     else if(this.powerstype == 7) { this.drawBallfast();}
     else if(this.powerstype == 8) { this.drawBallslow();}
-    */
+    
   }
 
   empty(){
@@ -278,7 +277,7 @@ class Powers{
       let power = this.powers[i];
       ctx.drawImage(img, power.x, power.y, 65, 55);
       if (power.y < canvas.height){
-        power.y = power.y+2;
+        power.y = power.y+this.fall_speed;
       }
       this.catchBall(i,power);
     }
@@ -290,7 +289,7 @@ class Powers{
       let power = this.powers[i];
       ctx.drawImage(img, power.x, power.y, 55, 45);
       if (power.y < canvas.height){
-        power.y = power.y+2;
+        power.y = power.y+this.fall_speed;
       }
       this.catchHeart(i,power);
     }
@@ -302,7 +301,7 @@ class Powers{
       let power = this.powers[i];
       ctx.drawImage(img, power.x, power.y, 90, 85);
       if (power.y < canvas.height){
-        power.y = power.y+2;
+        power.y = power.y+this.fall_speed;
       }
       this.catchPlonger(i,power);
     }
@@ -314,7 +313,7 @@ class Powers{
       let power = this.powers[i];
       ctx.drawImage(img, power.x, power.y, 90, 85);
       if (power.y < canvas.height){
-        power.y = power.y+2;
+        power.y = power.y+this.fall_speed;
       }
       this.catchPshorter(i,power);
     }
@@ -326,7 +325,7 @@ class Powers{
       let power = this.powers[i];
       ctx.drawImage(img, power.x, power.y, 55, 45);
       if (power.y < canvas.height){
-        power.y = power.y+2;
+        power.y = power.y+this.fall_speed;
       }
       this.catchBball(i,power);
     }
@@ -338,7 +337,7 @@ class Powers{
       let power = this.powers[i];
       ctx.drawImage(img, power.x, power.y, 40, 40);
       if (power.y < canvas.height){
-        power.y = power.y+2;
+        power.y = power.y+this.fall_speed;
       }
       this.catchSball(i,power);
     }
@@ -350,7 +349,7 @@ class Powers{
       let power = this.powers[i];
       ctx.drawImage(img, power.x, power.y, 85, 70);
       if (power.y < canvas.height){
-        power.y = power.y+2;
+        power.y = power.y+this.fall_speed;
       }
       this.catchBfast(i,power);
     }
@@ -362,7 +361,7 @@ class Powers{
       let power = this.powers[i];
       ctx.drawImage(img, power.x, power.y, 85, 70);
       if (power.y < canvas.height){
-        power.y = power.y+2;
+        power.y = power.y+this.fall_speed;
       }
       this.catchBslow(i,power);
     }
