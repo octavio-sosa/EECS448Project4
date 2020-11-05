@@ -88,18 +88,17 @@ class Powers{
             function expandSize()
             {
               gameObjects[OBJ_KEYS.PADDLE].width += 1;
+
+              console.log('init_width = ', gameObjects[OBJ_KEYS.PADDLE].init_width);
+              gameObjects[OBJ_KEYS.PADDLE].width_size = gameObjects[OBJ_KEYS.PADDLE].width / gameObjects[OBJ_KEYS.PADDLE].init_width;
+              console.log('width = ', gameObjects[OBJ_KEYS.PADDLE].width);
+              console.log('width_size = ', gameObjects[OBJ_KEYS.PADDLE].width_size);
+
               added_width += 1;
               if (added_width < max_added_width) setTimeout(expandSize, 10);
             }
             setTimeout(expandSize, 10);
           }
-          console.log('width = ', gameObjects[OBJ_KEYS.PADDLE].width);
-          console.log('init_width = ', gameObjects[OBJ_KEYS.PADDLE].init_width);
-
-          gameObjects[OBJ_KEYS.PADDLE].width_size = gameObjects[OBJ_KEYS.PADDLE].width / gameObjects[OBJ_KEYS.PADDLE].init_width;
-          
-          console.log('width_size = ', gameObjects[OBJ_KEYS.PADDLE].width_size);
-
           gameObjects[OBJ_KEYS.BALL].hitBricks = false;
           console.log(gameObjects[OBJ_KEYS.BALL].hitBricks);
           this.resetPowers(parseInt(Math.random()*(8-1+1)+1));
@@ -126,19 +125,17 @@ class Powers{
             let max_subtracted_width = gameObjects[OBJ_KEYS.PADDLE].width / 3;
             function reduceSize()
             {
+              console.log('init_width = ', gameObjects[OBJ_KEYS.PADDLE].init_width); 
               gameObjects[OBJ_KEYS.PADDLE].width -= 1;
+              console.log('width = ', gameObjects[OBJ_KEYS.PADDLE].width);    
+              console.log('width_size = ', gameObjects[OBJ_KEYS.PADDLE].width_size);
+              gameObjects[OBJ_KEYS.PADDLE].width_size = gameObjects[OBJ_KEYS.PADDLE].width / gameObjects[OBJ_KEYS.PADDLE].init_width;
               subtracted_width += 1;
               if (subtracted_width < max_subtracted_width) setTimeout(reduceSize, 10);
             }
             setTimeout(reduceSize, 10);
             //this.paddleW = gameObjects[OBJ_KEYS.PADDLE].width;     //update paddle info
           }
-          console.log('width = ', gameObjects[OBJ_KEYS.PADDLE].width);
-          console.log('init_width = ', gameObjects[OBJ_KEYS.PADDLE].init_width);
-
-          gameObjects[OBJ_KEYS.PADDLE].width_size = gameObjects[OBJ_KEYS.PADDLE].width / gameObjects[OBJ_KEYS.PADDLE].init_width;
-          
-          console.log('width_size = ', gameObjects[OBJ_KEYS.PADDLE].width_size);
           gameObjects[OBJ_KEYS.BALL].hitBricks = false;
           console.log(gameObjects[OBJ_KEYS.BALL].hitBricks);
           console.log('width_size = ', gameObjects[OBJ_KEYS.PADDLE].width_size);
