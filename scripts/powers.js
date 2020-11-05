@@ -1,13 +1,13 @@
 class Powers{
   constructor(paddle, num, itemtype){
-    this.power_size = 1;
+    this.power_initX_perc = Math.random();
     this.paddleW = paddle.width;
     this.paddleH = paddle.height;
     this.fallings = num;
     this.powerstype = itemtype;
     this.powers = [];
     for (let i=0; i < this.fallings; i++){
-      let power = {x: Math.floor(Math.random()*(window.innerWidth)),
+      let power = {x: this.power_initX * window.innerWidth,
                    y: 0,
                    power_width: canvas.width / 15,
                    power_height: canvas.height / 25,
@@ -387,9 +387,10 @@ class Powers{
   resetPowers(itemtype){
     console.log("reset powers");
     this.powers = [];
+    this.power_initX = Math.random();
     this.powerstype = itemtype;
     for (let i=0; i < this.fallings; i++){
-      let power = {x: Math.floor(Math.random()*canvas.width),
+      let power = {x: this.power_initX * canvas.width,
                    y: canvas.height/20,
                    power_width: canvas.width / 15,
                    power_height: canvas.height / 25,
@@ -405,9 +406,10 @@ class Powers{
   }
   resize(){
     console.log("resize");
+    console.log('this.power_intX_percentage = ', this.power_initX);
     for (let i=0; i<this.fallings; i++){
-      this.ini_x = this.powers[i].x;
-      this.powers[i].x = Math.floor(Math.random()*(window.innerWidth-40));
+      this.powers[i].x = this.power_initX * canvas.width;
+      console.log('this.powers[i].x = ', this.powers[i].x);
     }
   }
 }
