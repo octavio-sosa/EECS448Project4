@@ -346,8 +346,8 @@ class Powers{
       this.powers.push(power);
 
     }
-    this.update();
-    this.draw()
+    //this.update();
+    //this.draw()
   }
   resize(){
     console.log("resize");
