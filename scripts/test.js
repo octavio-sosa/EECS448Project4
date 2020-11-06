@@ -36,10 +36,19 @@ class testSuite {
     }
     test3()
     {
-        
+        console.log("Test3: Is paddle initialized properly? Paddle.width should = PADDLE_WIDTH * this.width_size, and paddle.height should = PADDLE_HEIGHT")
+        if(paddle.width != PADDLE_WIDTH * paddle.width_size && paddle.height != PADDLE_WIDTH)
+        {
+            console.log("FAIL: Paddle width = ", paddle.width, ", paddle height = ", paddle.height, ".\n")
+        }
+        else
+        {
+            console.log("Passed, paddle has been correctly initialized.\n");
+        }
     }
     test4()
     {
+        console.log("Test4: Is ball initialized correctly?");
         
     }
     runTests()
