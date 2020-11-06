@@ -215,6 +215,7 @@ class BallContainer
                     {
                         this.resetBalls();
                         gameObjects[OBJ_KEYS.PADDLE].resetPaddle();
+                        gameObjects[OBJ_KEYS.POWERS].resetPowers(Math.floor((Math.random() * 8) + 1));
                     }
                  }
              }

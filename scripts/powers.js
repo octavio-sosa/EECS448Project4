@@ -345,6 +345,7 @@ class Powers{
 
                   };
       this.powers.push(power);
+      console.log(power.x, power.y, power.power_type);
 
     }
     //this.update();

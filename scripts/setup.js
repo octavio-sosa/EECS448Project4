@@ -20,6 +20,9 @@ var lose = document.getElementById('lose screen');
 lose.style.display = 'none';
 
 var notif_elem = document.getElementById('notification');
+var playerScoreElem = document.getElementById('yourScore');
+var highScoreElem = document.getElementById('highScore');
+var highScore = 0;
 
 var startBtn = document.getElementById('start');
 var menu = document.getElementById('menu screen');

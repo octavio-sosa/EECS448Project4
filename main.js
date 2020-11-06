@@ -115,6 +115,9 @@ function animate() // main game loop occurs here
     else if (playerHasLost)
     {
         lose.style.display = 'block';
+        playerScoreElem.innerHTML = "Your Score: " + playerStatus.currentScore;
+        if (playerStatus.currentScore > highScore) highScore = playerStatus.currentScore;
+        highScoreElem.innerHTML = "High Score " + highScore; 
 		}
     else
     {
