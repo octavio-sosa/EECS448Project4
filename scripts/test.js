@@ -43,6 +43,11 @@ class testSuite {
         this.test1();
         this.test2();
         this.test3();
+        this.test4();
+        this.test5();
+        this.test6();
+        this.test7();
+        this.test8();
     }
 
 
