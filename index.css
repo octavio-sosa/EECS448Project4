@@ -2,41 +2,41 @@ body, canvas{ margin: 0; padding: 0; border: 0 none; } /* remove all the borders
 
 body {
     
-    background-color: rgb(175, 113, 225);
+    background-color: rgb(237, 226, 246);
     overflow: hidden; /* Hide scrollbars */
   }
   .container {
-    
+    white-space: pre-line;
     position: absolute;
     display: block;
     font-size: 3em;
     font-family: 'Roboto Slab', serif;
     top: 10%;
-    left: 30%;
-    background-color:#94d3ec;
+    left: 25%;
+    background-color:#44a7ce;
     border-style: solid;
     border-color:  #015272;
     border-width: 1vh;
     /*background-color: #533549;*/
     /*box-shadow: 0 15px 25px rgba(0,0,0,.9);*/
     /*border-radius: 10px;*/
-    width: 40%;
+    width: 50%;
     height: 75%;
     text-align: center;
   }
   .container h1 {
       color: white;
-      font-size: 8vh;
+      font-size: 8vmin;
       font-weight: 300;
+      padding: 0;
+      margin: 0;
+
   }
   .container h2 {
       color: white;
-      font-size: .5em;
+      font-size: 4vmin;
+      margin: 0;
       font-weight: 300;
-  }
-  .container p{
-      color: white;
-      font-size: 64px;
   }
 
   .submit {
@@ -54,7 +54,7 @@ body {
       transition: 0.25s;
       cursor: pointer;
       text-decoration: none;
-      font-size: 5.5vh;
+      font-size: 5.5vmin;
       font-family: 'Roboto Slab', serif;
   }
   .submit:hover {
@@ -63,8 +63,10 @@ body {
       border:0;
   }
   ul.menu {
+      width: 100%;
+      top: 20%;
+      position: absolute;
       text-align: center;
-      font-size: 1em;
       padding: 0;
       margin: 0;
       list-style: none;
