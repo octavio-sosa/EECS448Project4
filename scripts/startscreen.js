@@ -27,8 +27,6 @@ class StartScreenBall
     }
 }
 
-let startBall = new StartScreenBall;
-let drawingNotFinished = true;
 function drawStartScreen()
 {
 
@@ -69,18 +67,4 @@ function drawStartScreen()
 
 }
 
-
 drawStartScreen();
-
-function animateStartScreen() // main game loop occurs here
-{
-    if (!gameHasStarted) requestAnimationFrame(animateStartScreen); // waits until this animate is done and then calls it again
-
-    drawingNotFinished = true;
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    drawStartScreen();
-    startBall.update();
-}
-
-animateStartScreen();
-

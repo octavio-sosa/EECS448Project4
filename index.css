@@ -13,21 +13,25 @@ body {
     font-family: 'Roboto Slab', serif;
     top: 10%;
     left: 30%;
-    /*background-color: rgba(0, 0, 0, 0.5);*/
+    background-color: rgb(255, 127, 80);
+    border-style: solid;
+    border-color:  #cc3600;
+    border-width: 0.2em;
     /*background-color: #533549;*/
     /*box-shadow: 0 15px 25px rgba(0,0,0,.9);*/
     /*border-radius: 10px;*/
     width: 40%;
+    height: 75%;
     text-align: center;
   }
   .container h1 {
       color: white;
-      font-size: 2.5em;
-      font-weight: 600;
+      font-size: 1.4em;
+      font-weight: 300;
   }
   .container h2 {
       color: white;
-      font-size: 2em;
+      font-size: .5em;
       font-weight: 300;
   }
   .container p{
@@ -38,37 +42,34 @@ body {
   .submit {
       border: 0;
       background: none;
-      margin: none;
-      margin-top: 0;
+      margin: 0.1em;
+      padding: 0.1em 1em;
       display: inline-block;
       text-align: center;
-      /*border: 2px solid #3498db;*/
-      padding: 10px 40px;
+      /*background-color: #DC143C;*/
+      /*border: 2px solid #dbb434;*/
       outline: none;
       color: white;
-      border-radius: 24px;
+      border-radius: 18px;
       transition: 0.25s;
       cursor: pointer;
       text-decoration: none;
-      font-size: 0.7em;
+      font-size: 0.85em;
       font-family: 'Roboto Slab', serif;
   }
   .submit:hover {
       /*font-size: 15px;*/
-      color: black;
-      background-image: linear-gradient(to right,#533549 0%,#ffffff 100%);
+      background-image: linear-gradient(to right, #FF7F50 0%,#ffffff 100%);
       border:0;
   }
   ul.menu {
       text-align: center;
-      font-size: 64px;
+      font-size: 1em;
       padding: 0;
       margin: 0;
       list-style: none;
   }
-  ul.menu li {
-      margin: 0.8em 0;
-  }
+  
 
   .notification {
       position: absolute;
