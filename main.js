@@ -91,12 +91,12 @@ var inv = function InvertColors()
  * @Pre game objects have been created and user has selected to start game
  * @Post updates and draws every game object while unpaused
  */
-let startBall = new StartScreenBall;
 function animate() // main game loop occurs here
 {
     requestAnimationFrame(animate); // waits until this animate is done and then calls it again
     if (!gameHasStarted)
     { 
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
         drawStartScreen();
         startBall.update();
     }
@@ -151,7 +151,7 @@ function animate() // main game loop occurs here
 var start = function startGame()
 {
     setRandomColor();
-    animate();
+    //animate();
     displayNotification("LEVEL " + level);
     gameHasStarted = true;
 }
@@ -298,3 +298,4 @@ window.addEventListener('resize', () => // if the user shrinks/expands their bro
 
 
 });
+animate();

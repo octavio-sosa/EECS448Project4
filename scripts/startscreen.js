@@ -2,8 +2,8 @@ class StartScreenBall
 {
     constructor()
     {
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height;
+        this.x = (Math.random() * canvas.width / 2) + canvas.width / 4;
+        this.y = (Math.random() * canvas.height / 2) + canvas.height / 4;
         this.dx = 8;
         this.dy = 8;
         this.radius = canvas.height / 40;
@@ -26,7 +26,7 @@ class StartScreenBall
         ctx.fill();
     }
 }
-
+let startBall = new StartScreenBall;
 function drawStartScreen()
 {
 
@@ -34,7 +34,8 @@ function drawStartScreen()
     ctx.beginPath();
     ctx.moveTo(0, 0);
     ctx.lineTo(canvas.width / 5, 0);
-    ctx.lineTo(canvas.width * (3/5), canvas.height * (3/4));
+    //ctx.lineTo(canvas.width * (3/5), canvas.height * (3/4));
+    ctx.lineTo(startBall.x, startBall.y);
     ctx.lineTo(0, canvas.height / 2);
     ctx.closePath();
     ctx.fill();
@@ -42,7 +43,8 @@ function drawStartScreen()
     ctx.fillStyle = "#DAA520";
     ctx.beginPath();
     ctx.moveTo(canvas.width / 5, 0);
-    ctx.lineTo(canvas.width * (3/5), canvas.height * (3/4));
+    //ctx.lineTo(canvas.width * (3/5), canvas.height * (3/4));
+    ctx.lineTo(startBall.x, startBall.y);
     ctx.lineTo(canvas.width * (2/5), 0);
     ctx.closePath();
     ctx.fill();
@@ -50,7 +52,8 @@ function drawStartScreen()
     ctx.fillStyle = "#90EE90";
     ctx.beginPath();
     ctx.moveTo(0, canvas.height / 2);
-    ctx.lineTo(canvas.width * (3/5), canvas.height * (3/4));
+    //ctx.lineTo(canvas.width * (3/5), canvas.height * (3/4));
+    ctx.lineTo(startBall.x, startBall.y);
     ctx.lineTo(canvas.width * (2/5), canvas.height);
     ctx.lineTo(0, canvas.height);
     ctx.closePath();
@@ -60,7 +63,8 @@ function drawStartScreen()
     ctx.fillStyle = "#CD5C5C";
     ctx.beginPath();
     ctx.moveTo(canvas.width * (2/5), 0)
-    ctx.lineTo(canvas.width * (3/5), canvas.height * (3/4));
+    //ctx.lineTo(canvas.width * (3/5), canvas.height * (3/4));
+    ctx.lineTo(startBall.x, startBall.y);
     ctx.lineTo(canvas.width, canvas.height / 2);
     ctx.lineTo(canvas.width, 0);
     ctx.fill();
