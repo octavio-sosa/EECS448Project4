@@ -5,6 +5,7 @@ canvas.height = window.innerHeight; // make the canvas' height equal to the heig
 var prev_width = canvas.width;
 var prev_height = canvas.height;
 
+
 let ctx = canvas.getContext('2d'); // a variable that contains the canvas' 2d methods, used for drawing shapes and adding colors
 
 let about = document.getElementById('about'); // Gets the about button to redirect to about page
@@ -26,6 +27,7 @@ var highScore = 0;
 
 var startBtn = document.getElementById('start');
 var menu = document.getElementById('menu screen');
+
 var optionBtn = document.getElementById('option');
 var invertcolorBtn = document.getElementById('invert_colors');
 var backBtn = document.getElementById('back');
@@ -88,6 +90,8 @@ let paused = false;
 let playerHasLost = false;
 let playerHasWon = false;
 let simulate_ball = false;
+let gameHasStarted = false;
+
 
 let mouse = // create variable which will be used to update things based on the mouse's position
 {

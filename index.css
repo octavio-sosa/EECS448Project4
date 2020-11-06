@@ -1,43 +1,48 @@
 body, canvas{ margin: 0; padding: 0; border: 0 none; } /* remove all the borders so there isn't any weird whitespace in the body & canvas */
 
 body {
+    
+    background-color: #E6E6FA;
     overflow: hidden; /* Hide scrollbars */
   }
   .container {
-      width: 300px;
-      padding: 40px;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: rgba(0,0,0,.8);
-      text-align: center;
-      box-shadow: 0 15px 25px rgba(0,0,0,.9);
-      border-radius: 10px;
+    
+    position: absolute;
+    display: block;
+    font-size: 3em;
+    font-family: 'Roboto Slab', serif;
+    top: 10%;
+    left: 30%;
+    /*background-color: rgba(0, 0, 0, 0.5);*/
+    /*background-color: #533549;*/
+    /*box-shadow: 0 15px 25px rgba(0,0,0,.9);*/
+    /*border-radius: 10px;*/
+    width: 40%;
+    text-align: center;
   }
   .container h1 {
       color: white;
-      font-size: 50px;
+      font-size: 2.5em;
       font-weight: 600;
   }
   .container h2 {
       color: white;
-      font-size: 30px;
+      font-size: 2em;
       font-weight: 300;
   }
   .container p{
       color: white;
-      font-size: 20px;
+      font-size: 64px;
   }
 
   .submit {
       border: 0;
       background: none;
-      margin: 20px auto;
+      margin: none;
       margin-top: 0;
       display: inline-block;
       text-align: center;
-      border: 2px solid #3498db;
+      /*border: 2px solid #3498db;*/
       padding: 10px 40px;
       outline: none;
       color: white;
@@ -45,15 +50,18 @@ body {
       transition: 0.25s;
       cursor: pointer;
       text-decoration: none;
-      font-size: 20px;
+      font-size: 0.7em;
+      font-family: 'Roboto Slab', serif;
   }
   .submit:hover {
-      font-size: 15px;
-      background-image: linear-gradient(to right,#2ecc71 0%,#FFF36E 100%);
+      /*font-size: 15px;*/
+      color: black;
+      background-image: linear-gradient(to right,#533549 0%,#ffffff 100%);
       border:0;
   }
   ul.menu {
       text-align: center;
+      font-size: 64px;
       padding: 0;
       margin: 0;
       list-style: none;
@@ -70,4 +78,8 @@ body {
       top: 20%;
       width: 100%;
       text-align: center;
+  }
+
+  .life {
+      display: none;
   }
