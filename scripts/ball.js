@@ -5,21 +5,20 @@ class Ball
      * @Post initializes ball object
      * @constructor
      */
-    constructor()
+    constructor(isOriginal)
     {
-        this.radius_size = 1;
-        this.radius = this.radius_size * canvas.height / 40; // radius of ball dependent on screen size
+        this.radius_multiplier = 1;
+        this.radius = this.radius_multiplier * canvas.height / 40; // radius of ball dependent on screen size
         this.start_x = canvas.width / 2; // initial position is middle of the screen
         this.start_y = canvas.height - PADDLE_HEIGHT - this.radius - 1; // 1 pixel above paddle to avoid collision
         this.x = this.start_x;
         this.y = this.start_y;
         this.vel = {x: 0, y: 0} // initial velocities
-        this.speed = {x: 1, y: 1} // initial +/- speed
+        this.speed_multiplier = {x: 1, y: 1} // initial +/- speed
         this.numofBall = 1;
-        simulate_ball = false
+        if (isOriginal) simulate_ball = false
         this.unit_vector = (Math.sqrt(canvas.height**2 + canvas.width **2) / 200) * (Math.log10(level) + 1);
         this.arrowAim = new Aim(this.start_x, this.start_y);
-        this.hitBricks = false;
     }
 
     /**
@@ -33,8 +32,8 @@ class Ball
         {
             let velocity_scale = this.unit_vector * (1 / (Math.sqrt(this.vel.x**2 + this.vel.y**2)));
 
-            this.vel.x = velocity_scale * this.vel.x * this.speed.x
-            this.vel.y = velocity_scale * this.vel.y * this.speed.y
+            this.vel.x = velocity_scale * this.vel.x * this.speed_multiplier.x
+            this.vel.y = velocity_scale * this.vel.y * this.speed_multiplier.y
 
             this.x += this.vel.x; //increment x position based on velocity
             this.y += this.vel.y; //increment y position based on velocity
@@ -84,6 +83,7 @@ class Ball
      */
     detect_collisions(paddle, brickset)
     {
+        let brickIsHit = false;
         if (simulate_ball)
         {
             let y = this.y;
@@ -111,6 +111,7 @@ class Ball
             let x_collide_distance = brickset.brick_length / 2 + this.radius;
             let y_collide_distance = brickset.brick_height / 2 + this.radius;
 
+            
             for (let i = 0; i < brickset.bricks.length; i++)
             {
                 let brick = brickset.bricks[i];
@@ -129,8 +130,8 @@ class Ball
                         if (prev_x > x_collide_distance) this.vel.x *= -1;
                         if (prev_y > y_collide_distance) this.vel.y *= -1;
                         brickset.bricks[i].alive = false;
-                        this.hitBricks = !brickset.bricks[i].alive;
-                        console.log(this.hitBricks);
+                        brickIsHit = !brickset.bricks[i].alive;
+                        console.log(brickIsHit);
                         brickset.remaining_bricks -= 1;
                         gameObjects[OBJ_KEYS.PLAYERSTATUS].currentScore++;
                     }
@@ -148,40 +149,188 @@ class Ball
                     this.vel.x = (3/4 * this.unit_vector) * ((this.x - (paddle.x + mid_paddle)) / mid_paddle);
                 }
             }
-            //lose life
-            if (this.y - 2 * this.radius > canvas.height)
+        }
+        return brickIsHit;
+    }
+
+    checkLost()
+    {
+        //lose life
+        if (this.y - 2 * this.radius > canvas.height)
+        {
+            return true;
+        }
+    }
+
+    resize()
+    {
+        this.radius = this.radius_multiplier * canvas.height / 40; // radius of ball dependent on screen size
+        this.unit_vector = (Math.sqrt(canvas.height**2 + canvas.width **2) / 200) * (Math.log10(level) + 1)
+    }
+}
+
+class BallContainer
+{
+    constructor()
+    {
+        this.balls = [];
+        this.hitBricks = false;
+    }
+
+    push(ball)
+    {
+        this.balls.push(ball);
+    }
+
+    update()
+    {
+        for (let i = 0; i < this.balls.length; i++)
+        {
+            this.balls[i].update();
+        }
+    }
+
+    draw()
+    {
+        for (let i = 0; i < this.balls.length; i++)
+        {
+            this.balls[i].draw();
+        }
+    }
+
+    detect_collisions(paddle, brickset)
+    {
+        for (let i = 0; i < this.balls.length; i++)
+        {
+             let hit = this.balls[i].detect_collisions(paddle, brickset);
+             if (hit) this.hitBricks = true;
+             let ballLost = this.balls[i].checkLost();
+             if (ballLost)
+             {
+                 this.remove(i);
+                 if (this.isEmpty())
+                 {
+                    gameObjects[OBJ_KEYS.PLAYERSTATUS].currentLives--
+                    if (gameObjects[OBJ_KEYS.PLAYERSTATUS].currentLives > 0)
+                    {
+                        this.resetBalls();
+                        gameObjects[OBJ_KEYS.PADDLE].resetPaddle();
+                    }
+                 }
+             }
+        }
+    }
+
+    isEmpty()
+    {
+        return (this.balls.length == 0);
+    }
+
+    remove(index)
+    {
+        this.balls.splice(index, 1);
+    }
+
+    resetBalls()
+    {
+        simulate_ball = false;
+        this.balls = [];
+        this.push(new Ball(true));
+    }
+
+    x2()
+    {
+        let len = this.balls.length;
+        for (let i = 0; i < len; i++)
+        {
+            let original_ball = this.balls[i];
+            let new_ball = new Ball(false);
+            new_ball.x = original_ball.x;
+            new_ball.y = original_ball.y;
+            new_ball.speed_multiplier = original_ball.speed_multiplier;
+            new_ball.radius_multiplier = original_ball.radius_multiplier;
+            new_ball.vel.y = Math.random() * original_ball.vel.y;
+            new_ball.resize();
+            this.push(new_ball);
+        }
+    }
+    increaseSpeed() 
+    {
+        let speed = this.balls[0].speed_multiplier.x;
+        if (speed < 1.75)
+        {
+            speed *= 1.15;
+            for (let i = 0; i < this.balls.length; i++)
             {
-                gameObjects[OBJ_KEYS.PLAYERSTATUS].currentLives--
-                if (gameObjects[OBJ_KEYS.PLAYERSTATUS].currentLives > 0)
+                let ball = this.balls[i];
+                ball.speed_multiplier.x = speed;
+                ball.speed_multiplier.y = speed;
+            }
+        }
+    }
+    decreaseSpeed() 
+    {
+        let speed = this.balls[0].speed_multiplier.x;
+        if (speed > 0.5)
+        {
+            speed /= 1.2;
+            for (let i = 0; i < this.balls.length; i++)
+            {
+                let ball = this.balls[i];
+                ball.speed_multiplier.x = speed;
+                ball.speed_multiplier.y = speed;
+            }
+        }
+    }
+    increaseSize() 
+    {
+        let added_radius = this.balls[0].radius_multiplier;
+        let max_added_radius = added_radius * 1.5;
+
+
+        if (this.balls[0].radius_multiplier < 2.5)
+        {
+            for (let i = 0; i < this.balls.length; i++)
+            {
+                let ball = this.balls[i];
+                function expand()
                 {
-                    this.resetBall();
-                    gameObjects[OBJ_KEYS.PADDLE].resetPaddle();
+                    added_radius += 0.01;
+                    ball.radius_multiplier = added_radius;
+                    ball.resize();
+                    if (added_radius < max_added_radius) setTimeout(expand, 10);
                 }
+                setTimeout(expand, 10);
+            }
+        }
+    }
+    decreaseSize() 
+    {
+        let subtracted_radius = this.balls[0].radius_multiplier;
+        let max_subtracted_radius = subtracted_radius /= 1.5;
+
+        if (this.balls[0].radius_multiplier > 0.3)
+        {
+            for (let i = 0; i < this.balls.length; i++)
+            {
+                let ball = this.balls[i];
+                function shrink()
+                {
+                    subtracted_radius -= 0.01;
+                    ball.radius_multiplier = subtracted_radius;
+                    ball.resize();
+                    if (subtracted_radius > max_subtracted_radius) setTimeout(shrink, 10);
+                }
+                setTimeout(shrink, 10);
             }
         }
     }
 
-
-    /*
-    * @Pre: assumes ball is initialized
-    * @Post: resets ball to initial velocity
-    */
-    resetBall() {
-      simulate_ball = false;
-      this.vel = {x: 0, y: 0};
-      this.speed = {x: 1, y: 1};
-      this.radius_size = 1;
-      this.radius = canvas.height / 40; // radius of ball dependent on screen size
-      this.unit_vector = (Math.sqrt(canvas.height**2 + canvas.width **2) / 200) * (Math.log10(level) + 1);
-    }
-
-    /*
-    * @Pre: The window has been resized, and an event listener has called this method
-    * @Post: The ball's size will be updated to correspond with the new window size
-    */
     resize()
     {
-        this.radius = this.radius_size * canvas.height / 40; // radius of ball dependent on screen size
-        this.unit_vector = (Math.sqrt(canvas.height**2 + canvas.width **2) / 200) * (Math.log10(level) + 1)
+        for (let i = 0; i < this.balls.length; i++)
+        {
+            this.balls[i].resize();
+        }
     }
 }

@@ -5,8 +5,6 @@ canvas.height = window.innerHeight; // make the canvas' height equal to the heig
 var prev_width = canvas.width;
 var prev_height = canvas.height;
 
-let testButton = document.getElementById('testButton')
-
 let ctx = canvas.getContext('2d'); // a variable that contains the canvas' 2d methods, used for drawing shapes and adding colors
 
 let about = document.getElementById('about'); // Gets the about button to redirect to about page
@@ -52,7 +50,11 @@ let clr_idx = 7;
 
 function setRandomColor()
 {
-    let clr_idx = Math.floor(Math.random() * clrs.length);
+    do {
+        prev_idx = clr_idx
+        clr_idx = Math.floor(Math.random() * clrs.length);
+    } while (clr_idx == prev_idx);
+
     if (Math.random() >= 0.5)
     {
         let temp = clrs[clr_idx][0];
