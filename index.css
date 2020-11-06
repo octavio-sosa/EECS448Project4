@@ -2,7 +2,7 @@ body, canvas{ margin: 0; padding: 0; border: 0 none; } /* remove all the borders
 
 body {
     
-    background-color: #E6E6FA;
+    background-color: rgb(175, 113, 225);
     overflow: hidden; /* Hide scrollbars */
   }
   .container {
@@ -13,10 +13,10 @@ body {
     font-family: 'Roboto Slab', serif;
     top: 10%;
     left: 30%;
-    background-color: rgb(255, 127, 80);
+    background-color:#32afe0;
     border-style: solid;
-    border-color:  #cc3600;
-    border-width: 0.2em;
+    border-color:  #015272;
+    border-width: 1vh;
     /*background-color: #533549;*/
     /*box-shadow: 0 15px 25px rgba(0,0,0,.9);*/
     /*border-radius: 10px;*/
@@ -54,12 +54,12 @@ body {
       transition: 0.25s;
       cursor: pointer;
       text-decoration: none;
-      font-size: 5vh;
+      font-size: 5.5vh;
       font-family: 'Roboto Slab', serif;
   }
   .submit:hover {
       /*font-size: 15px;*/
-      background-image: linear-gradient(to right, #FF7F50 0%,#ffffff 100%);
+      background-image: linear-gradient(to right, #32afe0 0%,#ffffff 100%);
       border:0;
   }
   ul.menu {
