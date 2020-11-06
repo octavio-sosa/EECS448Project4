@@ -15,11 +15,11 @@ class testSuite {
         console.log("Test1: Is Player initialized correctly? Player should have 3 lives.")
         if(playerStatus.currentLives != 0)
         {
-            console.log("Player has ", playerStatus.currentLives, "lives, player is correctly initialized.\n")
+            console.log("Passed: Player has ", playerStatus.currentLives, "lives, player is correctly initialized.\n")
         }
         else
         {
-            console.log("Player has not been initialized correctly!\n");
+            console.log("FAIL: Player has not been initialized correctly!\n");
         }
     }
     test2()
@@ -27,11 +27,11 @@ class testSuite {
         console.log("Test2: Is score initialized properly? Player should start with 0 score.")
         if(playerStatus.currentScore == 0)
         {
-            console.log("Player has ", playerStatus.currentScore, "lives, player score is correctly initialized.\n")
+            console.log("Passed: Player has ", playerStatus.currentScore, "lives, player score is correctly initialized.\n")
         }
         else
         {
-            console.log("Player score is not correctly initialized!\n");
+            console.log("FAIL: Player score is not correctly initialized!\n");
         }
     }
     test3()
@@ -43,12 +43,22 @@ class testSuite {
         }
         else
         {
-            console.log("Passed, paddle has been correctly initialized.\n");
+            console.log("Passed: Paddle has been correctly initialized.\n");
         }
     }
     test4()
     {
-        console.log("Test4: Is ball initialized correctly?");
+        console.log("Test4: Is ball initialized correctly? Ball radius should be ball.radius_multiplier * canvas.height/40\nBall start_x should be canvas.width/2, Ball start_y should be canvas.height - PADDLE_HEIGHT - ball.radius -1");
+        if((ballContainer.balls[0].radius != (ballContainer.balls[0].radius_multiplier * canvas.height)/40)    || 
+        ballContainer.balls[0].start_x != (canvas.width/2)                                                     ||
+        ballContainer.balls[0].start_y != (canvas.height - PADDLE_HEIGHT - ballContainer.balls[0].radius - 1))
+        {
+            console.log("FAIL: Ball did not initialize correclty\n");
+        }
+        else
+        {
+            console.log("Passed: Ball has been initialized correctly\n");
+        }
         
     }
     runTests()
