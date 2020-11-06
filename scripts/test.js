@@ -38,6 +38,10 @@ class testSuite {
     {
         
     }
+    test4()
+    {
+        
+    }
     runTests()
     {
         this.test1();
