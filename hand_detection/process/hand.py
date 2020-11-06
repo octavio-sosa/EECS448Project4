@@ -183,3 +183,37 @@ def drawPOI(frame, handHist):
             cv2.circle(frame, fingerTipPoint, radius, tipColor, lineThickness)
 
     return frame
+
+def getPOI(frame, handHist):
+    handImg = getHandImg(frame, handHist)
+    contours = getContours(handImg)
+
+    try: 
+        #get handCentroid
+        largestContour = max(contours, key=cv2.contourArea) #hand outline
+        handCentroid = getCentroid(largestContour)
+
+        #get fingerTipPoint
+        if largestContour.any(): #error when largestContour = None
+            handHull = cv2.convexHull(largestContour, returnPoints=False)
+            handDefects = cv2.convexityDefects(largestContour, handHull)
+            fingerTipPoint = getFurthestPoint(handDefects, largestContour, handCentroid)
+
+        data = getHandDict(handCentroid, fingerTipPoint)
+
+    except Exception as error:
+        data = {'handCentroid_x': None,
+                'handCentroid_y': None,
+                'fingerTip_x': None,
+                'fingerTip_y': None}
+
+    finally:
+        return data
+
+def getHandDict(handCentroid, fingerTip):
+    data = {'handCentroid_x': int(handCentroid[0]),
+            'handCentroid_y': int(handCentroid[1]),
+            'fingerTip_x': int(fingerTip[0]),
+            'fingerTip_y': int(fingerTip[1])}
+
+    return data
