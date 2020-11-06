@@ -334,6 +334,7 @@ class Powers{
     this.powers = [];
     this.power_initX = Math.floor(Math.random()*9+1) / 10
     this.powerstype = itemtype;
+    gameObjects[OBJ_KEYS.BALL_CONTAINER].hitBricks = false;
     for (let i=0; i < this.fallings; i++){
       let power = {x: this.power_initX * canvas.width,
                    y: canvas.height/20,
