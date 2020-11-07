@@ -160,29 +160,33 @@ def drawPOI(frame, handHist):
     handImg = getHandImg(frame, handHist)
     contours = getContours(handImg)
     #cv2.drawContours(frame, contours, -1, [0, 255, 0], 3)
-    largestContour = max(contours, key=cv2.contourArea) #hand outline
-    cv2.drawContours(frame, largestContour, -1, [0, 255, 0], 3)
-    handCentroid = getCentroid(largestContour)
 
-    #draw handCentroid
-    radius = 10
-    centroidColor = [255, 0, 0] 
-    lineThickness = -1 #fill circle with -1 value
-    cv2.circle(frame, handCentroid, radius, centroidColor, lineThickness)
+    try: 
+        largestContour = max(contours, key=cv2.contourArea) #hand outline
+        cv2.drawContours(frame, largestContour, -1, [0, 255, 0], 3)
+        handCentroid = getCentroid(largestContour)
 
-    if largestContour.any(): 
-        #get fingerTipPoint
-        handHull = cv2.convexHull(largestContour, returnPoints=False)
-        #cv2.drawContours(frame, handHull, -1, [255, 255, 255], 3) #TODO draw handHull
-        handDefects = cv2.convexityDefects(largestContour, handHull)
-        fingerTipPoint = getFurthestPoint(handDefects, largestContour, handCentroid)
+        #draw handCentroid
+        radius = 10
+        centroidColor = [255, 0, 0] 
+        lineThickness = -1 #fill circle with -1 value
+        cv2.circle(frame, handCentroid, radius, centroidColor, lineThickness)
 
-        #draw finger-tip
-        if all(fingerTipPoint): #there are valid coordinates
-            tipColor = [0, 0, 255]
-            cv2.circle(frame, fingerTipPoint, radius, tipColor, lineThickness)
+        if largestContour.any(): 
+            #get fingerTipPoint
+            handHull = cv2.convexHull(largestContour, returnPoints=False)
+            #cv2.drawContours(frame, handHull, -1, [255, 255, 255], 3) #TODO draw handHull
+            handDefects = cv2.convexityDefects(largestContour, handHull)
+            fingerTipPoint = getFurthestPoint(handDefects, largestContour, handCentroid)
 
-    return frame
+            #draw finger-tip
+            if all(fingerTipPoint): #there are valid coordinates
+                tipColor = [0, 0, 255]
+                cv2.circle(frame, fingerTipPoint, radius, tipColor, lineThickness)
+    except Exception as error:
+        print('drawPOI error:', error)
+    finally:
+        return frame
 
 def getPOI(frame, handHist):
     handImg = getHandImg(frame, handHist)
