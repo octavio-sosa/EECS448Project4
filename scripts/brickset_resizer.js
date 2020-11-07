@@ -1,5 +1,10 @@
 class Brickset_Resizer
 {
+    /**
+     * @Pre a brickset has instantied a brickset_resizer
+     * @Post brickset_resizer will be ready for resizing
+     * @param {brickset}: the brickset this resizer is responsible for
+     */
     constructor(brickset) 
     {
         this.brickset = brickset;
@@ -8,6 +13,10 @@ class Brickset_Resizer
         this.row_length = 0;
     }
 
+    /**
+     * @Pre the window has been resized
+     * @Post decides which type of brickset needs to be resized and calls the appropriate method
+     */
     resize()
     {
         this.brickset.brick_length = canvas.width / 15 - 1;
@@ -43,6 +52,10 @@ class Brickset_Resizer
         }
     }
 
+    /**
+     * @Pre the brickset to resize is 'standard'
+     * @Post updates the position of each brick
+     */
     resize_standard()
     {
         this.row_length = (this.brickset.cols * this.brickset.brick_length) + ((this.brickset.cols - 1) * this.brickset.spacing);
@@ -66,6 +79,10 @@ class Brickset_Resizer
         }
     }
 
+    /**
+     * @Pre the brickset to resize is 'pyramid'
+     * @Post updates the position of each brick
+     */
     resize_pyramid()
     {
         this.starting_x_pos = (canvas.width - this.brickset.brick_length) / 2;
@@ -87,6 +104,10 @@ class Brickset_Resizer
         }
     }
 
+    /**
+     * @Pre the brickset to resize is 'wall'
+     * @Post updates the position of each brick
+     */
     resize_wall()
     {
         this.starting_y_pos = canvas.height / 8;
@@ -106,6 +127,10 @@ class Brickset_Resizer
         }
     }
 
+    /**
+     * @Pre the brickset to resize is 'spaced-wall'
+     * @Post updates the position of each brick
+     */
     resize_spaced_wall()
     {
         let k = 0;
@@ -126,6 +151,10 @@ class Brickset_Resizer
         }
     }
 
+    /**
+     * @Pre the brickset to resize is '3-column'
+     * @Post updates the position of each brick
+     */
     resize_3_column()
     {
         this.row_length = (this.brickset.cols * this.brickset.brick_length) + ((this.brickset.cols - 1) * this.brickset.spacing);
@@ -163,6 +192,10 @@ class Brickset_Resizer
         }
     }
 
+    /**
+     * @Pre the brickset to resize is 'alternating'
+     * @Post updates the position of each brick
+     */
     resize_alternating()
     {
         this.starting_y_pos = canvas.height / 8;
@@ -184,6 +217,11 @@ class Brickset_Resizer
             }
         }
     }
+
+    /**
+     * @Pre the brickset to resize is 'zig-zag'
+     * @Post updates the position of each brick
+     */
     resize_zigzag()
     {
         let starting_x1_pos = (canvas.width - this.brickset.brick_length * this.brickset.height) / 2;
@@ -246,6 +284,10 @@ class Brickset_Resizer
         }
     }
 
+    /**
+     * @Pre the brickset to resize is 'criss-cross'
+     * @Post updates the position of each brick
+     */
     resize_crisscross()
     {
         let cols = this.brickset.cols;
