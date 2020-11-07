@@ -8,8 +8,8 @@ class StartScreenBall
     {
         this.x = (Math.random() * canvas.width / 2) + canvas.width / 4;
         this.y = (Math.random() * canvas.height / 2) + canvas.height / 4;
-        this.dx = 8;
-        this.dy = 8;
+        this.dx = canvas.width / 300;
+        this.dy = canvas.height / 300;
         this.radius = canvas.height / 40;
     }
 
