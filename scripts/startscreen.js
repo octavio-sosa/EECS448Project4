@@ -1,13 +1,22 @@
 class StartScreenBall
 {
+    /**
+     * @Pre a StartScreenBall has been instantiated
+     * @Post gives the ball the appropriate properties based on the canvas size
+     */
     constructor()
     {
         this.x = (Math.random() * canvas.width / 2) + canvas.width / 4;
         this.y = (Math.random() * canvas.height / 2) + canvas.height / 4;
-        this.dx = 8;
-        this.dy = 8;
+        this.dx = canvas.width / 300;
+        this.dy = canvas.height / 300;
         this.radius = canvas.height / 40;
     }
+
+    /**
+     * @Pre the game has not yet started (the PLAY button has not been pressed)
+     * @Post moved the ball around the canvas
+     */
     update()
     {
         if (this.x + this.radius + this.dx >= canvas.width || this.x - this.radius<= 0) this.dx *= -1;
@@ -18,6 +27,11 @@ class StartScreenBall
 
         this.draw();
     }
+
+    /**
+     * @Pre the game has not yet started (the PLAY button has not been pressed)
+     * @Post draws the ball at its position
+     */
     draw()
     {
         ctx.beginPath();
@@ -27,6 +41,11 @@ class StartScreenBall
     }
 }
 let startBall = new StartScreenBall;
+
+/**
+ * @Pre the game has not yet started (the PLAY button has not been pressed)
+ * @Post draws polygons attached to the ball
+ */
 function drawStartScreen()
 {
 

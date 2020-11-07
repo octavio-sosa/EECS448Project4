@@ -22,6 +22,10 @@ class Brickset
         this.brickset_resizer = new Brickset_Resizer(this);
     }
 
+    /**
+     * @Pre a brickset has been instantiated
+     * @Post decides which type of brickset to generate and calls the appropriate method
+     */
     generate()
     {
         switch (this.brickset_type)
@@ -53,6 +57,10 @@ class Brickset
         }
     }
 
+    /**
+     * @Pre the randomly-selected brickset is 'standard'
+     * @Post creates all the bricks in appropriate positions for this brickset type
+     */
     generate_standard()
     {
         this.rows = Math.floor(Math.random() * 2 + 8);
@@ -79,6 +87,10 @@ class Brickset
         }
     }
 
+    /**
+     * @Pre the randomly-selected brickset is 'pyramid'
+     * @Post creates all the bricks in appropriate positions for this brickset type
+     */
     generate_pyramid()
     {
         this.height = Math.floor(Math.random() * 3 + 11);
@@ -98,6 +110,10 @@ class Brickset
         this.remaining_bricks = this.total_bricks;
     }
 
+    /**
+     * @Pre the randomly-selected brickset is 'wall'
+     * @Post creates all the bricks in appropriate positions for this brickset type
+     */
     generate_wall()
     {
         this.rows = Math.floor(Math.random() * 2 + 6);
@@ -117,6 +133,10 @@ class Brickset
         }
     }
 
+    /**
+     * @Pre the randomly-selected brickset is 'spaced-wall'
+     * @Post creates all the bricks in appropriate positions for this brickset type
+     */
     generate_spaced_wall()
     {
         this.rows = 6;
@@ -138,6 +158,10 @@ class Brickset
         }
     }
 
+    /**
+     * @Pre the randomly-selected brickset is '3-column'
+     * @Post creates all the bricks in appropriate positions for this brickset type
+     */
     generate_3_column()
     {
         this.cols = 3;
@@ -170,6 +194,10 @@ class Brickset
         }
     }
 
+    /**
+     * @Pre the randomly-selected brickset is 'alternating'
+     * @Post creates all the bricks in appropriate positions for this brickset type
+     */
     generate_alternating()
     {
         this.spacing = 1;
@@ -194,6 +222,10 @@ class Brickset
         }
     }
 
+    /**
+     * @Pre the randomly-selected brickset is 'zig-zag'
+     * @Post creates all the bricks in appropriate positions for this brickset type
+     */
     generate_zigzag()
     {
         //1st pyramid, attached to ceiling
@@ -249,6 +281,10 @@ class Brickset
         this.remaining_bricks = this.total_bricks;
     }
 
+    /**
+     * @Pre the randomly-selected brickset is 'criss-cross'
+     * @Post creates all the bricks in appropriate positions for this brickset type
+     */
     generate_crisscross()
     {
         this.cols = 5;
@@ -281,7 +317,9 @@ class Brickset
         }
     }
 
-    //@Post no effect, this class is skipped over in the game loop
+    /**
+     * @Post no effect, this class is skipped over in the game loop
+     */
     update() {}
 
     /**
@@ -307,7 +345,8 @@ class Brickset
     }
 
 
-    /*
+    /** 
+    * @Pre the game has been reset
     * @Post returns each brick to its original position
     */
     resetBrick()
@@ -324,9 +363,9 @@ class Brickset
         this.generate();
     }
 
-    /*
-    * @Pre: The window has been resized, and an event listener has called this method
-    * @Post: Each brick's size and position will be updated to correspond with the new window size
+    /**
+    * @Pre The window has been resized, and an event listener has called this method
+    * @Post Each brick's size and position will be updated to correspond with the new window size
     */
    resize()
    {
