@@ -279,19 +279,17 @@ window.addEventListener('resize', () => // if the user shrinks/expands their bro
     PADDLE_WIDTH = canvas.width / 6;
     PADDLE_HEIGHT = canvas.height / 30;
 
-    if (gameHasStarted)
+    if (gameObjects.length > 0) // if the objects have been created
     {
-      if (gameObjects.length > 0) // if the objects have been created
+      for (let i = 0; i < gameObjects.length; i++) // iterate through game objects
       {
-        for (let i = 0; i < gameObjects.length; i++) // iterate through game objects
-        {
-          gameObjects[i].resize();
-        }
+        gameObjects[i].resize();
       }
-      prev_width = canvas.width;
-      prev_height = canvas.height;
     }
-    else 
+    prev_width = canvas.width;
+    prev_height = canvas.height;
+  
+    if (!gameHasStarted)
     {
       drawStartScreen();
     }
