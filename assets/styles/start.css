@@ -1,0 +1,23 @@
+div {
+    position: absolute;
+    display: block;
+    font-size: 64px;
+    font-family: 'Roboto Slab', serif;
+    top: 20%;
+    width: 100%;
+    text-align: center;
+}
+.menu {
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+.menu li {
+    margin: 0.8em 0;
+}
+
+.menu a {
+    text-decoration: none;
+    color: black;
+}

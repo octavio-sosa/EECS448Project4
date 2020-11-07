@@ -3,42 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Brick</title>
+    <title>BrickBreaker</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="index.css">
 </head>
 <body>
 
   <div id="menu screen" class="container">
-    <h1>BrickBreak</h1>
     <ul class="menu">
-      <li><button id="start" class="submit">Play</button>
-      <li><button id="testButton" class="submit">Test</button>
-      <li><button id="option" class="submit">Option</button>
-      <li><a href="assets/pages/help.html"><button id="help" class="submit">Help</button></a>
-      <li><a href="https://github.com/ConnorSutton07/EECS448Project4"><button id="about" class="submit">About</button></a>
+      <h1>BRICK BREAKER</h1>
+      <li><button id="start" class="submit">PLAY</button>
+      <li><button id="testButton" class="submit">TEST</button>
+      <li><button id="option" class="submit">SETTINGS</button>
+      <li><a href="assets/pages/help.html"><button id="help" class="submit">HELP</button></a>
+      <li><a href="https://github.com/ConnorSutton07/EECS448Project4"><button id="about" class="submit">SOURCE</button></a>
     </ul>
   </div>
 
   <div id="setting screen" class="container">
-    <h1>Option</h1>
     <ul class="menu">
+      <h1>Settings</h1>
       <li><button id="invert_colors"class="submit">Invert Colors</button>
       <li><button id="back" class="submit">Back</button>
     </ul>
   </div>
 
   <div id="win screen" class="container">
-    <h1>You win</h1>
     <ul class="menu">
+      <h1>You Win</h1>
       <li><button id="nextlevel"class="submit">Next Level</button>
       <li><button id="backmain_w"class="submit">Main Menu</button>
     </ul>
   </div>
 
   <div id="lose screen" class="container">
-    <h1>You lose</h1>
     <ul class="menu">
+      <h1>You Lose</h1>
+      <li><h2 id = "yourScore">Your Score: </h2></li>
+      <li><h2 id = "highScore">High Score: </h2></li>
       <li><button id="tryagain"class="submit">Try Again</button>
       <li><button id="backmain_l"class="submit">Main Menu</button>
     </ul>
@@ -48,6 +50,7 @@
   <canvas id="canvas" class="game"></canvas>
 
   <script src = "scripts/setup.js"></script>
+  <script src = "scripts/startscreen.js"></script>
   <script src = "scripts/paddle.js"></script>
   <script src = "scripts/ball.js"></script>
   <script src = "scripts/brickset_resizer.js"></script>
@@ -60,7 +63,7 @@
   <script src = "scripts/test.js"></script>
   <script src = "main.js"></script>
 
-  <img id="img_life" src="assets/images/heart.png"></img>
+  <img id="img_life" class = "life" src="assets/images/heart.png"></img>
 
 </body>
 </html>

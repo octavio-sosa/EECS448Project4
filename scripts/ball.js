@@ -153,6 +153,10 @@ class Ball
         return brickIsHit;
     }
 
+    /**
+     * @Pre assumes ball is initialized
+     * @Post Returns a boolean indicating if the ball has dropped below the game area
+     */
     checkLost()
     {
         //lose life
@@ -162,6 +166,10 @@ class Ball
         }
     }
 
+    /**
+     * @Pre The window has been resized
+     * @Post updates the size and speed of the ball for the new window size
+     */
     resize()
     {
         this.radius = this.radius_multiplier * canvas.height / 40; // radius of ball dependent on screen size
@@ -171,17 +179,31 @@ class Ball
 
 class BallContainer
 {
+
+    /**
+     * @Pre BallContainer has been initialized
+     * @Post Creates instance of Ball container, initially empty
+     */
     constructor()
     {
         this.balls = [];
         this.hitBricks = false;
     }
 
+    /**
+     * @Pre a new ball has been instantiated and pushed to the BallContainer
+     * @Post The new ball will now be in the BallContainer
+     * @param {ball}: the ball to be pushed to the BallContainer array
+     */
     push(ball)
     {
         this.balls.push(ball);
     }
 
+    /**
+     * @Pre The main game loop is executing
+     * @Post updates the position and velocity of each ball in the container
+     */
     update()
     {
         for (let i = 0; i < this.balls.length; i++)
@@ -190,6 +212,10 @@ class BallContainer
         }
     }
 
+    /**
+     * @Pre The main game loop is executing
+     * @Post draws each ball on the canvas
+     */
     draw()
     {
         for (let i = 0; i < this.balls.length; i++)
@@ -198,6 +224,12 @@ class BallContainer
         }
     }
 
+    /**
+     * @Pre The main game loop is executing
+     * @Post if a ball has collided with an object, it will bounce off
+     * @param {paddle}: the paddle controlled by the user
+     * @param {bricket}: the collection of bricks
+     */
     detect_collisions(paddle, brickset)
     {
         for (let i = 0; i < this.balls.length; i++)
@@ -215,22 +247,36 @@ class BallContainer
                     {
                         this.resetBalls();
                         gameObjects[OBJ_KEYS.PADDLE].resetPaddle();
+                        gameObjects[OBJ_KEYS.POWERS].resetPowers(Math.floor((Math.random() * 8) + 1));
                     }
                  }
              }
         }
     }
 
+    /**
+     * @Pre The main game loop is executing and a ball has exited the game area
+     * @Post returns a boolean indicating whether there are no balls left, in which case the player will lose a life
+     */
     isEmpty()
     {
         return (this.balls.length == 0);
     }
 
+    /**
+     * @Pre a ball has exited the game area
+     * @Post removes the ball that has exited from the ball container, deleting it
+     * @param {index}: the location in the BallContainer of the ball that has fallen
+     */
     remove(index)
     {
         this.balls.splice(index, 1);
     }
 
+    /**
+     * @Pre The game has been reset
+     * @Post clears the container and initializes a new ball
+     */
     resetBalls()
     {
         simulate_ball = false;
@@ -238,6 +284,10 @@ class BallContainer
         this.push(new Ball(true));
     }
 
+    /**
+     * @Pre The player has caught a x2 power
+     * @Post doubles the number of balls
+     */
     x2()
     {
         let len = this.balls.length;
@@ -254,6 +304,11 @@ class BallContainer
             this.push(new_ball);
         }
     }
+
+    /**
+     * @Pre The player has caught the speed-increase power
+     * @Post increases the speed by each ball by 15%
+     */
     increaseSpeed() 
     {
         let speed = this.balls[0].speed_multiplier.x;
@@ -268,6 +323,11 @@ class BallContainer
             }
         }
     }
+
+    /**
+     * @Pre The player has caught the speed-decrease power
+     * @Post decreases the speed by each ball by 20%
+     */
     decreaseSpeed() 
     {
         let speed = this.balls[0].speed_multiplier.x;
@@ -282,6 +342,11 @@ class BallContainer
             }
         }
     }
+
+    /**
+     * @Pre The player has caught the size-increase power
+     * @Post increases the size by each ball by 50%
+     */
     increaseSize() 
     {
         let added_radius = this.balls[0].radius_multiplier;
@@ -304,6 +369,11 @@ class BallContainer
             }
         }
     }
+
+    /**
+     * @Pre The player has caught the size-decrease power
+     * @Post decreases the size by each ball by 50%
+     */
     decreaseSize() 
     {
         let subtracted_radius = this.balls[0].radius_multiplier;
@@ -326,6 +396,10 @@ class BallContainer
         }
     }
 
+    /**
+     * @Pre The window has been resized
+     * @Post resizes all balls in the BallContainer
+     */
     resize()
     {
         for (let i = 0; i < this.balls.length; i++)

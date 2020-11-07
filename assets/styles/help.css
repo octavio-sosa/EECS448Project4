@@ -1,5 +1,5 @@
 .help-screen{
-    width: 500px;
+    width: 700px;
     padding: 40px;
     position: absolute;
     top: 50%;
@@ -13,7 +13,7 @@
 
 .instructions{
     color: white;
-    font-size: 30px;
+    font-size: 25px;
     font-weight: 100;
 }
 

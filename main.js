@@ -69,9 +69,21 @@ var inv = function InvertColors()
   clrs[clr_idx][0] = clrs[clr_idx][1];
   clrs[clr_idx][1] = temp;
 
-  ctx.fillStyle = clrs[0];
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-  ctx.fillStyle = clrs[1];
+  if (gameHasStarted)
+  {
+      ctx.fillStyle = clrs[clr_idx][0];
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = clrs[clr_idx][1];
+      for (let i = 0; i < gameObjects.length-1; i++) // iterate through game objects
+      {
+        gameObjects[i].draw();
+      }
+      gameObjects[OBJ_KEYS.BALL_CONTAINER].detect_collisions(gameObjects[0], gameObjects[2]); // Have ball check for collisions
+      if (gameObjects[OBJ_KEYS.BALL_CONTAINER].hitBricks){
+        gameObjects[4].draw();
+      }
+  }
+
 }
 
 /**
@@ -82,7 +94,13 @@ var inv = function InvertColors()
 function animate() // main game loop occurs here
 {
     requestAnimationFrame(animate); // waits until this animate is done and then calls it again
-    if (!paused & !playerHasLost & !playerHasWon)
+    if (!gameHasStarted)
+    { 
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        drawStartScreen();
+        startBall.update();
+    }
+    else if (!paused & !playerHasLost & !playerHasWon)
     {
         menu.style.display = 'none';
         setting.style.display = 'none';
@@ -108,13 +126,16 @@ function animate() // main game loop occurs here
     }
     else if (paused & !playerHasLost)
     {
-        startBtn.innerHTML = "Resume";
+        startBtn.innerHTML = "RESUME";
         startBtn.onclick = resume;
         menu.style.display = 'block';
     }
     else if (playerHasLost)
     {
         lose.style.display = 'block';
+        playerScoreElem.innerHTML = "Your Score: " + playerStatus.currentScore;
+        if (playerStatus.currentScore > highScore) highScore = playerStatus.currentScore;
+        highScoreElem.innerHTML = "High Score: " + highScore; 
 		}
     else
     {
@@ -130,8 +151,9 @@ function animate() // main game loop occurs here
 var start = function startGame()
 {
     setRandomColor();
-    animate();
+    //animate();
     displayNotification("LEVEL " + level);
+    gameHasStarted = true;
 }
 
 invertcolorBtn.onclick = inv;
@@ -209,8 +231,8 @@ nextBtn.onclick = nextlevel;
  * @Post main menu will be hidden and settings menu will appear
  */
 var opt = function Opt(){
-  menu.style.display = 'none';
   setting.style.display = 'block';
+  menu.style.display = 'none';
 }
 optionBtn.onclick = opt;
 
@@ -253,6 +275,7 @@ window.addEventListener('resize', () => // if the user shrinks/expands their bro
 {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
+
     PADDLE_WIDTH = canvas.width / 6;
     PADDLE_HEIGHT = canvas.height / 30;
 
@@ -265,5 +288,12 @@ window.addEventListener('resize', () => // if the user shrinks/expands their bro
     }
     prev_width = canvas.width;
     prev_height = canvas.height;
+  
+    if (!gameHasStarted)
+    {
+      drawStartScreen();
+    }
+
 
 });
+animate();

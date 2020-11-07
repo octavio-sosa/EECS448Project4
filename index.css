@@ -1,61 +1,111 @@
 body, canvas{ margin: 0; padding: 0; border: 0 none; } /* remove all the borders so there isn't any weird whitespace in the body & canvas */
 
 body {
+    
+    background-color: rgb(237, 226, 246);
     overflow: hidden; /* Hide scrollbars */
   }
   .container {
-      width: 300px;
-      padding: 40px;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: rgba(0,0,0,.8);
-      text-align: center;
-      box-shadow: 0 15px 25px rgba(0,0,0,.9);
-      border-radius: 10px;
+    white-space: pre-line;
+    position: absolute;
+    display: block;
+    font-size: 0;
+    font-family: 'Roboto Slab', serif;
+    top: 12.5%;
+    left: 27.5%;
+    background-color:#44a7ce;
+    border-style: solid;
+    border-color:  #015272;
+    border-width: 1vh;
+    /*background-color: #533549;*/
+    /*box-shadow: 0 15px 25px rgba(0,0,0,.9);*/
+    /*border-radius: 10px;*/
+    width: 45%;
+    height: 75%;
+    text-align: center;
   }
   .container h1 {
       color: white;
-      font-size: 50px;
-      font-weight: 600;
+      width: 100%;
+      top: 0%;
+      padding: 0.5em 0em;
+      font-size: 9vmin;
+      font-weight: 300;
+      margin: 0;
+
   }
-  .container p{
+  .container h2 {
       color: white;
-      font-size: 20px;
+      font-size: 4vmin;
+      padding-bottom: 0.5em;
+      margin: 0;
+      font-weight: 300;
   }
 
   .submit {
       border: 0;
       background: none;
-      margin: 20px auto;
-      margin-top: 0;
+      margin: 0.1em;
+      padding: 0.1em 1em;
       display: inline-block;
       text-align: center;
-      border: 2px solid #3498db;
-      padding: 10px 40px;
+      /*background-color: #DC143C;*/
+      /*border: 2px solid #dbb434;*/
       outline: none;
       color: white;
-      border-radius: 24px;
+      border-radius: 18px;
       transition: 0.25s;
       cursor: pointer;
       text-decoration: none;
-      font-size: 20px;
+      font-size: 5vmin;
+      font-family: 'Roboto Slab', serif;
   }
+
+  @media (max-width: 2248px)
+  {
+      .container h1 {
+          font-size:8.75vmin;
+      }
+      .submit {
+          font-size: 4.5vmin;
+      }
+  }
+  @media (max-width: 1450px) {
+    .container h1 {
+        font-size: 8vmin;
+    }
+    .submit {
+        font-size: 4vmin;
+    }
+  }
+  
+@media (max-height: 750px) {
+    .container h1{
+        font-size: 7vmin;
+    }
+    .submit {
+        font-size: 3.5vmin;
+    }
+
+}
+
   .submit:hover {
-      font-size: 15px;
-      background-image: linear-gradient(to right,#2ecc71 0%,#FFF36E 100%);
+      /*font-size: 15px;*/
+      background-image: linear-gradient(to right, #32afe0 0%,#ffffff 100%);
       border:0;
   }
   ul.menu {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      top: 5%;
+      position: absolute;
       text-align: center;
       padding: 0;
       margin: 0;
       list-style: none;
   }
-  ul.menu li {
-      margin: 0.8em 0;
-  }
+  
 
   .notification {
       position: absolute;
@@ -65,4 +115,8 @@ body {
       top: 20%;
       width: 100%;
       text-align: center;
+  }
+
+  .life {
+      display: none;
   }
