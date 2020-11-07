@@ -61,6 +61,10 @@ let clrs = [["#FFFFFF", "#000000", "#DAA520"], ["#5B0E2D", "#FFA781", "#FFFFFF"]
 
 let clr_idx = 7;
 
+/**
+ * @Pre A new level has started
+ * @Post The colors of the objects and the background will be set to a random combination from the clrs array
+ */
 function setRandomColor()
 {
     do {
@@ -76,6 +80,11 @@ function setRandomColor()
     }
 }
 
+
+/**
+ * @Pre A request has been made to display a notification
+ * @Post The notification will be displayed on the canvas and fade away over time
+ */
 function displayNotification(notif)
 {
     notif_elem.style.display = 'block';
