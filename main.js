@@ -86,9 +86,18 @@ var inv = function InvertColors()
 
 }
 
-let scanHand = function handDataStream(){
-  console.log('streaming hand data')  
+let scanHand = function scanAndStreamHand(){
+  fetchScan()
+    .then(response=>{response})
+    .catch(response=>{response})
 }
+
+async function fetchScan() {
+  const response = await fetch('http://localhost:8000/handDataStream')
+  return response
+}
+
+
 
 /**
  * Animates game on screen

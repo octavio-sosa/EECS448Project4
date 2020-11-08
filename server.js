@@ -15,6 +15,7 @@ app.get('/', (req, res)=>{
 
 app.get('/handDataStream', (req, res)=>{
 	const childPy = spawn('python3', ['hand_detection/handDataStreamer.py'])
+  res.end()
 })
 
 app.get('/handDataRead', (req, res)=>{

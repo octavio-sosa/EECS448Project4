@@ -17,6 +17,7 @@ def main():
             rectangles = hp.get_rectangles(frame)
             handHist = hp.get_handHist(frame, rectangles)
             isHandHist = True
+            cv2.destroyAllWindows()
         elif isHandHist:
             data = hp.getPOI(frame, handHist)
             data['frame_x'] = frame.shape[1]
