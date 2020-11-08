@@ -110,8 +110,8 @@ class Paddle // the thing the player controls
         .catch(dataRaw => {dataRaw})
 
       if(this.handData.handCentroid_x > 0){
-        let handPosNorm = (this.handData.handCentroid_x / this.handData.frame_x) * canvas.width
-        this.x = handPosNorm
+        let handPos_x =  (this.handData.handCentroid_x / this.handData.frame_x) * canvas.width
+        this.x = Math.min(Math.max(handPos_x - (this.width / 2), 0), canvas.width - this.width); // move paddle based on mouse position if it is defined (it is undefined until it moves)
       }
     }
 }

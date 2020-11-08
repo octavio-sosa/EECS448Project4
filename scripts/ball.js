@@ -53,9 +53,8 @@ class Ball
     {
         this.y = canvas.height - PADDLE_HEIGHT - this.radius - 1;
         if(handTrackEnabled){
-          let paddle_x = gameObjects[OBJ_KEYS.PADDLE].x   
+          let paddle_x = gameObjects[OBJ_KEYS.PADDLE].x + PADDLE_WIDTH/2  
           this.x = Math.min(Math.max(paddle_x, PADDLE_WIDTH / 2), canvas.width - PADDLE_WIDTH / 2)
-          this.x += PADDLE_WIDTH / 2
         } else {
           this.x = Math.min(Math.max(mouse.x, PADDLE_WIDTH / 2), canvas.width - PADDLE_WIDTH / 2);
         }
