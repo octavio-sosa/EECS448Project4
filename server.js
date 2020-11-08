@@ -18,18 +18,18 @@ app.get('/handDataStream', (req, res)=>{
 })
 
 app.get('/handDataRead', (req, res)=>{
-	const childPython = spawn('python3', ['hand_detection/handDataReader.py'])
+	const childPy = spawn('python3', ['hand_detection/handDataReader.py'])
 
-	childPython.stdout.on('data', (data)=>{
+	childPy.stdout.on('data', (data)=>{
 		handData = data.toString()
 		res.json(handData)
 	})
 
-	childPython.stderr.on('data', (data)=>{
+	childPy.stderr.on('data', (data)=>{
 		console.error('stderr: ',data.toString())
 	})
 
-	childPython.on('close', (code) => {
+	childPy.on('close', (code) => {
 		console.log('child process exited with code: ', code.toString()) 
 	})
 })
