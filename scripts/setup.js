@@ -37,6 +37,7 @@ var startBtn = document.getElementById('start');
 var menu = document.getElementById('menu screen');
 
 var optionBtn = document.getElementById('option');
+var handTrackBtn = document.getElementById('handTrack');
 var invertcolorBtn = document.getElementById('invert_colors');
 var backBtn = document.getElementById('back');
 var nextBtn = document.getElementById('nextlevel');
@@ -108,6 +109,7 @@ let playerHasLost = false;
 let playerHasWon = false;
 let simulate_ball = false;
 let gameHasStarted = false;
+let handTrackEnabled = false;
 
 
 let mouse = // create variable which will be used to update things based on the mouse's position
@@ -127,14 +129,17 @@ let mouse = // create variable which will be used to update things based on the 
         space: start simulating the ball if it is dormant
 */
 window.addEventListener('keydown', e => {
+  if(!handTrackEnabled){
     if(e.key == 'ArrowLeft'){
         mouse.x = mouse.x - 30;
     }
     if (e.key == 'ArrowRight') {
         mouse.x = mouse.x + 30;
     }
-    if (e.key === 'Escape') paused = !paused;
-    if (e.code == 'Space') simulate_ball = true;
+  }
+
+  if (e.key === 'Escape') paused = !paused;
+  if (e.code == 'Space') simulate_ball = true;
 })
 
 /**
@@ -145,8 +150,10 @@ window.addEventListener('keydown', e => {
 window.addEventListener('mousemove', // window will call this function every time the mouse moves, updating its position
     function(e) 
     {
+      if(!handTrackEnabled){
         mouse.x = e.x;
         mouse.y = e.y;
+      }
     }
 );
 

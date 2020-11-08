@@ -160,26 +160,83 @@ def drawPOI(frame, handHist):
     handImg = getHandImg(frame, handHist)
     contours = getContours(handImg)
     #cv2.drawContours(frame, contours, -1, [0, 255, 0], 3)
-    largestContour = max(contours, key=cv2.contourArea) #hand outline
-    cv2.drawContours(frame, largestContour, -1, [0, 255, 0], 3)
-    handCentroid = getCentroid(largestContour)
 
-    #draw handCentroid
-    radius = 10
-    centroidColor = [255, 0, 0] 
-    lineThickness = -1 #fill circle with -1 value
-    cv2.circle(frame, handCentroid, radius, centroidColor, lineThickness)
+    try: 
+        largestContour = max(contours, key=cv2.contourArea) #hand outline
+        cv2.drawContours(frame, largestContour, -1, [0, 255, 0], 3)
+        handCentroid = getCentroid(largestContour)
 
-    if largestContour.any(): 
+        #draw handCentroid
+        radius = 10
+        centroidColor = [255, 0, 0] 
+        lineThickness = -1 #fill circle with -1 value
+        cv2.circle(frame, handCentroid, radius, centroidColor, lineThickness)
+
         #get fingerTipPoint
-        handHull = cv2.convexHull(largestContour, returnPoints=False)
-        #cv2.drawContours(frame, handHull, -1, [255, 255, 255], 3) #TODO draw handHull
-        handDefects = cv2.convexityDefects(largestContour, handHull)
-        fingerTipPoint = getFurthestPoint(handDefects, largestContour, handCentroid)
+        if largestContour.any(): 
+            handHull = cv2.convexHull(largestContour, returnPoints=False)
+            #cv2.drawContours(frame, handHull, -1, [255, 255, 255], 3) #TODO draw handHull
+            handDefects = cv2.convexityDefects(largestContour, handHull)
+            fingerTipPoint = getFurthestPoint(handDefects, largestContour, handCentroid)
 
-        #draw finger-tip
-        if all(fingerTipPoint): #there are valid coordinates
-            tipColor = [0, 0, 255]
-            cv2.circle(frame, fingerTipPoint, radius, tipColor, lineThickness)
+            #draw finger-tip
+            if all(fingerTipPoint): #there are valid coordinates
+                tipColor = [0, 0, 255]
+                cv2.circle(frame, fingerTipPoint, radius, tipColor, lineThickness)
+    except Exception as error:
+        print('drawPOI error:', error)
+    finally:
+        return frame
 
-    return frame
+def getPOI(frame, handHist):
+    frame = cv2.flip(frame, 1)
+    handImg = getHandImg(frame, handHist)
+    contours = getContours(handImg)
+
+    try: 
+        #get hand
+        largestContour = max(contours, key=cv2.contourArea) #hand outline
+
+        #draw hand
+        cv2.drawContours(frame, largestContour, -1, [0, 255, 0], 3)
+
+        #get handCentroid
+        handCentroid = getCentroid(largestContour)
+
+        #draw handCentroid
+        radius = 10
+        centroidColor = [255, 0, 0] 
+        lineThickness = -1 #fill circle with -1 value
+        cv2.circle(frame, handCentroid, radius, centroidColor, lineThickness)
+
+        """
+        #get fingerTipPoint
+        if largestContour.any(): #error when largestContour = None
+            handHull = cv2.convexHull(largestContour, returnPoints=False)
+            handDefects = cv2.convexityDefects(largestContour, handHull)
+            fingerTipPoint = getFurthestPoint(handDefects, largestContour, handCentroid)
+        """
+
+        #data = getDataDict(handCentroid, fingerTipPoint, frame)
+        data = getDataDict(handCentroid, (0, 0), frame)
+
+    except Exception as error:
+        data = {'handCentroid_x': None,
+                'handCentroid_y': None,
+                'fingerTip_x': None,
+                'fingerTip_y': None,
+                'frame_x': None,
+                'frame_y': None}
+
+    finally:
+        return data, frame
+
+def getDataDict(handCentroid, fingerTip, frame):
+    data = {'handCentroid_x': int(handCentroid[0]),
+            'handCentroid_y': int(handCentroid[1]),
+            'fingerTip_x': int(fingerTip[0]),
+            'fingerTip_y': int(fingerTip[1]),
+            'frame_x': int(frame.shape[1]),
+            'frame_y': int(frame.shape[0])}
+
+    return data
