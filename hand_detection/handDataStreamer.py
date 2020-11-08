@@ -22,7 +22,7 @@ def main():
             data['frame_x'] = frame.shape[1]
             data['frame_y'] = frame.shape[0]
             data = json.dumps(data)
-            fileName = r'/Users/sosa/Documents/software_projects/nodeServer/static/py/hand_detection/handData.txt'
+            fileName = r'./hand_detection/handData.txt'
             fileData = open(fileName, 'w')
             fileData.write(data)
             fileData.close()
