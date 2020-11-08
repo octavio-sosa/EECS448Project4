@@ -18,6 +18,14 @@ class Powers{
       this.powers.push(power);
     }
   }
+
+ /**
+  * Mark the power item is catched by paddle
+  * @pre item must drop from top of the screen, game is no over
+  * @post mark the power object it catched by paddle
+  * @param {Powers} item: set of powers that the paddle could catch it
+  * @return item: if catch, return True
+  */
   isCatch (item){
     return(item.x < gameObjects[OBJ_KEYS.PADDLE].x + gameObjects[OBJ_KEYS.PADDLE].width
     && item.x + item.power_width > gameObjects[OBJ_KEYS.PADDLE].x
@@ -25,11 +33,25 @@ class Powers{
     && item.y + item.power_height > gameObjects[OBJ_KEYS.PADDLE].y)
   }
 
+ /**
+  * Mark the power item is not catched by paddle
+  * @pre item must drop from top of screen, game is no over
+  * @post mark the power object is not catched by paddle
+  * @param {Powers} item: set of powers that the paddle could catch it
+  * @return item: if paddle is not catch item, return True
+  */
   isNotCatch(item){
     console.log('this.power_intX_percentage = ', this.power_initX);
     return (item.y > gameObjects[OBJ_KEYS.PADDLE].y);
   }
 
+ /**
+  * Double ball feature: 
+  * @pre item must drop from top of the screen, game is no over
+  * @post double the each existing ball when the paddle catch x2 item
+  * @param {int} index: the index about item
+  * @param {Power} item: set of powers that the paddle could catch it
+  */
   catchBall(index, item){
     if (item.isLive){
       if (this.isCatch(item)){
@@ -48,6 +70,14 @@ class Powers{
       }
     }
   }
+
+ /**
+  * Lives + 1 feature: 
+  * @pre item must drop from top of the screen, game is no over
+  * @post add 1 live when the paddle catch heart item
+  * @param {int} index: the index about item
+  * @param {Power} item: set of powers that the paddle could catch it
+  */
   catchHeart(index, item){
     if (item.isLive){
       if (this.isCatch(item)){
@@ -69,6 +99,14 @@ class Powers{
       }
     }
   }
+
+  /**
+  * Paddle longer feature: 
+  * @pre item must drop from top of the screen, game is no over
+  * @post paddle width change to longer when the paddle catch Plonger item
+  * @param {int} index: the index about item
+  * @param {Power} item: set of powers that the paddle could catch it
+  */
   catchPlonger(index, item){
     if (item.isLive){
       if (this.isCatch(item)){
@@ -98,6 +136,14 @@ class Powers{
 
     }
   }
+  
+  /**
+  * Paddle shorter feature: 
+  * @pre item must drop from top of the screen, game is no over
+  * @post paddle width change to shorter when the paddle catch Pshorter item
+  * @param {int} index: the index about item
+  * @param {Power} item: set of powers that the paddle could catch it
+  */
   catchPshorter(index, item){
     if (item.isLive){
       if (this.isCatch(item)){
@@ -130,6 +176,13 @@ class Powers{
     }
   }
 
+  /**
+  * Big ball feature: 
+  * @pre item must drop from top of the screen, game is no over
+  * @post ball size change to bigger when the paddle catch Bball item
+  * @param {int} index: the index about item
+  * @param {Power} item: set of powers that the paddle could catch it
+  */
   catchBball(index, item){
     if (item.isLive){
       if (this.isCatch(item)){
@@ -149,6 +202,13 @@ class Powers{
     }
   }
 
+  /**
+  * Small ball feature: 
+  * @pre item must drop from top of the screen, game is no over
+  * @post ball size change to smaller when the paddle catch Sball item
+  * @param {int} index: the index about item
+  * @param {Power} item: set of powers that the paddle could catch it
+  */
   catchSball(index, item){
     if (item.isLive){
       if (this.isCatch(item)){
@@ -169,6 +229,14 @@ class Powers{
     }
   }
 
+  
+  /**
+  * Ball speed up feature: 
+  * @pre item must drop from top of the screen, game is no over
+  * @post ball speed up when the paddle catch Bfast item
+  * @param {int} index: the index about item
+  * @param {Power} item: set of powers that the paddle could catch it
+  */
   catchBfast(index, item){
     if (item.isLive){
       if (this.isCatch(item)){
@@ -187,6 +255,13 @@ class Powers{
     }
   }
 
+  /**
+  * Ball speed down feature: 
+  * @pre item must drop from top of the screen, game is no over
+  * @post ball speed down when the paddle catch Bslow item
+  * @param {int} index: the index about item
+  * @param {Power} item: set of powers that the paddle could catch it
+  */
   catchBslow(index, item){
     if (item.isLive){
       if (this.isCatch(item)){
@@ -208,6 +283,11 @@ class Powers{
     }
   }
 
+  /**
+  * Draws the random power items drop from the top of screen
+  * @pre the ball hit the brick 
+  * @post draws the power item drop from the top of the screen
+  */
   draw(){
     if (this.powerstype == 0) { this.empty();}
     else if(this.powerstype == 1) { this.drawBall();}
@@ -221,12 +301,22 @@ class Powers{
     
   }
 
+  /**
+  * Do not draws the power item on the top of the screen
+  * @pre the ball hit the brick 
+  * @post No power item drop from the top of the screen
+  */
   empty(){
     console.log("empty");
     if (gameObjects[OBJ_KEYS.BALL_CONTAINER].hitBricks == true)
       this.resetPowers(parseInt(Math.random()*8)+1);
   }
 
+  /**
+  * Draws the double ball power item drop from the top of the screen
+  * @pre the ball hit the brick 
+  * @post draws the x2Ball item drop from the top of the screen
+  */
   drawBall(){
     var img = new Image();
     img.src = "assets/images/+ball.png";
@@ -239,6 +329,12 @@ class Powers{
       this.catchBall(i,power);
     }
   }
+
+  /**
+  * Draws the lives + 1 power item drop from the top of the screen
+  * @pre the ball hit the brick 
+  * @post draws the Heart item drop from the top of the screen
+  */
   drawHeart(){
     var img = new Image();
     img.src = "assets/images/+live.png";
@@ -251,6 +347,12 @@ class Powers{
       this.catchHeart(i,power);
     }
   }
+
+  /**
+  * Draws the paddle longer power item drop from the top of the screen
+  * @pre the ball hit the brick 
+  * @post draws the Plonger item drop from the top of the screen
+  */
   drawPlonger(){
     var img = new Image();
     img.src = "assets/images/plong.png";
@@ -263,6 +365,12 @@ class Powers{
       this.catchPlonger(i,power);
     }
   }
+
+  /**
+  * Draws the paddle shorter power item drop from the top of the screen
+  * @pre the ball hit the brick 
+  * @post draws the Pshorter item drop from the top of the screen
+  */
   drawPshorter(){
     var img = new Image();
     img.src = "assets/images/psmall.png";
@@ -275,6 +383,12 @@ class Powers{
       this.catchPshorter(i,power);
     }
   }
+
+  /**
+  * Draws the big ball power item drop from the top of the screen
+  * @pre the ball hit the brick 
+  * @post draws the BigBall item drop from the top of the screen
+  */
   drawBigBall(){
     var img = new Image();
     img.src = "assets/images/bball.png";
@@ -287,6 +401,12 @@ class Powers{
       this.catchBball(i,power);
     }
   }
+
+  /**
+  * Draws the small ball power item drop from the top of the screen
+  * @pre the ball hit the brick 
+  * @post draws the SmallBall item drop from the top of the screen
+  */
   drawSmallBall(){
     var img = new Image();
     img.src = "assets/images/sball.png";
@@ -299,6 +419,12 @@ class Powers{
       this.catchSball(i,power);
     }
   }
+
+  /**
+  * Draws the speed up power item drop from the top of the screen
+  * @pre the ball hit the brick 
+  * @post draws the Ballfast item drop from the top of the screen
+  */
   drawBallfast(){
     var img = new Image();
     img.src = "assets/images/bfast.png";
@@ -311,6 +437,12 @@ class Powers{
       this.catchBfast(i,power);
     }
   }
+
+  /**
+  * Draws the speed down power item drop from the top of the screen
+  * @pre the ball hit the brick 
+  * @post draws the Ballslow item drop from the top of the screen
+  */
   drawBallslow(){
     var img = new Image();
     img.src = "assets/images/bslow.png";
@@ -329,6 +461,11 @@ class Powers{
 
   }
 
+  /**
+  * @Pre The game has been reset or lose a live
+  * @Post clears power items from the screen
+  * @param {int} itemtype: generate random types of powers
+  */
   resetPowers(itemtype){
     console.log("reset powers");
     this.powers = [];
@@ -351,6 +488,11 @@ class Powers{
     //this.update();
     //this.draw()
   }
+
+  /**
+  * @Pre The window has been resized
+  * @Post updates the position of the power item for the new window size
+  */
   resize(){
     console.log("resize");
     console.log('this.power_intX_percentage = ', this.power_initX);
