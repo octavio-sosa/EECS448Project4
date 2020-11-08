@@ -8,11 +8,21 @@ class Paddle // the thing the player controls
      */
     constructor()
     {
-        this.width = PADDLE_WIDTH; // width of paddle
+        this.width_size = 1;
+        this.init_width = 1 * PADDLE_WIDTH;
+        this.width = PADDLE_WIDTH * this.width_size; // width of paddle
         this.height = PADDLE_HEIGHT; // height of paddle
         this.x = canvas.width / 2;  // initial x position
         this.y = canvas.height - this.height; // initial y position
-    }
+
+        this.handData = JSON.parse(JSON.stringify(
+                      {"handCentroid_x": 0,
+                        "handCentroid_y": 0,
+                        "fingerTip_x": 0,
+                        "fingerTip_y": 0,
+                        "frame_x": 0,
+                        "frame_y": 0}))
+      }
 
     /**
      * Updates the paddle position on screen
@@ -21,8 +31,9 @@ class Paddle // the thing the player controls
      */
     update()
     {
-        if (mouse.x != undefined)
-        {
+        if(handTrackEnabled){
+          this.updateHandData()
+        } else if (mouse.x != undefined){
             this.x = Math.min(Math.max(mouse.x - (this.width / 2), 0), canvas.width - this.width); // move paddle based on mouse position if it is defined (it is undefined until it moves)
         }
     }
@@ -43,9 +54,11 @@ class Paddle // the thing the player controls
      * @Post resets paddle's location to center of screen
      */
     resetPaddle(){
+      this.width_size = 1;
+      this.init_width = 1 * PADDLE_WIDTH; 
       this.x = canvas.width / 2;  // initial x position
       this.y = canvas.height - this.height; // initial y position
-      this.width = PADDLE_WIDTH; // width of paddle
+      this.width = PADDLE_WIDTH * this.width_size; // width of paddle
       this.height = PADDLE_HEIGHT; //height of paddle
     }
 
@@ -56,7 +69,8 @@ class Paddle // the thing the player controls
      */
     resize()
     {
-        this.width = PADDLE_WIDTH; // width of paddle
+        this.init_width = 1 * PADDLE_WIDTH;
+        this.width = PADDLE_WIDTH * this.width_size; // width of paddle
         this.height = PADDLE_HEIGHT; // height of paddle
         this.y = canvas.height - this.height; // initial y position
     }
@@ -79,5 +93,25 @@ class Paddle // the thing the player controls
                     Powers.powers.splice(i, 1);
                 }
         }
+    }
+
+    async fetchHandPosition() {
+      const response = await fetch('http://localhost:8000/handDataRead')
+      const data = await response.json()
+      return data
+    }
+
+    updateHandData(){
+      this.fetchHandPosition()
+        .then(dataRaw => {
+          let data = JSON.parse(dataRaw)
+          this.handData = data
+        })
+        .catch(dataRaw => {dataRaw})
+
+      if(this.handData.handCentroid_x > 0){
+        let handPos_x =  (this.handData.handCentroid_x / this.handData.frame_x) * canvas.width
+        this.x = Math.min(Math.max(handPos_x - (this.width / 2), 0), canvas.width - this.width); // move paddle based on mouse position if it is defined (it is undefined until it moves)
+      }
     }
 }

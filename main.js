@@ -4,23 +4,29 @@ let level = 1;
 
 let gameObjects = [] // array to iterate through during game loop
 let paddle = new Paddle(); // instantiate paddle
-let ball = new Ball(); // instantiate ball
+let ballContainer = new BallContainer;
 let brickset = new Brickset(); //instantiate brickset with number of rows and columns of bricks
-let targetScore = Math.floor(brickset.bricks.length/4);
-let playerStatus = new PlayerStatus(targetScore);
-let totalfallings = 1;
-let randomtype = parseInt(Math.random()*(4-1+1)+1);
-let powers = new Powers(PADDLE_WIDTH, PADDLE_HEIGHT, totalfallings, randomtype);
+let targetScore = Math.floor(brickset.bricks.length/4); // sets the target score
+let playerStatus = new PlayerStatus(targetScore); // initializes the players status object
+let totalfallings = 1; // 1 power
+let randomtype = parseInt(Math.random()*(8-1+1)+1); // Gets random number to choose powerup
+let powers = new Powers(paddle, totalfallings, 2); // initializes powerup
+let testing = new testSuite();
 
+testButton.addEventListener('click', () => {
+  testing.runTests();
+})
 
+ballContainer.push(new Ball(true));
 gameObjects.push(paddle); // add paddle to array
-gameObjects.push(ball); // add ball to array
-gameObjects.push(brickset);
-gameObjects.push(playerStatus);
-gameObjects.push(powers);
+gameObjects.push(ballContainer); // add ball to array
+gameObjects.push(brickset); // add brickset to array
+gameObjects.push(playerStatus); // add playerstatus to array
+gameObjects.push(powers); // add powers to array
+
 const OBJ_KEYS = {
 	PADDLE: 0,
-	BALL: 1,
+	BALL_CONTAINER: 1,
 	BRICKSET: 2,
   PLAYERSTATUS: 3,
   POWERS: 4
@@ -36,6 +42,11 @@ var resume = function Resume()
     paused = false;
 }
 
+/**
+ * Sets the color to a random colorscheme
+ * @Pre Gives game a random color
+ * @Post Game color will be changed to random color
+ */
 function setRandomColor()
 {
     clr_idx = Math.floor(Math.random() * clrs.length);
@@ -58,9 +69,40 @@ var inv = function InvertColors()
   clrs[clr_idx][0] = clrs[clr_idx][1];
   clrs[clr_idx][1] = temp;
 
-  ctx.fillStyle = clrs[0];
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-  ctx.fillStyle = clrs[1];
+  if (gameHasStarted)
+  {
+      ctx.fillStyle = clrs[clr_idx][0];
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = clrs[clr_idx][1];
+      for (let i = 0; i < gameObjects.length-1; i++) // iterate through game objects
+      {
+        gameObjects[i].draw();
+      }
+      gameObjects[OBJ_KEYS.BALL_CONTAINER].detect_collisions(gameObjects[0], gameObjects[2]); // Have ball check for collisions
+      if (gameObjects[OBJ_KEYS.BALL_CONTAINER].hitBricks){
+        gameObjects[4].draw();
+      }
+  }
+
+}
+
+let handTrack = function track(){
+  let text = handTrackBtn.innerText
+  if(text == 'Enable Tracking'){
+    handTrackBtn.innerText = 'Disable Tracking'
+    handTrackEnabled = true
+    fetchScan()
+      .then(response=>{response})
+      .catch(response=>{response})
+  } else {
+    handTrackBtn.innerText = 'Enable Tracking'
+    handTrackEnabled = false 
+  }
+}
+
+async function fetchScan() {
+  const response = await fetch('http://localhost:8000/handDataStream')
+  return response
 }
 
 /**
@@ -68,12 +110,16 @@ var inv = function InvertColors()
  * @Pre game objects have been created and user has selected to start game
  * @Post updates and draws every game object while unpaused
  */
-
 function animate() // main game loop occurs here
 {
-    console.log(clr_idx);
     requestAnimationFrame(animate); // waits until this animate is done and then calls it again
-    if (!paused & !playerHasLost & !playerHasWon)
+    if (!gameHasStarted)
+    { 
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        drawStartScreen();
+        startBall.update();
+    }
+    else if (!paused & !playerHasLost & !playerHasWon)
     {
         menu.style.display = 'none';
         setting.style.display = 'none';
@@ -90,11 +136,8 @@ function animate() // main game loop occurs here
           gameObjects[i].update(); // call update on each object
           gameObjects[i].draw();
         }
-				if (gameObjects[1].numofBall > 1){
-					loop();
-				}
-        gameObjects[1].detect_collisions(gameObjects[0], gameObjects[2]); // Have ball check for collisions
-				if (gameObjects[1].hitBricks == true){
+        gameObjects[OBJ_KEYS.BALL_CONTAINER].detect_collisions(gameObjects[0], gameObjects[2]); // Have ball check for collisions
+				if (gameObjects[OBJ_KEYS.BALL_CONTAINER].hitBricks){
 					gameObjects[4].update();
 					gameObjects[4].draw();
 				}
@@ -102,13 +145,16 @@ function animate() // main game loop occurs here
     }
     else if (paused & !playerHasLost)
     {
-        startBtn.innerHTML = "Resume";
+        startBtn.innerHTML = "RESUME";
         startBtn.onclick = resume;
         menu.style.display = 'block';
     }
     else if (playerHasLost)
     {
         lose.style.display = 'block';
+        playerScoreElem.innerHTML = "Your Score: " + playerStatus.currentScore;
+        if (playerStatus.currentScore > highScore) highScore = playerStatus.currentScore;
+        highScoreElem.innerHTML = "High Score: " + highScore; 
 		}
     else
     {
@@ -116,14 +162,21 @@ function animate() // main game loop occurs here
     }
 }
 
+/**
+ * Starts the game with a random color
+ * @Pre Game starts and color and level are chosen
+ * @Post Chooses color of game
+ */
 var start = function startGame()
 {
     setRandomColor();
-    animate();
+    //animate();
     displayNotification("LEVEL " + level);
+    gameHasStarted = true;
 }
 
 invertcolorBtn.onclick = inv;
+handTrackBtn.onclick = handTrack;
 startBtn.onclick = start; // start the loop
 
 
@@ -137,14 +190,21 @@ var reset = function gameRestart(){
   setRandomColor();
 	ctx.clearRect(0, 0 , window.innerWidth, window.innerHeight); // clears the previous frame
 	gameObjects[0].resetPaddle();
-	gameObjects[1].resetBall();
+	gameObjects[1].resetBalls();
 	gameObjects[2].resetBrick();
   gameObjects[3].resetStatus();
+  gameObjects[4].resetPowers(0);
+  gameObjects[1].hitBricks = false;
 
-	for (let i = 0; i < gameObjects.length; i++) // iterate through game objects
+
+	for (let i = 0; i < gameObjects.length-1; i++) // iterate through game objects
 	{
 		gameObjects[i].update(); // call update on each object
 		gameObjects[i].draw();
+  }
+  if (gameObjects[1].hitBricks == true){
+    gameObjects[4].update();
+    gameObjects[4].draw();
   }
   playerHasWon = false;
   playerHasLost = false;
@@ -152,22 +212,33 @@ var reset = function gameRestart(){
 }
 tryBtn.onclick = reset;
 
-
+/**
+ * Goes to next level once first level is beat
+ * @Pre Assumes game has been initialized properly
+ * @Post Game will advance to next level
+ */
 var nextlevel = function nextLevel()
 {
   level++;
   setRandomColor();
 	ctx.clearRect(0, 0 , window.innerWidth, window.innerHeight); // clears the previous frame
 	gameObjects[0].resetPaddle();
-	gameObjects[1].resetBall();
+	gameObjects[1].resetBalls();
 	gameObjects[2].resetBrick();
+  gameObjects[4].resetPowers(0);
+  //gameObjects[1].hitBricks = false;
   //gameObjects[3].resetStatus();
 
-	for (let i = 0; i < gameObjects.length; i++) // iterate through game objects
+	for (let i = 0; i < gameObjects.length-1; i++) // iterate through game objects
 	{
 		gameObjects[i].update(); // call update on each object
 		gameObjects[i].draw();
   }
+  if (gameObjects[1].hitBricks == true){
+    gameObjects[4].update();
+    gameObjects[4].draw();
+  }
+
   playerHasWon = false;
   playerHasLost = false;
   displayNotification("LEVEL " + level);
@@ -180,8 +251,8 @@ nextBtn.onclick = nextlevel;
  * @Post main menu will be hidden and settings menu will appear
  */
 var opt = function Opt(){
-  menu.style.display = 'none';
   setting.style.display = 'block';
+  menu.style.display = 'none';
 }
 optionBtn.onclick = opt;
 
@@ -224,61 +295,25 @@ window.addEventListener('resize', () => // if the user shrinks/expands their bro
 {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
+
     PADDLE_WIDTH = canvas.width / 6;
     PADDLE_HEIGHT = canvas.height / 30;
 
     if (gameObjects.length > 0) // if the objects have been created
     {
-      for (let i = 0; i < gameObjects.length - 2; i++) // iterate through game objects
+      for (let i = 0; i < gameObjects.length; i++) // iterate through game objects
       {
         gameObjects[i].resize();
       }
     }
+    prev_width = canvas.width;
+    prev_height = canvas.height;
+  
+    if (!gameHasStarted)
+    {
+      drawStartScreen();
+    }
+
 
 });
-
-const OtherBall = function (x, y, radius){
-  this.direction = Math.random() * Math.PI*2;
-  this.radius = radius;
-  this.x = x;
-  this.y = y;
-	this.vel = {x: 0, y: 0};
-
-}
-OtherBall.prototype = {
-  updateposition: function(width, height){
-    this.x += Math.cos(this.direction);
-    this.y += Math.sin(this.direction);
-
-
-		if(this.x - this.radius < 0) {
-			this.x = this.radius;
-			this.direction = Math.atan2(Math.sin(this.direction), Math.cos(this.direction) * -1);
-		}
-		else if (this.x + this.radius > width) {
-			this.x = width - this.radius;
-			this.direction = Math.atan2(Math.sin(this.direction), Math.cos(this.direction) * -1);
-		}
-		if(this.y - this.radius < 0) {
-			this.y = this.radius;
-			this.direction = Math.atan2(Math.sin(this.direction) * -1, Math.cos(this.direction));
-		}
-
-  }
-}
-
-var balls = new Array();
-for (let i=0; i<5; i++){
-  balls.push(new OtherBall(300, 400, gameObjects[1].radius));
-}
-
-function loop(){
-  for (let i=1; i<gameObjects[1].numofBall; i++){
-    let ball = balls[i];
-    ball.updateposition(canvas.width, canvas.height);
-    ctx.beginPath();
-    ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI*2);
-    ctx.fill();
-
-  }
-}
+animate();

@@ -1,4 +1,4 @@
-*.json
 *.swp
 Session.vim
 .DS_Store
+**/handData.txt
