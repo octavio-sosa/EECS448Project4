@@ -86,6 +86,10 @@ var inv = function InvertColors()
 
 }
 
+let scanHand = function handDataStream(){
+  console.log('streaming hand data')  
+}
+
 /**
  * Animates game on screen
  * @Pre game objects have been created and user has selected to start game
@@ -157,6 +161,7 @@ var start = function startGame()
 }
 
 invertcolorBtn.onclick = inv;
+handTrackBtn.onclick = scanHand;
 startBtn.onclick = start; // start the loop
 
 
