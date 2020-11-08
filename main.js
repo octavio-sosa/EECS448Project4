@@ -87,6 +87,7 @@ var inv = function InvertColors()
 }
 
 let scanHand = function scanAndStreamHand(){
+  handTrackEnabled = true
   fetchScan()
     .then(response=>{response})
     .catch(response=>{response})
