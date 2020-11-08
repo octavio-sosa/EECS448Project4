@@ -1,4 +1,14 @@
 class Powers{
+
+  /**
+   * Initializes the powers object
+   * @constructor
+   * @pre canvas must be declared
+   * @post initializes powers object
+   * @param {paddle} paddle: object
+   * @param {int} num: integer value representing the total number of powers
+   * @param {int} itemtype: integer index representing type number of powers
+   */
   constructor(paddle, num, itemtype){
     this.power_initX = Math.floor(Math.random()*9+1) / 10;
     this.paddleW = paddle.width;
@@ -24,7 +34,7 @@ class Powers{
   * @pre item must drop from top of the screen, game is no over
   * @post mark the power object it catched by paddle
   * @param {Powers} item: set of powers that the paddle could catch it
-  * @return item: if catch, return True
+  * @return return True if itme is caught by paddle, otherwise false
   */
   isCatch (item){
     return(item.x < gameObjects[OBJ_KEYS.PADDLE].x + gameObjects[OBJ_KEYS.PADDLE].width
@@ -38,7 +48,7 @@ class Powers{
   * @pre item must drop from top of screen, game is no over
   * @post mark the power object is not catched by paddle
   * @param {Powers} item: set of powers that the paddle could catch it
-  * @return item: if paddle is not catch item, return True
+  * @return return True if itme is not caught by paddle, otherwise false
   */
   isNotCatch(item){
     console.log('this.power_intX_percentage = ', this.power_initX);
@@ -46,7 +56,7 @@ class Powers{
   }
 
  /**
-  * Double ball feature: 
+  * Double ball feature:
   * @pre item must drop from top of the screen, game is no over
   * @post double the each existing ball when the paddle catch x2 item
   * @param {int} index: the index about item
@@ -72,7 +82,7 @@ class Powers{
   }
 
  /**
-  * Lives + 1 feature: 
+  * Lives + 1 feature:
   * @pre item must drop from top of the screen, game is no over
   * @post add 1 live when the paddle catch heart item
   * @param {int} index: the index about item
@@ -101,7 +111,7 @@ class Powers{
   }
 
   /**
-  * Paddle longer feature: 
+  * Paddle longer feature:
   * @pre item must drop from top of the screen, game is no over
   * @post paddle width change to longer when the paddle catch Plonger item
   * @param {int} index: the index about item
@@ -136,9 +146,9 @@ class Powers{
 
     }
   }
-  
+
   /**
-  * Paddle shorter feature: 
+  * Paddle shorter feature:
   * @pre item must drop from top of the screen, game is no over
   * @post paddle width change to shorter when the paddle catch Pshorter item
   * @param {int} index: the index about item
@@ -177,7 +187,7 @@ class Powers{
   }
 
   /**
-  * Big ball feature: 
+  * Big ball feature:
   * @pre item must drop from top of the screen, game is no over
   * @post ball size change to bigger when the paddle catch Bball item
   * @param {int} index: the index about item
@@ -203,7 +213,7 @@ class Powers{
   }
 
   /**
-  * Small ball feature: 
+  * Small ball feature:
   * @pre item must drop from top of the screen, game is no over
   * @post ball size change to smaller when the paddle catch Sball item
   * @param {int} index: the index about item
@@ -229,9 +239,9 @@ class Powers{
     }
   }
 
-  
+
   /**
-  * Ball speed up feature: 
+  * Ball speed up feature:
   * @pre item must drop from top of the screen, game is no over
   * @post ball speed up when the paddle catch Bfast item
   * @param {int} index: the index about item
@@ -256,7 +266,7 @@ class Powers{
   }
 
   /**
-  * Ball speed down feature: 
+  * Ball speed down feature:
   * @pre item must drop from top of the screen, game is no over
   * @post ball speed down when the paddle catch Bslow item
   * @param {int} index: the index about item
@@ -285,7 +295,7 @@ class Powers{
 
   /**
   * Draws the random power items drop from the top of screen
-  * @pre the ball hit the brick 
+  * @pre the ball hit the brick
   * @post draws the power item drop from the top of the screen
   */
   draw(){
@@ -298,12 +308,12 @@ class Powers{
     else if(this.powerstype == 6) { this.drawSmallBall();}
     else if(this.powerstype == 7) { this.drawBallfast();}
     else if(this.powerstype == 8) { this.drawBallslow();}
-    
+
   }
 
   /**
   * Do not draws the power item on the top of the screen
-  * @pre the ball hit the brick 
+  * @pre the ball hit the brick
   * @post No power item drop from the top of the screen
   */
   empty(){
@@ -314,8 +324,8 @@ class Powers{
 
   /**
   * Draws the double ball power item drop from the top of the screen
-  * @pre the ball hit the brick 
-  * @post draws the x2Ball item drop from the top of the screen
+  * @pre the ball hit the brick
+  * @post draws the x2Ball item drop from the top of the screen and update y position of power
   */
   drawBall(){
     var img = new Image();
@@ -332,8 +342,8 @@ class Powers{
 
   /**
   * Draws the lives + 1 power item drop from the top of the screen
-  * @pre the ball hit the brick 
-  * @post draws the Heart item drop from the top of the screen
+  * @pre the ball hit the brick
+  * @post draws the Heart item drop from the top of the screen and update y position of power
   */
   drawHeart(){
     var img = new Image();
@@ -350,8 +360,8 @@ class Powers{
 
   /**
   * Draws the paddle longer power item drop from the top of the screen
-  * @pre the ball hit the brick 
-  * @post draws the Plonger item drop from the top of the screen
+  * @pre the ball hit the brick
+  * @post draws the Plonger item drop from the top of the screen and update y position of power
   */
   drawPlonger(){
     var img = new Image();
@@ -368,8 +378,8 @@ class Powers{
 
   /**
   * Draws the paddle shorter power item drop from the top of the screen
-  * @pre the ball hit the brick 
-  * @post draws the Pshorter item drop from the top of the screen
+  * @pre the ball hit the brick
+  * @post draws the Pshorter item drop from the top of the screen and update y position of power
   */
   drawPshorter(){
     var img = new Image();
@@ -386,8 +396,8 @@ class Powers{
 
   /**
   * Draws the big ball power item drop from the top of the screen
-  * @pre the ball hit the brick 
-  * @post draws the BigBall item drop from the top of the screen
+  * @pre the ball hit the brick
+  * @post draws the BigBall item drop from the top of the screen and update y position of power
   */
   drawBigBall(){
     var img = new Image();
@@ -404,8 +414,8 @@ class Powers{
 
   /**
   * Draws the small ball power item drop from the top of the screen
-  * @pre the ball hit the brick 
-  * @post draws the SmallBall item drop from the top of the screen
+  * @pre the ball hit the brick
+  * @post draws the SmallBall item drop from the top of the screen and update y position of power
   */
   drawSmallBall(){
     var img = new Image();
@@ -422,8 +432,8 @@ class Powers{
 
   /**
   * Draws the speed up power item drop from the top of the screen
-  * @pre the ball hit the brick 
-  * @post draws the Ballfast item drop from the top of the screen
+  * @pre the ball hit the brick
+  * @post draws the Ballfast item drop from the top of the screen and update y position of power
   */
   drawBallfast(){
     var img = new Image();
@@ -440,8 +450,8 @@ class Powers{
 
   /**
   * Draws the speed down power item drop from the top of the screen
-  * @pre the ball hit the brick 
-  * @post draws the Ballslow item drop from the top of the screen
+  * @pre the ball hit the brick
+  * @post draws the Ballslow item drop from the top of the screen and update y position of power
   */
   drawBallslow(){
     var img = new Image();
@@ -491,7 +501,7 @@ class Powers{
 
   /**
   * @Pre The window has been resized
-  * @Post updates the position of the power item for the new window size
+  * @Post updates the x position of the power item for the new window size
   */
   resize(){
     console.log("resize");
