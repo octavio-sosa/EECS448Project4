@@ -228,8 +228,11 @@ class Powers{
   }
 
   drawBall(){
+    /*
     var img = new Image();
     img.src = "assets/images/+ball.png";
+    */
+    let img = document.getElementById('+ball')
     for (let i=0; i<this.powers.length; i++){
       let power = this.powers[i];
       ctx.drawImage(img, power.x, power.y, 65, 55);
@@ -240,8 +243,11 @@ class Powers{
     }
   }
   drawHeart(){
+    /*
     var img = new Image();
     img.src = "assets/images/+live.png";
+    */
+    let img = document.getElementById('+live')
     for (let i=0; i<this.powers.length; i++){
       let power = this.powers[i];
       ctx.drawImage(img, power.x, power.y, 55, 45);
@@ -252,8 +258,11 @@ class Powers{
     }
   }
   drawPlonger(){
+    /*
     var img = new Image();
     img.src = "assets/images/plong.png";
+    */
+    let img = document.getElementById('plong')
     for (let i=0; i<this.powers.length; i++){
       let power = this.powers[i];
       ctx.drawImage(img, power.x, power.y, 90, 85);
@@ -264,8 +273,11 @@ class Powers{
     }
   }
   drawPshorter(){
+    /*
     var img = new Image();
     img.src = "assets/images/psmall.png";
+    */
+    let img = document.getElementById('psmall')
     for (let i=0; i<this.powers.length; i++){
       let power = this.powers[i];
       ctx.drawImage(img, power.x, power.y, 90, 85);
@@ -276,8 +288,11 @@ class Powers{
     }
   }
   drawBigBall(){
+    /*
     var img = new Image();
     img.src = "assets/images/bball.png";
+    */
+    let img = document.getElementById('bball')
     for (let i=0; i<this.powers.length; i++){
       let power = this.powers[i];
       ctx.drawImage(img, power.x, power.y, 55, 45);
@@ -288,8 +303,11 @@ class Powers{
     }
   }
   drawSmallBall(){
+    /*
     var img = new Image();
     img.src = "assets/images/sball.png";
+    */
+    let img = document.getElementById('sball')
     for (let i=0; i<this.powers.length; i++){
       let power = this.powers[i];
       ctx.drawImage(img, power.x, power.y, 40, 40);
@@ -300,8 +318,11 @@ class Powers{
     }
   }
   drawBallfast(){
+    /*
     var img = new Image();
     img.src = "assets/images/bfast.png";
+    */
+    let img = document.getElementById('bfast')
     for (let i=0; i<this.powers.length; i++){
       let power = this.powers[i];
       ctx.drawImage(img, power.x, power.y, 85, 70);
@@ -312,8 +333,11 @@ class Powers{
     }
   }
   drawBallslow(){
+    /*
     var img = new Image();
     img.src = "assets/images/bslow.png";
+    */
+    let img = document.getElementById('bslow')
     for (let i=0; i<this.powers.length; i++){
       let power = this.powers[i];
       ctx.drawImage(img, power.x, power.y, 85, 70);
