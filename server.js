@@ -5,6 +5,8 @@ const { spawn } = require('child_process')
 const app = express();
 app.use('/scripts', express.static(path.join(__dirname, 'scripts')))
 app.use('/assets', express.static(path.join(__dirname, 'assets')))
+app.use('/hand_detection', express.static(path.join(__dirname, 'hand_detection')))
+
 app.use('', express.static(path.join(__dirname)))
 
 app.get('/', (req, res)=>{
@@ -12,11 +14,11 @@ app.get('/', (req, res)=>{
 })
 
 app.get('/handDataStream', (req, res)=>{
-	const childPy = spawn('python3', ['static/py/hand_detection/handDataStreamer.py'])
+	const childPy = spawn('python3', ['hand_detection/handDataStreamer.py'])
 })
 
 app.get('/handDataRead', (req, res)=>{
-	const childPython = spawn('python3', ['static/py/hand_detection/handDataReader.py'])
+	const childPython = spawn('python3', ['hand_detection/handDataReader.py'])
 
 	childPython.stdout.on('data', (data)=>{
 		handData = data.toString()
