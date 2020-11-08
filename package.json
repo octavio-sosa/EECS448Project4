@@ -1,0 +1,22 @@
+{
+  "name": "eecs448project4",
+  "version": "1.0.0",
+  "description": "Brickbreaker game created by Hunter Glass, Octavio Sosa, Shujing Wu, Siming Fu, and Connor Sutton for EECS 448 Project 4, continued from project3.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ConnorSutton07/EECS448Project4.git"
+  },
+  "author": "Octavio",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ConnorSutton07/EECS448Project4/issues"
+  },
+  "homepage": "https://github.com/ConnorSutton07/EECS448Project4#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
