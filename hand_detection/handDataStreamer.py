@@ -19,16 +19,14 @@ def main():
             isHandHist = True
             cv2.destroyAllWindows()
         elif isHandHist:
-            data = hp.getPOI(frame, handHist)
-            data['frame_x'] = frame.shape[1]
-            data['frame_y'] = frame.shape[0]
+            data, frame = hp.getPOI(frame, handHist)
             data = json.dumps(data)
             fileName = r'./hand_detection/handData.txt'
             fileData = open(fileName, 'w')
             fileData.write(data)
             fileData.close()
 
-            frame = hp.drawPOI(frame, handHist)
+            #frame = hp.drawPOI(frame, handHist)
             cv2.imshow('Hand-tracker: END STREAM WITH \'q\'', frame)
         else:
             frame = hp.draw_rect(frame)
