@@ -29,11 +29,11 @@ def main():
             fileData.close()
 
             frame = hp.drawPOI(frame, handHist)
-            cv2.imshow('Hand-track', frame)
+            cv2.imshow('Hand-tracker: END STREAM WITH \'q\'', frame)
         else:
             frame = hp.draw_rect(frame)
             frame = cv2.flip(frame, 1)
-            cv2.imshow('Hand-scan', frame)
+            cv2.imshow('Hand-scanner: SCAN HAND WITH \'s\'', frame)
 
     capture.release()
     cv2.destroyAllWindows()

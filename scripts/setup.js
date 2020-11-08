@@ -37,7 +37,8 @@ var startBtn = document.getElementById('start');
 var menu = document.getElementById('menu screen');
 
 var optionBtn = document.getElementById('option');
-var handTrackBtn = document.getElementById('handTrack');
+var handTrackEnableBtn = document.getElementById('handTrackEnable');
+var handTrackDisableBtn = document.getElementById('handTrackDisable');
 var invertcolorBtn = document.getElementById('invert_colors');
 var backBtn = document.getElementById('back');
 var nextBtn = document.getElementById('nextlevel');

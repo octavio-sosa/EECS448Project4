@@ -98,7 +98,9 @@ async function fetchScan() {
   return response
 }
 
-
+let disableHandTrack = function stopHandTrack(){
+  handTrackEnabled = false
+}
 
 /**
  * Animates game on screen
@@ -171,7 +173,8 @@ var start = function startGame()
 }
 
 invertcolorBtn.onclick = inv;
-handTrackBtn.onclick = scanHand;
+handTrackEnableBtn.onclick = scanHand;
+handTrackDisableBtn.onclick = disableHandTrack;
 startBtn.onclick = start; // start the loop
 
 
