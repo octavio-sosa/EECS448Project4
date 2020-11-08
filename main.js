@@ -86,20 +86,23 @@ var inv = function InvertColors()
 
 }
 
-let scanHand = function scanAndStreamHand(){
-  handTrackEnabled = true
-  fetchScan()
-    .then(response=>{response})
-    .catch(response=>{response})
+let handTrack = function track(){
+  let text = handTrackBtn.innerText
+  if(text == 'Enable Tracking'){
+    handTrackBtn.innerText = 'Disable Tracking'
+    handTrackEnabled = true
+    fetchScan()
+      .then(response=>{response})
+      .catch(response=>{response})
+  } else {
+    handTrackBtn.innerText = 'Enable Tracking'
+    handTrackEnabled = false 
+  }
 }
 
 async function fetchScan() {
   const response = await fetch('http://localhost:8000/handDataStream')
   return response
-}
-
-let disableHandTrack = function stopHandTrack(){
-  handTrackEnabled = false
 }
 
 /**
@@ -173,8 +176,7 @@ var start = function startGame()
 }
 
 invertcolorBtn.onclick = inv;
-handTrackEnableBtn.onclick = scanHand;
-handTrackDisableBtn.onclick = disableHandTrack;
+handTrackBtn.onclick = handTrack;
 startBtn.onclick = start; // start the loop
 
 
